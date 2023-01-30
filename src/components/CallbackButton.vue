@@ -3,9 +3,9 @@
     {{ buttonText }}
   </button>
   <button class="callback-btn callback-btn-wide-screen" v-bind="$attrs">
-    <ICrown class="crown"></ICrown>
+    <ICrown></ICrown>
     {{ buttonTextWideScreen }}
-    <ICrown class="crown"></ICrown>
+    <ICrown></ICrown>
   </button>
 </template>
 <script>

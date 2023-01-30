@@ -2,25 +2,23 @@
   <div class="home">
     <div class="open-screen">
       <div class="container">
-        <span class="open-screen__title open-screen__title-small">
-          the world’s most</span
-        >
-        <span class="open-screen__title open-screen__title-extra-big"
-          >extra ordinary
-        </span>
-        <span class="open-screen__title open-screen__title-big">Places </span>
+        <h1 class="open-screen__title">
+          <span class="open-screen__title-small"> the world’s most</span>
+          <span class="open-screen__title-extra-big">extra ordinary </span>
+          <span class="open-screen__title-big">Places </span>
+        </h1>
         <div class="open-screen__background">
           <img
             class="open-screen__img open-screen__img-1"
-            src="../assets/backgrounds/open-screen1.png"
+            src="../assets/backgrounds/mountains1.png"
           />
           <img
             class="open-screen__img open-screen__img-2"
-            src="../assets/backgrounds/open-screen2.png"
+            src="../assets/backgrounds/mountains2.png"
           />
           <img
             class="open-screen__img open-screen__img-3"
-            src="../assets/backgrounds/open-screen3.png"
+            src="../assets/backgrounds/mountains3.png"
           />
         </div>
         <div class="open-screen__rhombuses">
@@ -32,67 +30,49 @@
         </div>
       </div>
     </div>
+    <main>
+      <div class="container">
+        <SearchTrip></SearchTrip>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
 import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
+import SearchTrip from "@/components/SearchTrip.vue";
 
 export default {
   name: "HomeView",
   components: {
     IRhombusBlur,
+    SearchTrip,
   },
 };
 </script>
 <style lang="scss">
-.blured-rhombus {
-  position: absolute;
-  width: auto;
-  z-index: 1;
-  &-1 {
-    bottom: 0;
-    left: 50%;
-    translate: -50% 0;
-    height: clamp(138px, 19vw, 213px);
-  }
-  &-2 {
-    top: 60%;
-    left: 1%;
-    height: clamp(33px, 4vw, 52px);
-  }
-  &-3 {
-    top: 95%;
-    left: 10%;
-    translate: -50% 0;
-    height: clamp(53px, 7vw, 83px);
-  }
-  &-4 {
-    top: 65%;
-    left: 90%;
-    height: clamp(32px, 4vw, 50px);
-  }
-  &-5 {
-    top: 80%;
-    left: 87%;
-    height: clamp(64px, 8vw, 100px);
-  }
-}
 .home {
   .open-screen {
     position: relative;
-
+    z-index: 0;
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 50px;
+      margin-bottom: 60px;
     }
     &__title {
       color: var(--home-title);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-transform: uppercase;
-      text-align: center;
-      width: min-content;
+      font-weight: normal;
+      span {
+        width: min-content;
+        text-align: center;
+      }
       &-small {
         color: var(--black-main);
         font-size: clamp(17px, 3vw, 25px);
@@ -140,6 +120,38 @@ export default {
       position: absolute;
       margin: 0 auto;
       height: 100%;
+      .blured-rhombus {
+        position: absolute;
+        width: auto;
+        z-index: 1;
+        &-1 {
+          bottom: 0;
+          left: 50%;
+          translate: -50% 0;
+          height: clamp(138px, 19vw, 213px);
+        }
+        &-2 {
+          top: 60%;
+          left: 1%;
+          height: clamp(33px, 4vw, 52px);
+        }
+        &-3 {
+          top: 95%;
+          left: 10%;
+          translate: -50% 0;
+          height: clamp(53px, 7vw, 83px);
+        }
+        &-4 {
+          top: 65%;
+          left: 90%;
+          height: clamp(32px, 4vw, 50px);
+        }
+        &-5 {
+          top: 80%;
+          left: 87%;
+          height: clamp(64px, 8vw, 100px);
+        }
+      }
     }
   }
 }
@@ -148,6 +160,7 @@ export default {
     .open-screen {
       .container {
         padding-top: 20px;
+        margin-bottom: 50px;
       }
       &__title {
         &-small {
@@ -160,12 +173,6 @@ export default {
           min-height: 250px;
         }
       }
-    }
-  }
-}
-@media (min-width: 1200px) {
-  .home {
-    .open-screen {
     }
   }
 }

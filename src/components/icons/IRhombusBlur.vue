@@ -16,7 +16,7 @@
 </template>
 <style scoped>
 svg {
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(2px);
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 </style>

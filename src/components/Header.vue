@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <img class="header__bg" :src="headerBg" alt="header background" />
+    <img class="header__bg" :src="headerBg" />
     <div class="header__content">
       <CallbackButton class="header__callback"></CallbackButton>
       <router-link class="header__logo" :to="{ name: 'home' }">
