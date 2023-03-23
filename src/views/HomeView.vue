@@ -10,15 +10,15 @@
         <div class="open-screen__background">
           <img
             class="open-screen__img open-screen__img-1"
-            src="../assets/backgrounds/mountains1.png"
+            src="../assets/backgrounds/mountains-1.png"
           />
           <img
             class="open-screen__img open-screen__img-2"
-            src="../assets/backgrounds/mountains2.png"
+            src="../assets/backgrounds/mountains-2.png"
           />
           <img
             class="open-screen__img open-screen__img-3"
-            src="../assets/backgrounds/mountains3.png"
+            src="../assets/backgrounds/mountains-3.png"
           />
         </div>
         <div class="open-screen__rhombuses">
@@ -31,8 +31,12 @@
       </div>
     </div>
     <main>
-      <div class="container">
+      <div class="wrapper">
         <SearchTrip></SearchTrip>
+        <TopExperiences></TopExperiences>
+        <LuxuryPackages></LuxuryPackages>
+        <BookCategories></BookCategories>
+        <WhyLT></WhyLT>
       </div>
     </main>
   </div>
@@ -41,12 +45,20 @@
 <script>
 import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 import SearchTrip from "@/components/SearchTrip.vue";
+import TopExperiences from "@/components/TopExperiences.vue";
+import LuxuryPackages from "@/components/LuxuryPackages.vue";
+import BookCategories from "@/components/BookCategories.vue";
+import WhyLT from "@/components/WhyLT.vue";
 
 export default {
   name: "HomeView",
   components: {
     IRhombusBlur,
     SearchTrip,
+    TopExperiences,
+    LuxuryPackages,
+    BookCategories,
+    WhyLT,
   },
 };
 </script>
@@ -109,7 +121,7 @@ export default {
       }
       &-3 {
         top: clamp(260px, 59vw, 410px);
-        min-height: 190px;
+        min-height: 250px;
         z-index: 3;
         width: 100%;
       }
@@ -154,6 +166,13 @@ export default {
       }
     }
   }
+  .wrapper {
+    overflow: hidden;
+    isolation: isolate;
+    & > div {
+      margin-bottom: 80px;
+    }
+  }
 }
 @media (min-width: 768px) {
   .home {
@@ -168,10 +187,18 @@ export default {
         }
       }
       &__img {
+        &-2 {
+          min-height: 550px;
+        }
         &-3 {
           top: clamp(430px, 50vw, 490px);
-          min-height: 250px;
+          min-height: 440px;
         }
+      }
+    }
+    .wrapper {
+      & > div {
+        margin-bottom: 120px;
       }
     }
   }

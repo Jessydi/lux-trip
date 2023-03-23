@@ -7,7 +7,7 @@
       />
       <img
         class="footer__bg-img footer__bg-img-mountains"
-        src="../assets/backgrounds/mountains1.png"
+        src="../assets/backgrounds/mountains-1.png"
       />
       <div class="footer__bg-gradient"></div>
     </div>
@@ -132,7 +132,7 @@ export default {
     gap: 8px;
     font-size: 12px;
     line-height: 16px;
-    font-family: "Manrope", Arial, Helvetica, sans-serif;
+    font-family: var(--manrope);
     a {
       color: #fff;
     }

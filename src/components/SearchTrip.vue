@@ -1,59 +1,67 @@
 <template>
   <div class="search-trip">
-    <div class="search-trip__title crown-decoration">
-      <ICrown></ICrown>
-      <span>find your journey</span>
-      <ICrown></ICrown>
-    </div>
-    <form action="" class="search-trip__form">
-      <label class="search-trip__input" for="search-trip__destination">
-        <IRhombus class="rhombus-icon"></IRhombus>
-        <span>Destination</span>
-        <input
-          id="search-trip__destination"
-          type="text"
-          placeholder="Where are you going?"
-        />
-      </label>
-      <label class="search-trip__input" for="search-trip__travel-type">
-        <ISun></ISun>
-        <span>Travel type</span>
-        <input
-          id="search-trip__destination"
-          type="text"
-          placeholder="Adventure Travel"
-          size="16"
-        />
-      </label>
-      <label class="search-trip__input" for="search-trip__date">
-        <ICalendar></ICalendar>
-        <span>When</span>
-        <input
-          type="text"
-          id="datepicker"
-          v-model="dateValue"
-          autocomplete="off"
-          placeholder="Select Date"
-          :size="dateInputLength"
-        />
-      </label>
-      <label class="search-trip__input" for="search-trip__travellers">
-        <IPerson></IPerson>
-        <span>Travellers</span>
-        <input
-          id="search-trip__destination"
-          type="text"
-          placeholder="2 Persons"
-          size="10"
-        />
-      </label>
+    <div class="container">
+      <div class="search-trip__title crown-decoration">
+        <ICrown></ICrown>
+        <span>find your journey</span>
+        <ICrown></ICrown>
+      </div>
+      <form action="" class="search-trip__form">
+        <label class="search-trip__input" for="search-trip__destination">
+          <IRhombus class="rhombus-icon"></IRhombus>
+          <span>Destination</span>
 
-      <button class="btn btn-black">
-        <ISearch></ISearch>
-        <span>find</span>
-      </button>
-    </form>
-    <SelectComponent :options="['shit', 'fuck', 'luck']"></SelectComponent>
+          <SelectComponent
+            class="select-component"
+            id="search-trip__destination"
+            :placeholder="'Where are you going?'"
+            :options="['shit', 'fuck', 'luck']"
+          ></SelectComponent>
+        </label>
+        <label class="search-trip__input" for="search-trip__travel-type">
+          <ISun></ISun>
+          <span>Travel type</span>
+
+          <SelectComponent
+            class="select-component"
+            id="search-trip__travel-type"
+            :placeholder="'Adventure Travel'"
+            :options="[
+              'shit shitshitshitshit shit hitshitshit shit',
+              'fuck',
+              'luck',
+            ]"
+          ></SelectComponent>
+        </label>
+        <label class="search-trip__input" for="search-trip__date">
+          <ICalendar></ICalendar>
+          <span>When</span>
+          <input
+            type="text"
+            id="search-trip__date"
+            v-model="dateValue"
+            autocomplete="off"
+            placeholder="Select Date"
+            :size="dateInputLength"
+          />
+        </label>
+        <label class="search-trip__input" for="search-trip__travellers">
+          <IPerson></IPerson>
+          <span>Travellers</span>
+          <SelectComponent
+            class="select-component"
+            id="search-trip__travellers"
+            :placeholder="'2 Persons'"
+            :options="['shit', 'fuck', 'luck']"
+          ></SelectComponent>
+        </label>
+
+        <ButtonBlack>
+          <ISearch></ISearch>
+          <span>find</span>
+        </ButtonBlack>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -65,6 +73,7 @@ import IRhombus from "./icons/IRhombus.vue";
 import ISearch from "./icons/ISearch.vue";
 
 import SelectComponent from "./Select.vue";
+import ButtonBlack from "@/components/ButtonBlack.vue";
 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
@@ -77,6 +86,7 @@ export default {
     IRhombus,
     ISearch,
     SelectComponent,
+    ButtonBlack,
   },
   data() {
     return {
@@ -84,7 +94,7 @@ export default {
     };
   },
   mounted() {
-    flatpickr("#datepicker", {
+    flatpickr("#search-trip__date", {
       minDate: new Date(),
       mode: "range",
       dateFormat: "j M Y",
@@ -112,9 +122,6 @@ export default {
 
 <style lang="scss">
 .search-trip {
-  //
-  height: 1000px;
-  //
   &__title {
     background-color: #fff;
     border-radius: 67px;
@@ -127,15 +134,16 @@ export default {
     text-align: center;
     position: relative;
     margin: 0 auto;
+    top: 25px;
     span {
       position: relative;
       z-index: 1;
     }
   }
   &__form {
+    box-shadow: 0px 18px 38px rgba(0, 0, 0, 0.11);
     background-color: #fff;
     position: relative;
-    top: -25px;
     border-radius: 10px;
     padding: 42px 16px 32px;
     display: flex;
@@ -145,7 +153,7 @@ export default {
   }
   &__input {
     display: grid;
-    grid-template-columns: 24px min-content;
+    grid-template-columns: 24px 1fr;
     grid-template-areas:
       "icon desc"
       ".    input";
@@ -153,17 +161,23 @@ export default {
     flex: 10 1 auto;
 
     span {
-      font-family: "Manrope", Arial, Helvetica, sans-serif;
+      font-family: var(--manrope);
       font-size: 18px;
       line-height: 25px;
       font-weight: 300;
       grid-area: desc;
     }
     svg {
-      // grid-row: span 2;
       justify-self: center;
       grid-area: icon;
       align-self: center;
+    }
+    .select-component {
+      grid-area: input;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 25px;
+      font-family: var(--manrope);
     }
     input {
       border: none;
@@ -201,19 +215,11 @@ export default {
 }
 @media (min-width: 1000px) {
   .search-trip {
-    &__title {
-      span {
-      }
-    }
     &__form {
       align-items: center;
     }
     &__input {
       height: fit-content;
-      span {
-      }
-      input {
-      }
     }
     .btn {
       flex: 1 0 auto;

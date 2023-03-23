@@ -24,7 +24,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Forum", Arial, Helvetica, sans-serif;
+  font-family: var(--forum);
 }
 .app {
   display: flex;
@@ -38,6 +38,13 @@ export default {
   padding: 0 15px;
   width: 100%;
 }
+h2 {
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--black-main);
+}
 ul,
 ol {
   li {
@@ -48,6 +55,7 @@ a {
   text-decoration: none;
   color: #000;
   transition: 0.2s;
+  display: inline-block;
   &:hover {
     opacity: 0.7;
   }
@@ -57,62 +65,48 @@ button {
   background-color: transparent;
   text-transform: uppercase;
   cursor: pointer;
-  &.btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 55px;
-    padding: 15px 23px;
-    gap: 8px;
-    font-size: 24px;
-    line-height: 27px;
-    border-radius: 74px;
-    transition: all 0.2s ease-in;
-    &:hover,
-    &:focus {
-      opacity: 0.8;
-    }
-
-    &-black {
-      background-color: var(--black-main);
-      color: #fff;
-      &:active {
-        opacity: 1;
-        box-shadow: 0 0 5px 1px var(--black-main);
-      }
-      &::before,
-      &::after {
-        border-color: var(--black-main);
-      }
-      .crown {
-        path {
-          fill: #000;
-        }
-      }
-    }
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+  padding: 15px 23px;
+  gap: 8px;
+  font-size: 24px;
+  line-height: 27px;
+  border-radius: 74px;
+  transition: all 0.2s ease-in;
+  &:hover,
+  &:focus {
+    opacity: 0.8;
   }
 }
 input {
-  font-family: "Manrope", Arial, Helvetica, sans-serif;
+  font-family: var(--manrope);
   color: var(--black-main);
   &::placeholder {
     color: var(--black-main);
   }
 }
 main {
-  background: linear-gradient(
-    rgba(226, 211, 206, 0),
-    rgba(226, 211, 206, 0.71) 200px,
-    var(--bg-main) 350px
-  );
+  background: linear-gradient(rgba(226, 211, 206, 0), var(--bg-main) 100px),
+    no-repeat top -10px left 0px url(./assets/backgrounds/clouds-main-color-1.png),
+    no-repeat top -10px right -150px
+      url(./assets/backgrounds/clouds-main-color-2.png);
 
   position: relative;
 }
 :root {
+  // fonts
+  --manrope: "Manrope", Arial, Helvetica, sans-serif;
+  --forum: "Forum", Arial, Helvetica, sans-serif;
+  // colors
   --bg-main: #e2d3ce;
   --black-main: #0c0b10;
   --home-title: #fcfcfc;
   --gray: #79655e;
+  --blue: #0b2034;
 }
 
 .crown-decoration {
@@ -171,6 +165,22 @@ main {
       right: 25px;
       rotate: 180deg;
     }
+  }
+  main {
+    background: linear-gradient(
+        rgba(226, 211, 206, 0),
+        rgba(226, 211, 206, 0.71) 200px,
+        var(--bg-main) 300px
+      ),
+      no-repeat top 73px left 0px
+        url(./assets/backgrounds/clouds-main-color-1.png),
+      no-repeat top -30px right 0px url(./assets/backgrounds/clouds-main-color-2.png);
+
+    position: relative;
+  }
+  h2 {
+    font-size: 60px;
+    line-height: 58px;
   }
 }
 </style>
