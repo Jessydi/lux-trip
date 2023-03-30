@@ -77,6 +77,8 @@ button {
   line-height: 27px;
   border-radius: 74px;
   transition: all 0.2s ease-in;
+  width: 100%;
+  position: relative;
   &:hover,
   &:focus {
     opacity: 0.8;
@@ -109,63 +111,7 @@ main {
   --blue: #0b2034;
 }
 
-.crown-decoration {
-  position: relative;
-  border: 0;
-  padding: 11px 25px;
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    border: 1px solid #fff;
-    border-right: 1px solid transparent;
-    border-radius: 100px 0 0 100px;
-    width: calc(50% - 50px);
-    height: calc(100% + 10px);
-    bottom: 0;
-    transition: 0.5s ease;
-  }
-  &::before {
-    left: 15px;
-  }
-  &::after {
-    right: 15px;
-    rotate: 180deg;
-  }
-  .crown {
-    position: absolute;
-    left: 50%;
-    translate: -50% 0;
-    &-part {
-      transition: 0.8s ease;
-    }
-    &:first-of-type {
-      height: 20px;
-      width: auto;
-      bottom: calc(100% + 6px);
-    }
-    &:last-of-type {
-      rotate: 180deg;
-      height: 15px;
-      width: auto;
-      top: calc(100% + 3px);
-    }
-  }
-}
 @media (min-width: 768px) {
-  .crown-decoration {
-    &::before,
-    &::after {
-      width: calc(50% - 60px);
-    }
-    &::before {
-      left: 25px;
-    }
-    &::after {
-      right: 25px;
-      rotate: 180deg;
-    }
-  }
   main {
     background: linear-gradient(
         rgba(226, 211, 206, 0),

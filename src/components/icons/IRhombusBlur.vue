@@ -18,5 +18,6 @@
 svg {
   backdrop-filter: blur(2px);
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  height: auto;
 }
 </style>

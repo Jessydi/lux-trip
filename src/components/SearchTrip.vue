@@ -1,10 +1,10 @@
 <template>
   <div class="search-trip">
     <div class="container">
-      <div class="search-trip__title crown-decoration">
-        <ICrown></ICrown>
+      <div class="search-trip__title">
+        <CrownDecoration></CrownDecoration>
+
         <span>find your journey</span>
-        <ICrown></ICrown>
       </div>
       <form action="" class="search-trip__form">
         <label class="search-trip__input" for="search-trip__destination">
@@ -55,7 +55,6 @@
             :options="['shit', 'fuck', 'luck']"
           ></SelectComponent>
         </label>
-
         <ButtonBlack>
           <ISearch></ISearch>
           <span>find</span>
@@ -65,7 +64,6 @@
   </div>
 </template>
 <script>
-import ICrown from "./icons/ICrown.vue";
 import IPerson from "./icons/IPerson.vue";
 import ICalendar from "./icons/ICalendar.vue";
 import ISun from "./icons/ISun.vue";
@@ -74,12 +72,13 @@ import ISearch from "./icons/ISearch.vue";
 
 import SelectComponent from "./Select.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
+import CrownDecoration from "@/components/CrownDecoration.vue";
 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
 export default {
   components: {
-    ICrown,
+    CrownDecoration,
     IPerson,
     ICalendar,
     ISun,
@@ -222,7 +221,7 @@ export default {
       height: fit-content;
     }
     .btn {
-      flex: 1 0 auto;
+      flex: 1 0;
     }
   }
 }

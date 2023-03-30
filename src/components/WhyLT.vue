@@ -22,6 +22,7 @@
             imgSrc="why-lt/why-lt-img-3.jpg"
           ></ImageWithRhombus>
           <IRhombusBlur class="rhombus-center"></IRhombusBlur>
+          <IRhombusBlur class="rhombus-small rhombus-small-1"></IRhombusBlur>
         </div>
         <p class="lt-benefits__text-forum-enlarged">
           Exclusive knowledge to provide the best of the best to clients
@@ -41,6 +42,7 @@
             interests and with strong attention to detail.
           </p>
           <ButtonTransparent>help me plan a trip</ButtonTransparent>
+          <IRhombusBlur class="rhombus-small rhombus-small-2"></IRhombusBlur>
         </div>
       </div>
       <img
@@ -125,7 +127,6 @@ export default {
       &-center {
         place-self: center;
         width: 72px;
-        height: auto;
       }
     }
     .lt-benefits__img {
@@ -146,7 +147,17 @@ export default {
       }
     }
   }
-
+  .rhombus-small {
+    position: absolute;
+    &-1 {
+      display: none;
+    }
+    &-2 {
+      width: 39px;
+      top: 70%;
+      left: 17vw;
+    }
+  }
   &__bg {
     position: absolute;
     width: 100%;
@@ -229,6 +240,18 @@ export default {
           right: 0;
           display: block;
         }
+      }
+    }
+    .rhombus-small {
+      position: absolute;
+      &-1 {
+        top: 27%;
+        right: calc(100% + 120px);
+        width: 29px;
+        display: block;
+      }
+      &-2 {
+        width: 62px;
       }
     }
     &__bg {

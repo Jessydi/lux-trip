@@ -10,17 +10,27 @@ export default {};
 .btn-black {
   background-color: var(--black-main);
   color: #fff;
+  span {
+    position: relative;
+    z-index: 1;
+  }
   &:active {
     opacity: 1;
     box-shadow: 0 0 5px 1px var(--black-main);
   }
-  &::before,
-  &::after {
-    border-color: var(--black-main);
-  }
-  .crown {
-    path {
-      fill: #000;
+  .crown-decoration {
+    &::before,
+    &::after {
+      border: 1px solid var(--black-main);
+      border-right: 1px solid transparent;
+    }
+    .crown {
+      path {
+        fill: var(--black-main);
+      }
+    }
+    &.single-crown {
+      border-bottom: 1px solid var(--black-main);
     }
   }
 }

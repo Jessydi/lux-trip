@@ -12,6 +12,7 @@
 </template>
 <style scoped>
 svg {
+  display: block;
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 </style>

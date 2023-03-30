@@ -37,6 +37,8 @@
         <LuxuryPackages></LuxuryPackages>
         <BookCategories></BookCategories>
         <WhyLT></WhyLT>
+        <CustomiseTrip></CustomiseTrip>
+        <SubscribeComponent></SubscribeComponent>
       </div>
     </main>
   </div>
@@ -49,6 +51,8 @@ import TopExperiences from "@/components/TopExperiences.vue";
 import LuxuryPackages from "@/components/LuxuryPackages.vue";
 import BookCategories from "@/components/BookCategories.vue";
 import WhyLT from "@/components/WhyLT.vue";
+import CustomiseTrip from "@/components/CustomiseTrip.vue";
+import SubscribeComponent from "@/components/Subscribe.vue";
 
 export default {
   name: "HomeView",
@@ -59,6 +63,8 @@ export default {
     LuxuryPackages,
     BookCategories,
     WhyLT,
+    CustomiseTrip,
+    SubscribeComponent,
   },
 };
 </script>
