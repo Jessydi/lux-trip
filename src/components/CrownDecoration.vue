@@ -80,7 +80,7 @@ export default {
     }
   }
   &.single-crown,
-  &.no-corwn {
+  &.no-crown {
     border-bottom: 1px solid #fff;
     border-radius: var(--border-radius);
 

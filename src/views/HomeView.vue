@@ -39,6 +39,8 @@
         <WhyLT></WhyLT>
         <CustomiseTrip></CustomiseTrip>
         <SubscribeComponent></SubscribeComponent>
+        <CustomersReviews></CustomersReviews>
+        <ContactComponent></ContactComponent>
       </div>
     </main>
   </div>
@@ -53,6 +55,8 @@ import BookCategories from "@/components/BookCategories.vue";
 import WhyLT from "@/components/WhyLT.vue";
 import CustomiseTrip from "@/components/CustomiseTrip.vue";
 import SubscribeComponent from "@/components/Subscribe.vue";
+import CustomersReviews from "@/components/CustomersReviews.vue";
+import ContactComponent from "@/components/ContactComponent.vue";
 
 export default {
   name: "HomeView",
@@ -65,6 +69,8 @@ export default {
     WhyLT,
     CustomiseTrip,
     SubscribeComponent,
+    CustomersReviews,
+    ContactComponent,
   },
 };
 </script>
