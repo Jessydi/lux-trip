@@ -8,7 +8,7 @@
         <router-link :to="{ name: 'home' }">Home</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'home' }">Luxury packages</router-link>
+        <router-link :to="{ name: 'packages' }">Luxury packages</router-link>
       </li>
       <li class="navigation__item">
         <router-link :to="{ name: 'home' }">Book with us</router-link>
@@ -30,22 +30,34 @@
         <ul class="navigation__list">
           <IRhombus class="rhombus-icon"></IRhombus>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }">Home</router-link>
+            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+              >Home</router-link
+            >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }">Luxury packages</router-link>
+            <router-link :to="{ name: 'packages' }" @click="toggleMobileMenu"
+              >Luxury packages</router-link
+            >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }">Book with us</router-link>
+            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+              >Book with us</router-link
+            >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }">Why Lux Trips</router-link>
+            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+              >Why Lux Trips</router-link
+            >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }">Contact</router-link>
+            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+              >Contact</router-link
+            >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }">Client Area</router-link>
+            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+              >Client Area</router-link
+            >
           </li>
         </ul>
       </div>
@@ -72,7 +84,7 @@ export default {
   methods: {
     checkScreen() {
       this.windowWidth = window.innerWidth;
-      if (this.windowWidth <= 768) {
+      if (this.windowWidth < 768) {
         this.mobile = true;
         return;
       }

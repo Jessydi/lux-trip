@@ -116,6 +116,11 @@ export default {
 <style lang="scss">
 .customers-reviews {
   position: relative;
+  .splide {
+    &__arrows {
+      display: none;
+    }
+  }
   &__title {
     position: relative;
     z-index: 1;
@@ -135,9 +140,9 @@ export default {
     position: absolute;
     z-index: -1;
     left: 50%;
-    top: 350px;
+    bottom: -500px;
     translate: -50%;
-    min-width: 700px;
+    min-width: 1100px;
     width: 100%;
   }
   .crown-decoration {
@@ -153,6 +158,9 @@ export default {
     .splide {
       position: relative;
       margin-right: -290px;
+      &__arrows {
+        display: block;
+      }
       &::after {
         content: "";
         position: absolute;
@@ -175,6 +183,10 @@ export default {
         width: 112px;
         height: auto;
       }
+    }
+    &__bg {
+      bottom: -700px;
+      min-width: 1400px;
     }
   }
 }

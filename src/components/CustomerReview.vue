@@ -50,7 +50,7 @@ export default {
   &__content {
     height: 100%;
     position: relative;
-    padding: 20px 60px;
+    padding: 60px 20px;
     isolation: isolate;
     .crown-decoration {
       z-index: -1;
@@ -99,6 +99,7 @@ export default {
 @media (min-width: 768px) {
   .customer-review {
     padding: 8px;
+
     & > .crown-decoration {
       width: calc(100% - 40px);
     }
@@ -106,10 +107,6 @@ export default {
       position: relative;
       padding: 60px 70px 80px 90px;
     }
-
-    &__photo {
-    }
-
     &__review {
       font-size: 21px;
       line-height: 37px;

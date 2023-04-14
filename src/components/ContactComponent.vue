@@ -87,6 +87,20 @@ export default {
 }
 @media (min-width: 768px) {
   .contact {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(226, 211, 206, 0.71) 60px,
+        var(--bg-main) 200px
+      );
+    }
     &__title {
       margin-bottom: 32px;
     }

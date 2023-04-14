@@ -184,6 +184,12 @@ export default {
     & > div {
       margin-bottom: 80px;
     }
+    & > div:last-child {
+      margin-bottom: 0px;
+    }
+    .customers-reviews {
+      margin-bottom: 230px;
+    }
   }
 }
 @media (min-width: 768px) {
@@ -211,6 +217,9 @@ export default {
     .wrapper {
       & > div {
         margin-bottom: 120px;
+      }
+      .customers-reviews {
+        margin-bottom: 430px;
       }
     }
   }
