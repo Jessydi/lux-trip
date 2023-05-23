@@ -32,6 +32,7 @@ export default {
       this.selectedTitle = title;
     },
   },
+
   provide() {
     return {
       selectedTitle: computed(() => this.selectedTitle || this.tabsTitles[0]),
@@ -56,7 +57,7 @@ export default {
 .tabs {
   &__header {
     overflow-x: auto;
-    margin-bottom: 15px;
+    padding-bottom: 15px;
   }
   &__list {
     display: flex;

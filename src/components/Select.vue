@@ -3,9 +3,16 @@
     <div class="select__wrapper">
       <select
         class="select-native"
-        aria-labelledby="seclect"
-        v-model="optionChecked"
+        aria-labelledby="select"
+        :value="modelValue"
+        @input="
+          $emit('update:modelValue', $event.target.value),
+            (optionChecked = $event.target.value)
+        "
       >
+        <option value="">
+          {{ placeholder }}
+        </option>
         <option v-for="(option, index) in options" :value="option" :key="index">
           {{ option }}
         </option>
@@ -26,6 +33,15 @@
           {{ optionChecked ? optionChecked : placeholder }}
         </div>
         <div class="select-custom__options" v-show="isOptionVisible">
+          <div
+            data-value=""
+            class="select-custom__option"
+            @click="select"
+            @mouseover="optionHoveredIndex = -1"
+            :class="{ hovered: optionHoveredIndex == -1 }"
+          >
+            {{ placeholder }}
+          </div>
           <div
             v-for="(option, index) in options"
             :key="index"
@@ -54,7 +70,11 @@ export default {
       type: String,
       default: "select option",
     },
+    modelValue: {
+      type: [String, Number],
+    },
   },
+  emits: ["update:modelValue"],
   data() {
     return {
       optionChecked: null,
@@ -65,7 +85,6 @@ export default {
   methods: {
     toggleSelectCustom() {
       this.isOptionVisible = !this.isOptionVisible;
-      console.log(this.isOptionVisible);
     },
     closeSelectCustom() {
       if (this.isOptionVisible) {
@@ -78,7 +97,7 @@ export default {
       }
     },
     hoverPrev() {
-      if (this.optionHoveredIndex > 0) {
+      if (this.optionHoveredIndex > -1) {
         this.optionHoveredIndex = this.optionHoveredIndex - 1;
       }
     },
@@ -90,7 +109,11 @@ export default {
       ) {
         this.optionChecked = this.options[this.optionHoveredIndex];
         this.closeSelectCustom();
+      } else if (this.optionHoveredIndex == -1) {
+        this.optionChecked = null;
+        this.closeSelectCustom();
       }
+      this.$emit("update:modelValue", this.optionChecked);
     },
   },
 };

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import PackagesView from "../views/PackagesView.vue";
 
 const routes = [
   {
@@ -11,7 +10,12 @@ const routes = [
   {
     path: "/luxury-packages",
     name: "packages",
-    component: PackagesView,
+    component: () => import("../views/PackagesView.vue"),
+  },
+  {
+    path: "/luxury-packages/:id",
+    name: "package-page",
+    component: () => import("../views/TripShow.vue"),
   },
   // {
   //   path: "/about",

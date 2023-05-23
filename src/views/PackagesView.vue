@@ -30,7 +30,7 @@ export default {
     overflow: hidden;
     isolation: isolate;
     & > div {
-      margin-bottom: 80px;
+      margin-bottom: 30px;
     }
   }
 }
@@ -38,7 +38,7 @@ export default {
   .packages {
     .wrapper {
       & > div {
-        margin-bottom: 120px;
+        margin-bottom: 60px;
       }
     }
   }

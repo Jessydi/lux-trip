@@ -47,7 +47,7 @@
       </div>
       <img
         class="lt-benefits__bg"
-        src="@/assets/why-lt/why-lt-bg.png"
+        src="@/assets/backgrounds/why-lt-bg.png"
         alt="background mountains"
       />
     </div>

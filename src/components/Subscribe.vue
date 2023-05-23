@@ -18,8 +18,7 @@
             <ButtonWhite>
               <CrownDecoration></CrownDecoration>
               <span>Subscribe</span>
-              ></ButtonWhite
-            >
+            </ButtonWhite>
           </div>
         </div>
       </div>

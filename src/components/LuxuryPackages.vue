@@ -12,7 +12,7 @@
       </h2>
       <SliderComponent :splide-object="splideObject">
         <SplideSlide v-for="(card, index) in packageCards" :key="index"
-          ><PackageCard :card-object="card"></PackageCard>
+          ><CollectionCard :card-object="card"></CollectionCard>
         </SplideSlide>
       </SliderComponent>
     </div>
@@ -20,7 +20,7 @@
 </template>
 <script>
 import SliderComponent from "@/components/SliderComponent.vue";
-import PackageCard from "@/components/PackageCard.vue";
+import CollectionCard from "@/components/CollectionCard.vue";
 import ButtonTransparent from "@/components/ButtonTransparent.vue";
 import { SplideSlide } from "@splidejs/vue-splide";
 
@@ -28,7 +28,7 @@ export default {
   components: {
     SliderComponent,
     SplideSlide,
-    PackageCard,
+    CollectionCard,
     ButtonTransparent,
   },
   data() {

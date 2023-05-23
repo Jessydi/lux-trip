@@ -23,7 +23,7 @@ module.exports = defineConfig({
               // Feel free to experiment with options for better result for you
               plugins: [
                 ["gifsicle", { interlaced: true }],
-                ["mozjpeg", { progressive: true, quality: 60 }],
+                ["mozjpeg", { progressive: true, quality: 80 }],
                 ["pngquant", { quality: [0.3, 0.5] }],
                 // Svgo configuration here https://github.com/svg/svgo#configuration
                 [

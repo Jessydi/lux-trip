@@ -33,7 +33,7 @@ export default {
 }
 
 .container {
-  max-width: 1110px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
   width: 100%;
@@ -59,6 +59,9 @@ a {
   &:hover {
     opacity: 0.7;
   }
+}
+img {
+  display: block;
 }
 button {
   border: 0;
@@ -106,9 +109,11 @@ main {
   // colors
   --bg-main: #e2d3ce;
   --black-main: #0c0b10;
+  --black-secondary: #1d1a1a;
   --home-title: #fcfcfc;
   --gray: #79655e;
   --blue: #0b2034;
+  --error-red: rgb(179, 38, 38);
 }
 
 @media (min-width: 768px) {
@@ -120,7 +125,7 @@ main {
       ),
       no-repeat top 73px left 0px
         url(./assets/backgrounds/clouds-main-color-1.png),
-      no-repeat top -30px right 0px url(./assets/backgrounds/clouds-main-color-2.png);
+      no-repeat top -5px right 0px url(./assets/backgrounds/clouds-main-color-2.png);
 
     position: relative;
   }

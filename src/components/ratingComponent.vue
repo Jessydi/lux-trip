@@ -1,14 +1,25 @@
 <template>
   <div class="rating">
-    <span class="rating__value">{{ selectedGrade }}</span>
+    <span v-if="selectedGrade" class="rating__value">{{ selectedGrade }}</span>
+    <span v-if="title" class="rating__title">{{ title }}</span>
     <div class="rating__rhombuses" @mouseleave="hoveredGrade = null">
-      <IRhombus
+      <div
         v-for="i in 5"
         @mouseover="hoverRating(i)"
         @click="selectGrade(i)"
-        :class="{ filled: i <= hoveredGrade || i <= selectedGrade }"
         :key="i"
-      ></IRhombus>
+        class="rating__rhombus"
+        :class="{
+          pointer: !disabled,
+        }"
+      >
+        <IRhombus
+          :class="{
+            filled: i <= hoveredGrade || i <= Math.round(selectedGrade),
+          }"
+        >
+        </IRhombus>
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +32,11 @@ export default {
   },
   props: {
     rating: {
-      type: Number,
+      type: [Number, String],
+      default: null,
+    },
+    title: {
+      type: String,
       default: null,
     },
     disabled: {
@@ -29,10 +44,11 @@ export default {
       default: false,
     },
   },
+  emits: ["selectGrade"],
   data() {
     return {
       hoveredGrade: null,
-      selectedGrade: this.rating,
+      selectedGrade: +this.rating,
     };
   },
   methods: {
@@ -44,7 +60,14 @@ export default {
     selectGrade(selectedGrade) {
       if (!this.disabled) {
         this.selectedGrade = selectedGrade;
+        this.$emit("selectGrade", this.selectedGrade);
       }
+    },
+  },
+  watch: {
+    rating(newRating) {
+      console.log(newRating);
+      this.selectedGrade = newRating;
     },
   },
 };
@@ -53,13 +76,28 @@ export default {
 .rating {
   text-align: center;
   min-width: 18px;
-  svg {
-    color: white;
-    height: 16px;
-    width: auto;
-    stroke-width: 50;
-    &.filled {
-      fill: white;
+  &__rhombus {
+    &.pointer {
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: calc(100% + 10px);
+        height: calc(100% + 2px);
+        translate: -50% -50%;
+      }
+      cursor: pointer;
+    }
+    svg {
+      color: white;
+      height: 16px;
+      width: auto;
+      stroke-width: 50;
+      &.filled {
+        fill: white;
+      }
     }
   }
   &__value {
@@ -76,8 +114,10 @@ export default {
 }
 @media (min-width: 768px) {
   .rating {
-    svg {
-      height: 18px;
+    &__rhombus {
+      svg {
+        height: 18px;
+      }
     }
     &__value {
       font-size: 14px;

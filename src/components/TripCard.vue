@@ -1,8 +1,13 @@
 <template>
   <div class="trip-card">
-    <img
+    <!-- <img
       class="trip-card__image"
       :src="require(`@/assets/trip-cards/${cardData.imgSrc}`)"
+      alt="trip card image"
+    /> -->
+    <img
+      class="trip-card__image"
+      :src="cardData.imgSrc"
       alt="trip card image"
     />
     <div class="trip-card__content">
@@ -11,7 +16,12 @@
           <IPin></IPin>
           <span>{{ cardData.location }}</span>
         </div>
-        <router-link class="trip-card__name" :to="{ name: 'home' }">
+
+        <router-link
+          class="trip-card__name"
+          :to="{ name: 'package-page', params: { id: cardData.name } }"
+          @click="luxTripStore.getDetailsAboutTrip(cardData.id)"
+        >
           {{ cardData.name }}
         </router-link>
         <div class="trip-card__price">
@@ -26,7 +36,8 @@
 <script>
 import IPin from "./icons/IPin.vue";
 import ratingComponent from "./ratingComponent.vue";
-
+import { useLuxTripStore } from "@/store/index";
+import { mapStores } from "pinia";
 export default {
   components: {
     IPin,
@@ -42,6 +53,9 @@ export default {
     return {
       cardData: this.cardObject,
     };
+  },
+  computed: {
+    ...mapStores(useLuxTripStore),
   },
 };
 </script>

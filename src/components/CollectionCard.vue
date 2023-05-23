@@ -2,7 +2,7 @@
   <div class="package-card">
     <img
       class="package-card__image"
-      :src="require(`@/assets/packages-covers/${cardObject.imgSrc}`)"
+      :src="require(`@/assets/collections-cards/${cardObject.imgSrc}`)"
       alt="package card image"
     />
     <div class="package-card__content">

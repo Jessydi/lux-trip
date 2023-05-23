@@ -3,19 +3,23 @@
     <div class="container">
       <div class="search-trip__title">
         <CrownDecoration></CrownDecoration>
-
         <span>find your journey</span>
       </div>
       <form action="" class="search-trip__form">
         <label class="search-trip__input" for="search-trip__destination">
           <IRhombus class="rhombus-icon"></IRhombus>
-          <span>Destination</span>
+          <span>Luxury Tours</span>
 
           <SelectComponent
             class="select-component"
             id="search-trip__destination"
+            v-model="filterObject.travelCategory"
             :placeholder="'Where are you going?'"
-            :options="['shit', 'fuck', 'luck']"
+            :options="[
+              'Romantic Winter Destinations',
+              'Best Summer Destinations',
+              'Best Winter Destinations',
+            ]"
           ></SelectComponent>
         </label>
         <label class="search-trip__input" for="search-trip__travel-type">
@@ -25,12 +29,9 @@
           <SelectComponent
             class="select-component"
             id="search-trip__travel-type"
-            :placeholder="'Adventure Travel'"
-            :options="[
-              'shit shitshitshitshit shit hitshitshit shit',
-              'fuck',
-              'luck',
-            ]"
+            v-model="filterObject.travelType"
+            :placeholder="'Choose trip type'"
+            :options="['Adventure', 'Romantic']"
           ></SelectComponent>
         </label>
         <label class="search-trip__input" for="search-trip__date">
@@ -39,11 +40,15 @@
           <input
             type="text"
             id="search-trip__date"
-            v-model="dateValue"
+            v-model="filterObject.dateValue"
             autocomplete="off"
             placeholder="Select Date"
             :size="dateInputLength"
           />
+          <button
+            class="clear-date"
+            @click.prevent="filterObject.dateValue = null"
+          ></button>
         </label>
         <label class="search-trip__input" for="search-trip__travellers">
           <IPerson></IPerson>
@@ -51,11 +56,12 @@
           <SelectComponent
             class="select-component"
             id="search-trip__travellers"
-            :placeholder="'2 Persons'"
-            :options="['shit', 'fuck', 'luck']"
+            v-model="filterObject.travellers"
+            :placeholder="'Any amount'"
+            :options="[1, 2, 3]"
           ></SelectComponent>
         </label>
-        <ButtonBlack>
+        <ButtonBlack @click.prevent="searchTrip()">
           <ISearch></ISearch>
           <span>find</span>
         </ButtonBlack>
@@ -76,6 +82,10 @@ import CrownDecoration from "@/components/CrownDecoration.vue";
 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
+
+import { useLuxTripStore } from "@/store/index";
+import { mapStores } from "pinia";
+
 export default {
   components: {
     CrownDecoration,
@@ -89,31 +99,56 @@ export default {
   },
   data() {
     return {
-      dateValue: null,
+      filterObject: {
+        travelCategory: null,
+        travelType: null,
+        travellers: null,
+        dateValue: null,
+      },
     };
   },
   mounted() {
     flatpickr("#search-trip__date", {
       minDate: new Date(),
       mode: "range",
-      dateFormat: "j M Y",
+      defaultDate: null,
+      dateFormat: "j M Y ",
     });
+  },
+  methods: {
+    searchTrip() {
+      this.filterObject.dateValue = null;
+      const isAllFiltersEmpty = Object.values(this.filterObject).every(
+        (val) => val === null
+      );
+      if (isAllFiltersEmpty) {
+        if (this.luxTripStore.isStoreFiltersEmpty) {
+          return;
+        }
+        this.luxTripStore.getTrips();
+        this.luxTripStore.filterParams = this.filterObject;
+        return;
+      }
+      this.luxTripStore.filterParams = this.filterObject;
+      this.luxTripStore.getTrips(this.luxTripStore.queryForActiveFilters);
+    },
   },
   computed: {
     dateInputLength: function () {
-      if (this.dateValue) {
-        console.log(this.dateValue);
-        return this.dateValue.length;
+      if (this.filterObject.dateValue) {
+        return this.filterObject.dateValue.length;
       }
       return "10";
     },
+    ...mapStores(useLuxTripStore),
   },
   watch: {
-    dateValue(newDate) {
-      if (newDate.includes("to")) {
-        console.log(newDate);
-        this.dateValue = newDate.replace("to", "-");
-      }
+    "filterObject.dateValue": {
+      handler(newDate) {
+        if (newDate && newDate.includes("to")) {
+          this.filterObject.dateValue = newDate.replace("to", "-");
+        }
+      },
     },
   },
 };
@@ -158,7 +193,7 @@ export default {
       ".    input";
     width: auto;
     flex: 10 1 auto;
-
+    position: relative;
     span {
       font-family: var(--manrope);
       font-size: 18px;
@@ -201,6 +236,32 @@ export default {
       stroke-width: 120px;
       polygon {
         stroke: var(--gray);
+      }
+    }
+    .clear-date {
+      position: absolute;
+      cursor: pointer;
+      height: 20px;
+      width: 20px;
+      right: 0;
+      bottom: 3px;
+      &::after,
+      &::before {
+        content: "";
+        position: absolute;
+        height: 15px;
+        width: 2px;
+        left: 50%;
+        top: 50%;
+        transform-origin: center;
+        translate: -50% -50%;
+        background-color: var(--gray);
+      }
+      &::after {
+        rotate: -45deg;
+      }
+      &::before {
+        rotate: 45deg;
       }
     }
   }

@@ -59,6 +59,7 @@ export default {
 .footer {
   overflow: visible;
   position: relative;
+  margin-top: auto;
   &__content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
