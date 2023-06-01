@@ -17,20 +17,50 @@ const routes = [
     name: "package-page",
     component: () => import("../views/TripShow.vue"),
   },
-  // {
-  //   path: "/about",
-  //   name: "about",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  // },
+  {
+    path: "/booking",
+    name: "booking",
+    component: () => import("../views/BookCategoriesView.vue"),
+  },
+  {
+    path: "/supercar-booking",
+    name: "supercar-booking",
+    component: () => import("../views/BookSupercar.vue"),
+  },
+  {
+    path: "/hotels-booking",
+    name: "hotels-booking",
+    component: () => import("../views/BookHotels.vue"),
+  },
+  {
+    path: "/vilas-booking",
+    name: "vilas-booking",
+    component: () => import("../views/BookVilas.vue"),
+  },
+  {
+    path: "/yachts-booking",
+    name: "yachts-booking",
+    component: () => import("../views/BookYachts.vue"),
+  },
+  {
+    path: "/helicopter-booking",
+    name: "helicopter-booking",
+    component: () => import("../views/BookHelicopter.vue"),
+  },
+  {
+    path: "/jet-booking",
+    name: "jet-booking",
+    component: () => import("../views/BookJet.vue"),
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  scrollBehavior() {
+    // always scroll to top
+    return { top: 0 };
+  },
 });
 
 export default router;

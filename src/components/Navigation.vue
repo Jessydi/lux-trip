@@ -11,7 +11,7 @@
         <router-link :to="{ name: 'packages' }">Luxury packages</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'home' }">Book with us</router-link>
+        <router-link :to="{ name: 'booking' }">Book with us</router-link>
       </li>
       <li class="navigation__item">
         <router-link :to="{ name: 'home' }">Why Lux Trips</router-link>
@@ -40,7 +40,7 @@
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+            <router-link :to="{ name: 'booking' }" @click="toggleMobileMenu"
               >Book with us</router-link
             >
           </li>

@@ -1,12 +1,12 @@
 <template>
   <div class="trip-page">
     <main>
-      <div class="container">
+      <div class="container" v-if="fullTripInfo">
         <h2>Romantic Winter Destinations</h2>
         <div class="big-card">
           <img
             class="big-card__img"
-            :src="require(`@/assets/big-trip-images/${fullTripInfo.bigImgSrc}`)"
+            :src="fullTripInfo.bigImgSrc"
             alt="Machu Picchu"
           />
           <div class="big-card__content">
@@ -27,7 +27,7 @@
               </div>
             </div>
             <ratingComponent
-              :rating="fullTripInfo.rating"
+              :rating="averageRating.overallAverageRating"
               disabled
             ></ratingComponent>
           </div>
@@ -106,9 +106,7 @@
                 <div class="information__card">
                   <img
                     class="information__card-img"
-                    :src="
-                      require(`@/assets/trip-cards/${fullTripInfo.smallImgSrc}`)
-                    "
+                    :src="fullTripInfo.smallImgSrc"
                     alt="Machu Picchu"
                   />
                   <ButtonWhite>
@@ -215,14 +213,12 @@
                 <div class="photos">
                   <img
                     class="photo-top"
-                    :src="
-                      require(`@/assets/gallery/${fullTripInfo.gallery.topImg}`)
-                    "
+                    :src="fullTripInfo.gallery.topImg"
                     :alt="fullTripInfo.name"
                   />
                   <div
                     class="photos__masonry"
-                    v-if="fullTripInfo.gallery.masonryImages.length > 0"
+                    v-if="fullTripInfo.gallery.masonryImages"
                   >
                     <div class="column">
                       <img
@@ -233,7 +229,7 @@
                           this.halfMasonryLength
                         )"
                         :key="index"
-                        :src="require(`@/assets/gallery/${img}`)"
+                        :src="img"
                         :alt="fullTripInfo.name"
                       />
                     </div>
@@ -245,27 +241,25 @@
                           this.halfMasonryLength
                         )"
                         :key="index"
-                        :src="require(`@/assets/gallery/${img}`)"
+                        :src="img"
                         :alt="fullTripInfo.name"
                       />
                     </div>
                   </div>
                   <div
                     class="photos__rest"
-                    v-if="fullTripInfo.gallery.restImages.length > 0"
+                    v-if="fullTripInfo.gallery.restImages"
                   >
                     <img
                       v-for="(img, index) in fullTripInfo.gallery.restImages"
                       :key="index"
-                      :src="require(`@/assets/gallery/${img}`)"
+                      :src="img"
                       :alt="fullTripInfo.name"
                     />
                   </div>
                   <img
                     class="photo-bottom"
-                    :src="
-                      require(`@/assets/gallery/${fullTripInfo.gallery.bottomImg}`)
-                    "
+                    :src="fullTripInfo.gallery.bottomImg"
                     :alt="fullTripInfo.name"
                   />
                 </div>
@@ -284,27 +278,27 @@
                     class="rating__overall"
                     :rating="averageRating.overallAverageRating"
                     disabled
-                    :title="'35 reviews'"
+                    title="35 reviews"
                   ></ratingComponent>
                   <ratingComponent
                     :rating="averageRating.comfortAverageRating"
                     disabled
-                    :title="'Comfort'"
+                    title="Comfort"
                   ></ratingComponent>
                   <ratingComponent
                     :rating="averageRating.hospitalityAverageRating"
                     disabled
-                    :title="'Hospitality'"
+                    title="Hospitality"
                   ></ratingComponent>
                   <ratingComponent
                     :rating="averageRating.hygieneAverageRating"
                     disabled
-                    :title="'Hygiene'"
+                    title="Hygiene"
                   ></ratingComponent>
                   <ratingComponent
                     :rating="averageRating.receptionAverageRating"
                     disabled
-                    :title="'Reception'"
+                    title="Reception"
                   ></ratingComponent>
                 </div>
                 <div class="reviews__comments">
@@ -325,25 +319,25 @@
                     <div class="rating__services">
                       <ratingComponent
                         :rating="reviews.rating.comfort"
-                        :title="'Comfort'"
+                        title="Comfort"
                         disabled
                       ></ratingComponent>
 
                       <ratingComponent
                         :rating="reviews.rating.hospitality"
-                        :title="'Hospitality'"
+                        title="Hospitality"
                         disabled
                       ></ratingComponent>
 
                       <ratingComponent
                         :rating="reviews.rating.hygiene"
-                        :title="'Hygiene'"
+                        title="Hygiene"
                         disabled
                       ></ratingComponent>
 
                       <ratingComponent
                         :rating="reviews.rating.reception"
-                        :title="'Reception'"
+                        title="Reception"
                         disabled
                       ></ratingComponent>
                     </div>
@@ -355,40 +349,40 @@
                     <div class="comment-form">
                       <Input
                         v-model="commentForm.userName"
-                        :type="'text'"
-                        :placeholder="'Name'"
+                        type="text"
+                        placeholder="Name"
                       ></Input>
                       <Input
                         v-model="commentForm.userEmail"
-                        :type="'email'"
-                        :placeholder="'Email'"
+                        type="email"
+                        placeholder="Email"
                       ></Input>
                       <Input
                         v-model="commentForm.comment"
-                        :type="'textarea'"
-                        :placeholder="'Comment'"
+                        type="textarea"
+                        placeholder="Comment"
                       ></Input>
                     </div>
                     <div class="rating-form">
                       <ratingComponent
                         :rating="ratingForm.comfort"
                         @select-grade="(n) => (ratingForm.comfort = n)"
-                        :title="'Comfort'"
+                        title="Comfort"
                       ></ratingComponent>
                       <ratingComponent
                         :rating="ratingForm.hospitality"
                         @select-grade="(n) => (ratingForm.hospitality = n)"
-                        :title="'Hospitality'"
+                        title="Hospitality"
                       ></ratingComponent>
                       <ratingComponent
                         :rating="ratingForm.hygiene"
                         @select-grade="(n) => (ratingForm.hygiene = n)"
-                        :title="'Hygiene'"
+                        title="Hygiene"
                       ></ratingComponent>
                       <ratingComponent
                         :rating="ratingForm.reception"
                         @select-grade="(n) => (ratingForm.reception = n)"
-                        :title="'Reception'"
+                        title="Reception"
                       ></ratingComponent>
                     </div>
                     <ButtonBlack @click.prevent="addComment">
@@ -462,14 +456,18 @@
   </div>
 </template>
 <script>
+// потім треба додати стан завантаження
 import ratingComponent from "@/components/ratingComponent.vue";
 import ButtonWhite from "@/components/ButtonWhite.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
+import CrownDecoration from "@/components/CrownDecoration.vue";
 import ButtonTransparent from "@/components/ButtonTransparent.vue";
 import TabsWrapper from "@/components/TabsWrapper.vue";
 import TabComponent from "@/components/TabComponent.vue";
-import CrownDecoration from "@/components/CrownDecoration.vue";
 import Input from "@/components/Input.vue";
+
+import { mapStores } from "pinia";
+import { useLuxTripStore } from "../store/index";
 
 import IPin from "@/components/icons/IPin.vue";
 import IIncluded from "@/components/icons/IIncluded.vue";
@@ -495,263 +493,50 @@ export default {
     return {
       errorMessage: null,
       isError: false,
-      // commentForm: {
-      //   userName: null,
-      //   userEmail: null,
-      //   comment: null,
-      // },
-      // ratingForm: {
-      //   comfort: null,
-      //   hospitality: null,
-      //   hygiene: null,
-      //   reception: null,
-      // },
       commentForm: {
-        userName: "Alexandro",
+        userName: null,
         userEmail: null,
-        comment: "comment from vsCode",
+        comment: null,
       },
       ratingForm: {
-        comfort: 5,
-        hospitality: 5,
-        hygiene: 5,
-        reception: 5,
+        comfort: null,
+        hospitality: null,
+        hygiene: null,
+        reception: null,
       },
-      fullTripInfo: {
-        name: "Machu Picchu",
-        country: "Peru",
-        rating: 5,
-        description:
-          "Machu Picchu is situated above a bow of the Urubamba River, which surrounds the site on three sides, where cliffs drop vertically for 450 meters (1,480 ft) to the river at their base. The area is subject to morning mists rising from the river.[49] The location of the city was a military secret, and its deep precipices and steep mountains provided natural defenses.",
-        destination: "Machu Picchu",
-        departure: "Lima",
-        departureTime: "Flexible schedule",
-        returnTime: "Flexible schedule",
-        dressCode: "Comfortable outdoor clothing",
-        bigImgSrc: "big-trip-img-1.jpg",
-        smallImgSrc: "trip-card-img-1.jpg",
-        price: 2300,
-        included: [
-          "5 Star Accommodation",
-          "Airport Transfer",
-          "Breakfast",
-          "Personal Guide",
-        ],
-        notIncluded: ["Gallery Ticket", "Lunch"],
-        tourPlan: [
-          {
-            dayPlanTitle: "Acclimatizing to Cusco's Charm and Culture",
-            dayPlan:
-              "Arrive in Cusco and transfer to your hotel. Spend the day acclimatizing to the altitude and exploring the city's charming streets and vibrant markets.",
-            included: ["Airport transfer", "Hotel accommodation"],
-          },
-          {
-            dayPlanTitle: "Discovering Inca Ruins in the Sacred Valley",
-            dayPlan:
-              "Embark on a full-day guided tour of the Sacred Valley, stopping at important Inca ruins and traditional Andean villages along the way.",
-            included: [
-              "Full-day guided tour of the Sacred Valley",
-              "Entrance fees to Inca ruins",
-              "Lunch",
-            ],
-          },
-          {
-            dayPlanTitle: "Exploring Machu Picchu with a Guide",
-            dayPlan:
-              "Take an early morning train to Aguas Calientes, the town at the base of Machu Picchu. Spend the day exploring the ancient Inca citadel with a knowledgeable guide.",
-            included: [
-              "Train tickets to Aguas Calientes",
-              "Bus tickets to Machu Picchu",
-              "Guided tour of Machu Picchu",
-              "Entrance fee to Machu Picchu",
-            ],
-          },
-          {
-            dayPlanTitle: "Sunrise at Machu Picchu: Optional Second Visit",
-            dayPlan:
-              "Optional: wake up early for a second visit to Machu Picchu to watch the sunrise. Return to Cusco by train in the afternoon.",
-            included: [
-              "Train tickets from Aguas Calientes to Cusco (or airport)",
-              "Airport transfer",
-            ],
-          },
-        ],
-        gallery: {
-          topImg: "machu-gallery-1.jpg",
-          restImages: [],
-          masonryImages: [
-            "machu-gallery-2.jpg",
-            "machu-gallery-3.jpg",
-            "machu-gallery-4.jpg",
-            "machu-gallery-5.jpg",
-          ],
-          bottomImg: "machu-gallery-6.jpg",
-        },
-        reviews: [
-          {
-            commentText:
-              "Well organized trip, All arranged well by Arooz. Special thanks to Aijaz Bhai for the service and support given to us, all explained well and take us to all places as per our wish. It was a wonderful experience .... Thank you team",
-            rating: {
-              comfort: "4",
-              hospitality: "5",
-              hygiene: "4",
-              reception: "5",
-            },
-            userName: "Eduard Hand",
-            userEmail: null,
-            date: new Date(),
-          },
-          {
-            commentText:
-              "This trip was a mesmerizing escapade into the unknown. With each step, I found myself immersed in a tapestry of unfamiliar sights and unfamiliar cultures. It was a journey of self-exploration, where I discovered hidden strengths and embraced new perspectives. The encounters with locals, their stories, and their warmth left an indelible mark on my soul. The trip challenged me to step outside my comfort zone and embrace the unfamiliar, leading to moments of profound personal growth. It's an experience that will forever ignite my wanderlust and inspire me to continue exploring the wonders of our world.",
-            rating: {
-              comfort: "4",
-              hospitality: "5",
-              hygiene: "4",
-              reception: "5",
-            },
-            userName: "Brandon Mango",
-            userEmail: null,
-            date: new Date(),
-          },
-          {
-            commentText:
-              "Wow, what an incredible trip! The sights, sounds, and sensations encountered along the way were truly transformative. From the awe-inspiring landscapes to the rich cultural experiences, every moment was a feast for the senses. The journey pushed boundaries, allowing for personal growth and self-discovery. It's a trip that will forever hold a special place in my heart, reminding me of the immense beauty and diversity our world has to offer. I feel grateful for the memories created and the connections forged during this extraordinary adventure.",
-            rating: {
-              comfort: "4",
-              hospitality: "5",
-              hygiene: "4",
-              reception: "5",
-            },
-            userName: "Maren Westervelt",
-            userEmail: null,
-            date: new Date(),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "4",
-              hospitality: "5",
-              hygiene: "4",
-              reception: "5",
-            },
-            userName: "Alice Smith",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "3",
-              hospitality: "4",
-              hygiene: "3",
-              reception: "4",
-            },
-            userName: "Ethan Johnson",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "5",
-              hospitality: "5",
-              hygiene: "4",
-              reception: "4",
-            },
-            userName: "Sophia Davis",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "4",
-              hospitality: "3",
-              hygiene: "4",
-              reception: "3",
-            },
-            userName: "Oliver Wilson",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "5",
-              hospitality: "4",
-              hygiene: "5",
-              reception: "4",
-            },
-            userName: "Ava Thompson",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "3",
-              hospitality: "3",
-              hygiene: "4",
-              reception: "3",
-            },
-            userName: "Noah Anderson",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "4",
-              hospitality: "5",
-              hygiene: "4",
-              reception: "5",
-            },
-            userName: "Emma Brown",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "5",
-              hospitality: "5",
-              hygiene: "5",
-              reception: "4",
-            },
-            userName: "Liam Taylor",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "5",
-              hospitality: "5",
-              hygiene: "5",
-              reception: "4",
-            },
-            userName: "Liam Taylor",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-          {
-            commentText: null,
-            rating: {
-              comfort: "5",
-              hospitality: "4",
-              hygiene: "5",
-              reception: "5",
-            },
-            userName: "Lucas Martinez",
-            userEmail: null,
-            date: new Date("2023-05-16T14:30:00.000Z"),
-          },
-        ],
-      },
+      // commentForm: {
+      //   userName: "Alexandro",
+      //   userEmail: null,
+      //   comment: "comment from vsCode",
+      // },
+      // ratingForm: {
+      //   comfort: 5,
+      //   hospitality: 5,
+      //   hygiene: 5,
+      //   reception: 5,
+      // },
+      fullTripInfo: null,
     };
   },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.fetchData();
+      },
+      { immediate: true }
+    );
+  },
   methods: {
+    async fetchData() {
+      this.fullTripInfo = null;
+      //  this.error = null;
+      // this.loading = true;
+      await this.luxTripStore.getDetailsAboutTrip(this.$route.params.id);
+      this.fullTripInfo = this.luxTripStore.trips.find(
+        (trip) => trip.id === this.$route.params.id
+      ).fullTripInfo;
+    },
     generatePdf() {
       // need to refactor later
       var pdf = new jsPDF("p", "pt", "A4"),
@@ -878,6 +663,7 @@ export default {
     },
   },
   computed: {
+    ...mapStores(useLuxTripStore),
     halfMasonryLength() {
       return Math.floor(this.fullTripInfo.gallery.masonryImages.length / 2);
     },
@@ -931,12 +717,7 @@ export default {
 <style lang="scss">
 .trip-page {
   padding-top: 15px;
-  p {
-    font-size: 16px;
-    line-height: 24px;
-    font-family: var(--manrope);
-    color: var(--black-main);
-  }
+
   h3 {
     font-size: 40px;
     line-height: 40px;
@@ -1446,10 +1227,6 @@ export default {
 }
 @media (min-width: 768px) {
   .trip-page {
-    p {
-      font-size: 18px;
-      line-height: 36px;
-    }
     h3 {
       margin-bottom: 40px;
     }

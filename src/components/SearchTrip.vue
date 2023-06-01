@@ -14,7 +14,7 @@
             class="select-component"
             id="search-trip__destination"
             v-model="filterObject.travelCategory"
-            :placeholder="'Where are you going?'"
+            placeholder="Where are you going?"
             :options="[
               'Romantic Winter Destinations',
               'Best Summer Destinations',
@@ -30,7 +30,7 @@
             class="select-component"
             id="search-trip__travel-type"
             v-model="filterObject.travelType"
-            :placeholder="'Choose trip type'"
+            placeholder="Choose trip type"
             :options="['Adventure', 'Romantic']"
           ></SelectComponent>
         </label>
@@ -57,11 +57,15 @@
             class="select-component"
             id="search-trip__travellers"
             v-model="filterObject.travellers"
-            :placeholder="'Any amount'"
+            placeholder="Any amount"
             :options="[1, 2, 3]"
           ></SelectComponent>
         </label>
-        <ButtonBlack @click.prevent="searchTrip()">
+        <!-- <ButtonBlack @click.prevent="searchTrip()">
+          <ISearch></ISearch>
+          <span>find</span>
+        </ButtonBlack> -->
+        <ButtonBlack @click.prevent="luxTripStore.addTrips()">
           <ISearch></ISearch>
           <span>find</span>
         </ButtonBlack>

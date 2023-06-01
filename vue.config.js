@@ -19,13 +19,10 @@ module.exports = defineConfig({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
             options: {
-              // Lossless optimization with custom option
-              // Feel free to experiment with options for better result for you
               plugins: [
                 ["gifsicle", { interlaced: true }],
-                ["mozjpeg", { progressive: true, quality: 80 }],
-                ["pngquant", { quality: [0.3, 0.5] }],
-                // Svgo configuration here https://github.com/svg/svgo#configuration
+                ["mozjpeg", { progressive: true, quality: 100 }],
+                ["pngquant", { quality: [0.7, 0.9] }],
                 [
                   "svgo",
                   {

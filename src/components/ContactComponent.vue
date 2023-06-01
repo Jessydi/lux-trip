@@ -22,8 +22,7 @@
           <ButtonBlack>
             <CrownDecoration></CrownDecoration>
             <span>Start a trip request</span>
-            ></ButtonBlack
-          >
+          </ButtonBlack>
         </form>
       </div>
     </div>
@@ -34,11 +33,14 @@ import InputComponent from "@/components/Input.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 
+import IDoubleRhombus from "./icons/IDoubleRhombus.vue";
+
 export default {
   components: {
     InputComponent,
     ButtonBlack,
     CrownDecoration,
+    IDoubleRhombus,
   },
 };
 </script>

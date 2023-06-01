@@ -2,6 +2,7 @@
   <div class="packages">
     <main>
       <div class="wrapper">
+        <h2>Luxury packages</h2>
         <SearchTrip></SearchTrip>
         <PackagesLoader></PackagesLoader>
         <SubscribeComponent></SubscribeComponent>
@@ -24,23 +25,4 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.packages {
-  .wrapper {
-    overflow: hidden;
-    isolation: isolate;
-    & > div {
-      margin-bottom: 30px;
-    }
-  }
-}
-@media (min-width: 768px) {
-  .packages {
-    .wrapper {
-      & > div {
-        margin-bottom: 60px;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

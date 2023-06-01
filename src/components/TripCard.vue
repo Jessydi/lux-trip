@@ -19,8 +19,10 @@
 
         <router-link
           class="trip-card__name"
-          :to="{ name: 'package-page', params: { id: cardData.name } }"
-          @click="luxTripStore.getDetailsAboutTrip(cardData.id)"
+          :to="{
+            name: 'package-page',
+            params: { id: cardData.id },
+          }"
         >
           {{ cardData.name }}
         </router-link>
@@ -36,8 +38,7 @@
 <script>
 import IPin from "./icons/IPin.vue";
 import ratingComponent from "./ratingComponent.vue";
-import { useLuxTripStore } from "@/store/index";
-import { mapStores } from "pinia";
+
 export default {
   components: {
     IPin,
@@ -53,9 +54,6 @@ export default {
     return {
       cardData: this.cardObject,
     };
-  },
-  computed: {
-    ...mapStores(useLuxTripStore),
   },
 };
 </script>

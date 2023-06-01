@@ -34,43 +34,6 @@ export default {
     return {
       cardsOnOnePage: 12,
       page: 1,
-      cards: [
-        {
-          imgSrc: "trip-card-img-2.jpg",
-          location: "Austria",
-          name: "Winter Park Ski Holiday",
-          price: 1490,
-          rating: 2.1,
-        },
-        {
-          imgSrc: "trip-card-img-1.jpg",
-          location: "Austria",
-          name: "Winter Park Ski Holiday",
-          price: 1490,
-          rating: 3.0,
-        },
-        {
-          imgSrc: "trip-card-img-3.jpg",
-          location: "Austria",
-          name: "Winter Park Ski Holiday",
-          price: 1490,
-          rating: 1.4,
-        },
-        {
-          imgSrc: "trip-card-img-5.jpg",
-          location: "Austria",
-          name: "Winter Park Ski Holiday",
-          price: 1490,
-          rating: 3.8,
-        },
-        {
-          imgSrc: "trip-card-img-4.jpg",
-          location: "Austria",
-          name: "Winter Park Ski Holiday",
-          price: 1490,
-          rating: 4.4,
-        },
-      ],
     };
   },
 

@@ -1,6 +1,9 @@
 <template>
+  <label :for="id" v-if="id && label">{{ label }}</label>
   <textarea
     class="input"
+    v-bind="$attrs"
+    :id="id"
     :class="{ blur: blured }"
     :placeholder="placeholder"
     :value="modelValue"
@@ -11,6 +14,8 @@
     v-else
     :type="type"
     class="input"
+    v-bind="$attrs"
+    :id="id"
     :class="{ blur: blured }"
     :placeholder="placeholder"
     :value="modelValue"
@@ -20,6 +25,7 @@
 <script>
 export default {
   name: "InputComponent",
+  inheritAttrs: false,
   props: {
     blured: {
       type: Boolean,
@@ -36,11 +42,26 @@ export default {
     modelValue: {
       type: String,
     },
+    id: {
+      type: String,
+    },
+    label: {
+      type: String,
+    },
   },
   emits: ["update:modelValue"],
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
+label {
+  margin-bottom: 5px;
+  display: block;
+  padding-left: 30px;
+  font-family: var(--manrope);
+  font-size: 16px;
+  line-height: 29px;
+  color: var(--gray);
+}
 textarea.input {
   height: auto;
   resize: none;

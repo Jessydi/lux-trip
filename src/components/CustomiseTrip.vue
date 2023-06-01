@@ -43,8 +43,7 @@
       <ButtonBlack>
         <CrownDecoration></CrownDecoration>
         <span>Start a trip request</span>
-        ></ButtonBlack
-      >
+      </ButtonBlack>
       <div class="customise-trip__free">
         <span>It’s Free! - no credit card required</span>
       </div>

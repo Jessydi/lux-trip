@@ -69,6 +69,12 @@ button {
   text-transform: uppercase;
   cursor: pointer;
 }
+p {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: var(--manrope);
+  color: var(--black-main);
+}
 .btn {
   display: flex;
   align-items: center;
@@ -87,13 +93,16 @@ button {
     opacity: 0.8;
   }
 }
-input {
+input,
+textarea {
+  display: block;
   font-family: var(--manrope);
   color: var(--black-main);
   &::placeholder {
     color: var(--black-main);
   }
 }
+
 main {
   background: linear-gradient(rgba(226, 211, 206, 0), var(--bg-main) 100px),
     no-repeat top -10px left 0px url(./assets/backgrounds/clouds-main-color-1.png),
@@ -101,6 +110,20 @@ main {
       url(./assets/backgrounds/clouds-main-color-2.png);
 
   position: relative;
+  .wrapper {
+    overflow: hidden;
+    isolation: isolate;
+    & > div {
+      margin-bottom: 80px;
+    }
+    & > div:last-child {
+      margin-bottom: 0px;
+    }
+    & > h2 {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  }
 }
 :root {
   // fonts
@@ -128,10 +151,24 @@ main {
       no-repeat top -5px right 0px url(./assets/backgrounds/clouds-main-color-2.png);
 
     position: relative;
+    .wrapper {
+      & > div {
+        margin-bottom: 120px;
+      }
+      & > h2 {
+        margin-top: 30px;
+        margin-bottom: 50px;
+      }
+    }
   }
+
   h2 {
     font-size: 60px;
     line-height: 58px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 36px;
   }
 }
 </style>

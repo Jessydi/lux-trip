@@ -9,12 +9,12 @@
           </div>
           <p class="subscribe__text">Sign up for our Weekly Newsletter</p>
           <div class="subscribe__form">
-            <InputComponent
+            <Input
               class="subscribe__email"
               type="email"
               blured
               placeholder="Email address"
-            ></InputComponent>
+            ></Input>
             <ButtonWhite>
               <CrownDecoration></CrownDecoration>
               <span>Subscribe</span>
@@ -27,14 +27,14 @@
 </template>
 <script>
 import ButtonWhite from "@/components/ButtonWhite.vue";
-import InputComponent from "@/components/Input.vue";
+import Input from "@/components/Input.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 
 export default {
   name: "SubscribeComponent",
   components: {
     ButtonWhite,
-    InputComponent,
+    Input,
     CrownDecoration,
   },
 };

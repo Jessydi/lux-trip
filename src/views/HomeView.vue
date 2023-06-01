@@ -33,9 +33,16 @@
     <main>
       <div class="wrapper">
         <SearchTrip></SearchTrip>
-        <TopExperiences></TopExperiences>
+
+        <!-- <TopExperiences></TopExperiences> -->
         <LuxuryPackages></LuxuryPackages>
-        <BookCategories></BookCategories>
+        <BookCategories title="Book with us" v-slot:default="slotProps">
+          <BookCategory
+            v-for="(bookCategory, index) in slotProps.bookCategories"
+            :key="index"
+            :bookCategory="bookCategory"
+          ></BookCategory>
+        </BookCategories>
         <WhyLT></WhyLT>
         <CustomiseTrip></CustomiseTrip>
         <SubscribeComponent></SubscribeComponent>
@@ -49,9 +56,13 @@
 <script>
 import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 import SearchTrip from "@/components/SearchTrip.vue";
-import TopExperiences from "@/components/TopExperiences.vue";
+
+//  розібратися з підвантаженням коли з'явиться більше подорожів в бд, бо зараз не зрозуміло що відображати в цих табах
+
+// import TopExperiences from "@/components/TopExperiences.vue";
 import LuxuryPackages from "@/components/LuxuryPackages.vue";
 import BookCategories from "@/components/BookCategories.vue";
+import BookCategory from "@/components/BookCategory.vue";
 import WhyLT from "@/components/WhyLT.vue";
 import CustomiseTrip from "@/components/CustomiseTrip.vue";
 import SubscribeComponent from "@/components/Subscribe.vue";
@@ -63,9 +74,10 @@ export default {
   components: {
     IRhombusBlur,
     SearchTrip,
-    TopExperiences,
+    // TopExperiences,
     LuxuryPackages,
     BookCategories,
+    BookCategory,
     WhyLT,
     CustomiseTrip,
     SubscribeComponent,
@@ -179,14 +191,6 @@ export default {
     }
   }
   .wrapper {
-    overflow: hidden;
-    isolation: isolate;
-    & > div {
-      margin-bottom: 80px;
-    }
-    & > div:last-child {
-      margin-bottom: 0px;
-    }
     .customers-reviews {
       margin-bottom: 230px;
     }
@@ -215,9 +219,6 @@ export default {
       }
     }
     .wrapper {
-      & > div {
-        margin-bottom: 120px;
-      }
       .customers-reviews {
         margin-bottom: 430px;
       }
