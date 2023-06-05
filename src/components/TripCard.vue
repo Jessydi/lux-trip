@@ -31,18 +31,18 @@
           <div class="trip-card__price-value">€ {{ cardData.price }}</div>
         </div>
       </div>
-      <ratingComponent :rating="cardData.rating" disabled></ratingComponent>
+      <RatingComponent :rating="cardData.rating" disabled></RatingComponent>
     </div>
   </div>
 </template>
 <script>
 import IPin from "./icons/IPin.vue";
-import ratingComponent from "./ratingComponent.vue";
+import RatingComponent from "./RatingComponent.vue";
 
 export default {
   components: {
     IPin,
-    ratingComponent,
+    RatingComponent,
   },
   props: {
     cardObject: {

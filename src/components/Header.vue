@@ -1,5 +1,8 @@
 <template>
-  <header class="header">
+  <header
+    class="header"
+    :class="{ 'why-lux-trip': $route.name == 'why-lux-trip' }"
+  >
     <img class="header__bg" :src="headerBg" />
     <div class="header__content">
       <CallbackButton class="header__callback"></CallbackButton>
@@ -33,11 +36,26 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .header {
   position: relative;
   display: flex;
   justify-content: center;
+  &.why-lux-trip {
+    &::before {
+      content: "";
+      background-color: #d1dce6;
+      position: absolute;
+      height: 1500px;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .header__bg {
+      display: none;
+    }
+  }
   &__content {
     display: flex;
     align-items: center;
@@ -77,10 +95,6 @@ export default {
     &__content {
       gap: 20px;
       padding: 25px 45px 0px 45px;
-    }
-
-    &__callback {
-      order: 6;
     }
     &__logo {
       position: static;

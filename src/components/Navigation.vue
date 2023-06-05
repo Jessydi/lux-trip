@@ -14,10 +14,10 @@
         <router-link :to="{ name: 'booking' }">Book with us</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'home' }">Why Lux Trips</router-link>
+        <router-link :to="{ name: 'why-lux-trip' }">Why Lux Trips</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'home' }">Contact</router-link>
+        <router-link :to="{ name: 'contact' }">Contact</router-link>
       </li>
       <li class="navigation__item">
         <router-link :to="{ name: 'home' }">Client Area</router-link>
@@ -45,12 +45,14 @@
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+            <router-link
+              :to="{ name: 'why-lux-trip' }"
+              @click="toggleMobileMenu"
               >Why Lux Trips</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+            <router-link :to="{ name: 'contact' }" @click="toggleMobileMenu"
               >Contact</router-link
             >
           </li>

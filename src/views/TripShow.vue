@@ -26,10 +26,10 @@
                 >
               </div>
             </div>
-            <ratingComponent
+            <RatingComponent
               :rating="averageRating.overallAverageRating"
               disabled
-            ></ratingComponent>
+            ></RatingComponent>
           </div>
           <ButtonWhite>
             <CrownDecoration></CrownDecoration>
@@ -274,32 +274,32 @@
                   >Post comment</ButtonTransparent
                 >
                 <div class="reviews__statistics">
-                  <ratingComponent
+                  <RatingComponent
                     class="rating__overall"
                     :rating="averageRating.overallAverageRating"
                     disabled
                     title="35 reviews"
-                  ></ratingComponent>
-                  <ratingComponent
+                  ></RatingComponent>
+                  <RatingComponent
                     :rating="averageRating.comfortAverageRating"
                     disabled
                     title="Comfort"
-                  ></ratingComponent>
-                  <ratingComponent
+                  ></RatingComponent>
+                  <RatingComponent
                     :rating="averageRating.hospitalityAverageRating"
                     disabled
                     title="Hospitality"
-                  ></ratingComponent>
-                  <ratingComponent
+                  ></RatingComponent>
+                  <RatingComponent
                     :rating="averageRating.hygieneAverageRating"
                     disabled
                     title="Hygiene"
-                  ></ratingComponent>
-                  <ratingComponent
+                  ></RatingComponent>
+                  <RatingComponent
                     :rating="averageRating.receptionAverageRating"
                     disabled
                     title="Reception"
-                  ></ratingComponent>
+                  ></RatingComponent>
                 </div>
                 <div class="reviews__comments">
                   <div
@@ -317,29 +317,29 @@
                       </div>
                     </div>
                     <div class="rating__services">
-                      <ratingComponent
+                      <RatingComponent
                         :rating="reviews.rating.comfort"
                         title="Comfort"
                         disabled
-                      ></ratingComponent>
+                      ></RatingComponent>
 
-                      <ratingComponent
+                      <RatingComponent
                         :rating="reviews.rating.hospitality"
                         title="Hospitality"
                         disabled
-                      ></ratingComponent>
+                      ></RatingComponent>
 
-                      <ratingComponent
+                      <RatingComponent
                         :rating="reviews.rating.hygiene"
                         title="Hygiene"
                         disabled
-                      ></ratingComponent>
+                      ></RatingComponent>
 
-                      <ratingComponent
+                      <RatingComponent
                         :rating="reviews.rating.reception"
                         title="Reception"
                         disabled
-                      ></ratingComponent>
+                      ></RatingComponent>
                     </div>
                   </div>
                 </div>
@@ -364,26 +364,26 @@
                       ></Input>
                     </div>
                     <div class="rating-form">
-                      <ratingComponent
+                      <RatingComponent
                         :rating="ratingForm.comfort"
                         @select-grade="(n) => (ratingForm.comfort = n)"
                         title="Comfort"
-                      ></ratingComponent>
-                      <ratingComponent
+                      ></RatingComponent>
+                      <RatingComponent
                         :rating="ratingForm.hospitality"
                         @select-grade="(n) => (ratingForm.hospitality = n)"
                         title="Hospitality"
-                      ></ratingComponent>
-                      <ratingComponent
+                      ></RatingComponent>
+                      <RatingComponent
                         :rating="ratingForm.hygiene"
                         @select-grade="(n) => (ratingForm.hygiene = n)"
                         title="Hygiene"
-                      ></ratingComponent>
-                      <ratingComponent
+                      ></RatingComponent>
+                      <RatingComponent
                         :rating="ratingForm.reception"
                         @select-grade="(n) => (ratingForm.reception = n)"
                         title="Reception"
-                      ></ratingComponent>
+                      ></RatingComponent>
                     </div>
                     <ButtonBlack @click.prevent="addComment">
                       <CrownDecoration></CrownDecoration>
@@ -457,7 +457,7 @@
 </template>
 <script>
 // потім треба додати стан завантаження
-import ratingComponent from "@/components/ratingComponent.vue";
+import RatingComponent from "@/components/RatingComponent.vue";
 import ButtonWhite from "@/components/ButtonWhite.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
@@ -476,7 +476,7 @@ import IRhombus from "@/components/icons/IRhombus.vue";
 import jsPDF from "jspdf";
 export default {
   components: {
-    ratingComponent,
+    RatingComponent,
     ButtonWhite,
     ButtonBlack,
     ButtonTransparent,

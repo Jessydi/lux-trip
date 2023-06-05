@@ -19,19 +19,19 @@
         <div class="footer__callback">
           <CallbackButton></CallbackButton>
         </div>
-        <router-link class="footer__link" :to="{ name: 'home' }"
+        <router-link class="footer__link" :to="{ name: 'packages' }"
           >Luxury packages</router-link
         >
 
-        <router-link class="footer__link" :to="{ name: 'home' }"
+        <router-link class="footer__link" :to="{ name: 'booking' }"
           >Book with us</router-link
         >
 
-        <router-link class="footer__link" :to="{ name: 'home' }"
+        <router-link class="footer__link" :to="{ name: 'why-lux-trip' }"
           >Why Lux Trips</router-link
         >
 
-        <router-link class="footer__link" :to="{ name: 'home' }"
+        <router-link class="footer__link" :to="{ name: 'contact' }"
           >Contact</router-link
         >
       </div>

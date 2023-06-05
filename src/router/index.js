@@ -23,6 +23,16 @@ const routes = [
     component: () => import("../views/BookCategoriesView.vue"),
   },
   {
+    path: "/why-lux-trip",
+    name: "why-lux-trip",
+    component: () => import("../views/WhyLuxTrip.vue"),
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: () => import("../views/ContactView.vue"),
+  },
+  {
     path: "/supercar-booking",
     name: "supercar-booking",
     component: () => import("../views/BookSupercar.vue"),

@@ -87,6 +87,15 @@ export default {
   .container {
     position: relative;
   }
+  .btn-transparent {
+    width: 140px;
+  }
+  &__bg {
+    position: absolute;
+    width: 100%;
+    top: 80%;
+    z-index: -2;
+  }
   &::before {
     content: "";
     width: 100%;
@@ -124,37 +133,16 @@ export default {
       text-align: left;
     }
   }
-  &__bg {
-    position: absolute;
-    width: 100%;
-    top: 80%;
-    z-index: -2;
-  }
-  .btn-transparent {
-    width: 140px;
-  }
 }
 @media (min-width: 900px) {
   .luxury-packages {
-    &__bg {
-      max-height: 1000px;
-      object-fit: cover;
-    }
-    &::after {
-      max-height: 1000px;
-    }
     .container {
       display: grid;
       gap: 30px;
       grid-template-columns: 1fr 1fr 1fr;
       padding-bottom: 120px;
     }
-    h2 {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      margin-top: 100px;
-    }
+
     .splide {
       display: contents;
       &__slide:nth-child(3n + 1) {
@@ -172,6 +160,19 @@ export default {
           display: contents;
         }
       }
+    }
+    &__bg {
+      max-height: 1000px;
+      object-fit: cover;
+    }
+    &::after {
+      max-height: 1000px;
+    }
+    h2 {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-top: 100px;
     }
   }
 }

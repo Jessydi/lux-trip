@@ -50,6 +50,7 @@ export default {
     border-radius: var(--border-radius) 0 0 var(--border-radius);
     width: calc(50% - 50px);
     height: calc(100% + 10px);
+    min-width: 30px;
     bottom: 0;
     transition: 0.2s ease;
   }

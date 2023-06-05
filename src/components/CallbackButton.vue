@@ -1,12 +1,14 @@
 <template>
-  <button class="callback-btn">
-    {{ buttonText }}
-  </button>
-  <button class="callback-btn callback-btn-wide-screen" v-bind="$attrs">
-    <ICrown></ICrown>
-    {{ buttonTextWideScreen }}
-    <ICrown></ICrown>
-  </button>
+  <div class="callback-btn__wrapper">
+    <button class="callback-btn">
+      {{ buttonText }}
+    </button>
+    <button class="callback-btn callback-btn-wide-screen" v-bind="$attrs">
+      <ICrown></ICrown>
+      {{ buttonTextWideScreen }}
+      <ICrown></ICrown>
+    </button>
+  </div>
 </template>
 <script>
 import ICrown from "./icons/ICrown.vue";
@@ -31,6 +33,7 @@ export default {
   font-size: 16px;
   line-height: 18px;
   letter-spacing: 1px;
+  white-space: nowrap;
   &:hover,
   &:focus {
     background-color: rgb(141 38 38 / 10%);
@@ -96,7 +99,6 @@ export default {
     display: none;
 
     &-wide-screen {
-      flex-shrink: 0;
       display: block;
     }
   }

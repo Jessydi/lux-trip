@@ -1,6 +1,7 @@
 <template>
   <div class="img-with-rhombus">
     <img :src="require(`@/assets/${imgSrc}`)" />
+    <slot></slot>
     <IRhombusBlur class="rhombus"></IRhombusBlur>
   </div>
 </template>
