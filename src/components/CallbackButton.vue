@@ -1,5 +1,5 @@
 <template>
-  <div class="callback-btn__wrapper">
+  <router-link :to="{ name: 'home', hash: '#callback' }">
     <button class="callback-btn">
       {{ buttonText }}
     </button>
@@ -8,7 +8,7 @@
       {{ buttonTextWideScreen }}
       <ICrown></ICrown>
     </button>
-  </div>
+  </router-link>
 </template>
 <script>
 import ICrown from "./icons/ICrown.vue";

@@ -88,6 +88,7 @@ p {
   transition: all 0.2s ease-in;
   width: 100%;
   position: relative;
+  white-space: nowrap;
   &:hover,
   &:focus {
     opacity: 0.8;
@@ -120,8 +121,9 @@ main {
       margin-bottom: 0px;
     }
     & > h2 {
-      margin-top: 20px;
-      margin-bottom: 30px;
+      margin: 20px auto 30px auto;
+      max-width: 1140px;
+      padding: 0 15px;
     }
   }
 }

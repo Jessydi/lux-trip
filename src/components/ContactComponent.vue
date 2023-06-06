@@ -1,24 +1,24 @@
 <template>
-  <div class="contact">
+  <div class="contact-block">
     <div class="container">
-      <div class="contact__content">
-        <div class="contact__title">
-          <IDoubleRhombus></IDoubleRhombus>
+      <div class="contact-block__content">
+        <div class="contact-block__title">
           <h2>Contact</h2>
         </div>
-        <form class="contact__form">
+        <form class="contact-block__form">
           <InputComponent
-            class="contact__name"
+            class="contact-block__name"
             type="text"
             blured
             placeholder="Name"
           ></InputComponent>
           <InputComponent
-            class="contact__phone"
+            class="contact-block__phone"
             type="tel"
             blured
             placeholder="Phone"
           ></InputComponent>
+
           <ButtonBlack>
             <CrownDecoration></CrownDecoration>
             <span>Start a trip request</span>
@@ -33,19 +33,16 @@ import InputComponent from "@/components/Input.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 
-import IDoubleRhombus from "./icons/IDoubleRhombus.vue";
-
 export default {
   components: {
     InputComponent,
     ButtonBlack,
     CrownDecoration,
-    IDoubleRhombus,
   },
 };
 </script>
 <style lang="scss">
-.contact {
+.contact-block {
   &__title {
     margin-bottom: 50px;
   }
@@ -88,7 +85,7 @@ export default {
   }
 }
 @media (min-width: 768px) {
-  .contact {
+  .contact-block {
     position: relative;
     &::before {
       content: "";

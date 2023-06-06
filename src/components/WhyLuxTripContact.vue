@@ -16,7 +16,10 @@
         are the most precious gifts we want our customer to bring back with
         them.
       </p>
-      <router-link class="why-lux-trip-contact__link" :to="{ name: 'contact' }">
+      <router-link
+        class="why-lux-trip-contact__link"
+        :to="{ name: 'home', hash: '#callback' }"
+      >
         <ButtonBlack>
           <CrownDecoration></CrownDecoration>
           <span>Contact us</span>
