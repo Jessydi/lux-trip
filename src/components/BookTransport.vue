@@ -39,8 +39,12 @@
           <span>Make A Request</span>
         </ButtonBlack>
         <div class="callback-buttons">
-          <ButtonTransparent>call me back</ButtonTransparent>
-          <ButtonTransparent>email me back </ButtonTransparent>
+          <router-link :to="{ name: 'home', hash: '#callback' }">
+            <ButtonTransparent>call me back</ButtonTransparent>
+          </router-link>
+          <router-link :to="{ name: 'home', hash: '#emailback' }">
+            <ButtonTransparent>email me back </ButtonTransparent>
+          </router-link>
         </div>
       </div>
     </div>
@@ -70,27 +74,28 @@ import IHelicopterCard from "@/components/icons/IHelicopterCard.vue";
 import IPlane from "@/components/icons/IPlane.vue";
 import ICook from "@/components/icons/ICook.vue";
 
+import { shallowRef } from "vue";
 export default {
   data() {
     return {
       morphs: {
-        IDestination,
-        IWomen,
-        IFamily,
-        IClock,
-        IMan,
-        ICar,
-        IHealth,
-        ITickets,
-        ICase,
-        IBuildings,
-        IGuides,
-        ISail,
-        IGlobe,
-        IHelicopter,
-        IHelicopterCard,
-        IPlane,
-        ICook,
+        IDestination: shallowRef(IDestination),
+        IClock: shallowRef(IClock),
+        IWomen: shallowRef(IWomen),
+        IFamily: shallowRef(IFamily),
+        IMan: shallowRef(IMan),
+        ICar: shallowRef(ICar),
+        IHealth: shallowRef(IHealth),
+        ITickets: shallowRef(ITickets),
+        ICase: shallowRef(ICase),
+        IBuildings: shallowRef(IBuildings),
+        IGuides: shallowRef(IGuides),
+        ISail: shallowRef(ISail),
+        IGlobe: shallowRef(IGlobe),
+        IHelicopter: shallowRef(IHelicopter),
+        IHelicopterCard: shallowRef(IHelicopterCard),
+        IPlane: shallowRef(IPlane),
+        ICook: shallowRef(ICook),
       },
     };
   },
@@ -170,7 +175,7 @@ export default {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      .btn {
+      a {
         flex: 1 1 150px;
       }
       &::before {
@@ -208,7 +213,6 @@ export default {
     }
 
     &__description {
-      margin-bottom: 20px;
       p {
         line-height: 28px;
       }
@@ -235,27 +239,6 @@ export default {
       height: fit-content;
       flex: 0 1 50%;
       min-width: 410px;
-      .callback-buttons {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        .btn {
-          flex: 1 1 150px;
-        }
-        &::before {
-          content: "or";
-          text-transform: uppercase;
-          text-align: center;
-          display: block;
-          flex: 1 1 100%;
-          font-size: 16px;
-          line-height: 18px;
-          color: var(--black-main);
-        }
-      }
-      .request-button {
-        margin-bottom: 30px;
-      }
     }
   }
 }

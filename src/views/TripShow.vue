@@ -266,135 +266,10 @@
               </div>
             </TabComponent>
             <TabComponent title="Reviews">
-              <div class="reviews">
-                <h3>Reviews Scores and Score Breakdown</h3>
-                <ButtonTransparent
-                  @click="scrollToCommentForm"
-                  class="to-comment-form"
-                  >Post comment</ButtonTransparent
-                >
-                <div class="reviews__statistics">
-                  <RatingComponent
-                    class="rating__overall"
-                    :rating="averageRating.overallAverageRating"
-                    disabled
-                    title="35 reviews"
-                  ></RatingComponent>
-                  <RatingComponent
-                    :rating="averageRating.comfortAverageRating"
-                    disabled
-                    title="Comfort"
-                  ></RatingComponent>
-                  <RatingComponent
-                    :rating="averageRating.hospitalityAverageRating"
-                    disabled
-                    title="Hospitality"
-                  ></RatingComponent>
-                  <RatingComponent
-                    :rating="averageRating.hygieneAverageRating"
-                    disabled
-                    title="Hygiene"
-                  ></RatingComponent>
-                  <RatingComponent
-                    :rating="averageRating.receptionAverageRating"
-                    disabled
-                    title="Reception"
-                  ></RatingComponent>
-                </div>
-                <div class="reviews__comments">
-                  <div
-                    class="comment"
-                    v-for="(reviews, index) in reviewsWithComment"
-                    :key="index"
-                  >
-                    <p class="comment__text">{{ reviews.commentText }}</p>
-                    <div class="comment__info">
-                      <div class="comment__user-name">
-                        {{ reviews.userName }}
-                      </div>
-                      <div class="comment__date">
-                        {{ formattedDate(reviews.date) }}
-                      </div>
-                    </div>
-                    <div class="rating__services">
-                      <RatingComponent
-                        :rating="reviews.rating.comfort"
-                        title="Comfort"
-                        disabled
-                      ></RatingComponent>
-
-                      <RatingComponent
-                        :rating="reviews.rating.hospitality"
-                        title="Hospitality"
-                        disabled
-                      ></RatingComponent>
-
-                      <RatingComponent
-                        :rating="reviews.rating.hygiene"
-                        title="Hygiene"
-                        disabled
-                      ></RatingComponent>
-
-                      <RatingComponent
-                        :rating="reviews.rating.reception"
-                        title="Reception"
-                        disabled
-                      ></RatingComponent>
-                    </div>
-                  </div>
-                </div>
-                <div ref="commentForm" class="reviews__post-review">
-                  <h3>Post a Review</h3>
-                  <form class="post-review-form">
-                    <div class="comment-form">
-                      <Input
-                        v-model="commentForm.userName"
-                        type="text"
-                        placeholder="Name"
-                      ></Input>
-                      <Input
-                        v-model="commentForm.userEmail"
-                        type="email"
-                        placeholder="Email"
-                      ></Input>
-                      <Input
-                        v-model="commentForm.comment"
-                        type="textarea"
-                        placeholder="Comment"
-                      ></Input>
-                    </div>
-                    <div class="rating-form">
-                      <RatingComponent
-                        :rating="ratingForm.comfort"
-                        @select-grade="(n) => (ratingForm.comfort = n)"
-                        title="Comfort"
-                      ></RatingComponent>
-                      <RatingComponent
-                        :rating="ratingForm.hospitality"
-                        @select-grade="(n) => (ratingForm.hospitality = n)"
-                        title="Hospitality"
-                      ></RatingComponent>
-                      <RatingComponent
-                        :rating="ratingForm.hygiene"
-                        @select-grade="(n) => (ratingForm.hygiene = n)"
-                        title="Hygiene"
-                      ></RatingComponent>
-                      <RatingComponent
-                        :rating="ratingForm.reception"
-                        @select-grade="(n) => (ratingForm.reception = n)"
-                        title="Reception"
-                      ></RatingComponent>
-                    </div>
-                    <ButtonBlack @click.prevent="addComment">
-                      <CrownDecoration></CrownDecoration>
-                      <span>Post review</span></ButtonBlack
-                    >
-                    <div class="error-message" :class="{ visible: isError }">
-                      {{ errorMessage }}
-                    </div>
-                  </form>
-                </div>
-              </div>
+              <ReviewsTab
+                :averageRating="averageRating"
+                :reviewsWithCommentArray="reviewsWithComment"
+              ></ReviewsTab>
             </TabComponent>
             <TabComponent title="Cancellation policy">
               <div class="cancellation-policy">
@@ -461,10 +336,10 @@ import RatingComponent from "@/components/RatingComponent.vue";
 import ButtonWhite from "@/components/ButtonWhite.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
-import ButtonTransparent from "@/components/ButtonTransparent.vue";
 import TabsWrapper from "@/components/TabsWrapper.vue";
 import TabComponent from "@/components/TabComponent.vue";
-import Input from "@/components/Input.vue";
+
+import { defineAsyncComponent } from "vue";
 
 import { mapStores } from "pinia";
 import { useLuxTripStore } from "../store/index";
@@ -479,15 +354,18 @@ export default {
     RatingComponent,
     ButtonWhite,
     ButtonBlack,
-    ButtonTransparent,
     CrownDecoration,
-    Input,
     IPin,
     TabsWrapper,
     TabComponent,
     IIncluded,
     INotIncluded,
     IRhombus,
+    ReviewsTab: defineAsyncComponent(() =>
+      import(
+        /* webpackPrefetch: true */ "@/components/tripShowTabs/Reviews.vue"
+      )
+    ),
   },
   data() {
     return {
@@ -599,67 +477,6 @@ export default {
       });
 
       pdf.save(this.fullTripInfo.name.replace(" ", "") + "Plan");
-    },
-    scrollToCommentForm() {
-      console.log(this.$refs.commentForm);
-      this.$refs.commentForm.scrollIntoView({ behavior: "smooth" });
-    },
-    formattedDate(date) {
-      const options = {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      };
-
-      return date.toLocaleString("en-US", options);
-    },
-    validateComent() {
-      if (Object.values(this.ratingForm).some((el) => el === null)) {
-        this.errorMessage = "Please, rate all services.";
-        this.isError = true;
-        setTimeout(() => {
-          this.isError = false;
-          console.log(this.isError);
-        }, 5000);
-      } else if (!this.commentForm.userName) {
-        this.errorMessage = "Please, write your name.";
-        this.isError = true;
-        setTimeout(() => {
-          this.isError = false;
-          console.log(this.isError);
-        }, 5000);
-      }
-    },
-    addComment() {
-      this.validateComent();
-      if (!this.isError) {
-        let newComment = {
-          commentText: this.commentForm.comment
-            ? this.commentForm.comment
-            : null,
-          rating: {
-            comfort: this.ratingForm.comfort,
-            hospitality: this.ratingForm.hospitality,
-            hygiene: this.ratingForm.hygiene,
-            reception: this.ratingForm.reception,
-          },
-          userName: this.commentForm.userName,
-          userEmail: this.commentForm.userEmail
-            ? this.commentForm.userEmail
-            : null,
-          date: new Date(),
-        };
-        this.fullTripInfo.reviews.push(newComment);
-        console.log(this.fullTripInfo.reviews);
-        // for (var service in this.ratingForm) {
-        //   if (Object.hasOwn(this.ratingForm, service)) {
-        //     this.ratingForm[service] = null;
-        //   }
-        // }
-      }
     },
   },
   computed: {
