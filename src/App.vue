@@ -1,5 +1,7 @@
 <template>
-  <div class="app">
+  <div
+    class="app"
+    :class="{ 'not-scrollable': mobileNavigation }">
     <TheHeader></TheHeader>
     <router-view />
     <TheFooter></TheFooter>
@@ -8,10 +10,16 @@
 <script>
 import TheHeader from "@/components/Header";
 import TheFooter from "@/components/Footer";
+
+import { useLuxTripStore } from "@/store/index";
+import { mapWritableState } from "pinia";
 export default {
   components: {
     TheHeader,
     TheFooter,
+  },
+  computed: {
+    ...mapWritableState(useLuxTripStore, ["mobileNavigation"]),
   },
 };
 </script>
@@ -30,6 +38,16 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  &.not-scrollable {
+    max-width: 100%;
+    overflow: hidden;
+    position: fixed;
+  }
+  & > div {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .container {
@@ -105,12 +123,13 @@ textarea {
 }
 
 main {
-  background: linear-gradient(rgba(226, 211, 206, 0), var(--bg-main) 100px),
+  background: linear-gradient(transparent, var(--bg-main) 100px),
     no-repeat top -10px left 0px url(./assets/backgrounds/clouds-main-color-1.png),
     no-repeat top -10px right -150px
       url(./assets/backgrounds/clouds-main-color-2.png);
 
   position: relative;
+  flex: 1 1 auto;
   .wrapper {
     overflow: hidden;
     isolation: isolate;

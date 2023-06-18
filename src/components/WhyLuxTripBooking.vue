@@ -6,13 +6,19 @@
         options, including private yachts, jets, charter flights and supercars.
       </h3>
     </div>
-    <SliderComponent :splideObject="splideObject">
-      <SplideSlide v-for="(bookCategory, index) in bookCategories" :key="index">
-        <BookCategory :bookCategory="bookCategory"></BookCategory>
-      </SplideSlide>
-    </SliderComponent>
+    <div class="container container__booking">
+      <SliderComponent :splideObject="splideObject">
+        <SplideSlide
+          v-for="(bookCategory, index) in bookCategories"
+          :key="index">
+          <BookCategory :bookCategory="bookCategory"></BookCategory>
+        </SplideSlide>
+      </SliderComponent>
+    </div>
     <div class="container">
-      <router-link class="why-lux-trip-booking__link" :to="{ name: 'booking' }">
+      <router-link
+        class="why-lux-trip-booking__link"
+        :to="{ name: 'booking' }">
         <ButtonBlack>
           <CrownDecoration></CrownDecoration>
           <span>Book now</span>
@@ -42,6 +48,7 @@ export default {
         perPage: 4,
         perMove: 1,
         type: "loop",
+        drag: "free",
         breakpoints: {
           768: {
             perPage: 2,
@@ -105,6 +112,9 @@ export default {
 
   .container {
     max-width: 540px;
+    &__booking {
+      max-width: 1140px;
+    }
   }
   .splide {
     margin: 0 -230px 75px 15px;
@@ -117,6 +127,9 @@ export default {
   }
   :deep(.book-category) {
     border-radius: 5px;
+    .book-category__img {
+      border-radius: 5px;
+    }
     .book-category__name {
       font-size: 23px;
       line-height: 22px;
@@ -138,10 +151,13 @@ export default {
       margin-bottom: 35px;
     }
     .splide {
-      margin: 0 -230px 85px -230px;
+      margin: 0 -570px 85px -570px;
     }
     :deep(.book-category) {
       border-radius: 10px;
+      .book-category__img {
+        border-radius: 10px;
+      }
       .book-category__name {
         font-size: 44px;
         line-height: 43px;

@@ -1,15 +1,17 @@
 <template>
   <div class="trip-card">
-    <!-- <img
-      class="trip-card__image"
-      :src="require(`@/assets/trip-cards/${cardData.imgSrc}`)"
-      alt="trip card image"
-    /> -->
-    <img
-      class="trip-card__image"
-      :src="cardData.imgSrc"
-      alt="trip card image"
-    />
+    <router-link
+      class="trip-card__image-link"
+      :to="{
+        name: 'package-page',
+        params: { id: cardData.id },
+      }">
+      <img
+        class="trip-card__image"
+        :src="cardData.imgSrc"
+        alt="trip card image" />
+    </router-link>
+
     <div class="trip-card__content">
       <div class="trip-card__description">
         <div class="trip-card__location">
@@ -22,8 +24,7 @@
           :to="{
             name: 'package-page',
             params: { id: cardData.id },
-          }"
-        >
+          }">
           {{ cardData.name }}
         </router-link>
         <div class="trip-card__price">
@@ -31,7 +32,9 @@
           <div class="trip-card__price-value">€ {{ cardData.price }}</div>
         </div>
       </div>
-      <RatingComponent :rating="cardData.rating" disabled></RatingComponent>
+      <RatingComponent
+        :rating="cardData.averageRatingObject.overallAverageRating"
+        disabled></RatingComponent>
     </div>
   </div>
 </template>
@@ -74,6 +77,12 @@ export default {
     width: 100%;
     object-fit: cover;
     transition: 0.3s;
+    &-link {
+      width: 100%;
+      &-link:hover {
+        opacity: 1;
+      }
+    }
   }
 
   &__content {
@@ -82,6 +91,7 @@ export default {
     width: 100%;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     padding: 30px;
     color: white;
     gap: 10px;

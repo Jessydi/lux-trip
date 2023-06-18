@@ -5,8 +5,13 @@
         <CrownDecoration></CrownDecoration>
         <span>find your journey</span>
       </div>
-      <form action="" class="search-trip__form">
-        <label class="search-trip__input" for="search-trip__destination">
+      <form
+        @submit="searchTrip"
+        action=""
+        class="search-trip__form">
+        <label
+          class="search-trip__input"
+          for="search-trip__destination">
           <IRhombus class="rhombus-icon"></IRhombus>
           <span>Luxury Tours</span>
 
@@ -19,10 +24,11 @@
               'Romantic Winter Destinations',
               'Best Summer Destinations',
               'Best Winter Destinations',
-            ]"
-          ></SelectComponent>
+            ]"></SelectComponent>
         </label>
-        <label class="search-trip__input" for="search-trip__travel-type">
+        <label
+          class="search-trip__input"
+          for="search-trip__travel-type">
           <ISun></ISun>
           <span>Travel type</span>
 
@@ -31,10 +37,11 @@
             id="search-trip__travel-type"
             v-model="filterObject.travelType"
             placeholder="Choose trip type"
-            :options="['Adventure', 'Romantic']"
-          ></SelectComponent>
+            :options="['Adventure', 'Romantic']"></SelectComponent>
         </label>
-        <label class="search-trip__input" for="search-trip__date">
+        <label
+          class="search-trip__input"
+          for="search-trip__date">
           <ICalendar></ICalendar>
           <span>When</span>
           <input
@@ -43,14 +50,14 @@
             v-model="filterObject.dateValue"
             autocomplete="off"
             placeholder="Select Date"
-            :size="dateInputLength"
-          />
+            :size="dateInputLength" />
           <button
             class="clear-date"
-            @click.prevent="filterObject.dateValue = null"
-          ></button>
+            @click.prevent="datePicker.clear()"></button>
         </label>
-        <label class="search-trip__input" for="search-trip__travellers">
+        <label
+          class="search-trip__input"
+          for="search-trip__travellers">
           <IPerson></IPerson>
           <span>Travellers</span>
           <SelectComponent
@@ -58,10 +65,9 @@
             id="search-trip__travellers"
             v-model="filterObject.travellers"
             placeholder="Any amount"
-            :options="[1, 2, 3]"
-          ></SelectComponent>
+            :options="[1, 2, 3]"></SelectComponent>
         </label>
-        <!-- <ButtonBlack @click.prevent="searchTrip()">
+        <!-- <ButtonBlack @click.prevent="searchTrip">
           <ISearch></ISearch>
           <span>find</span>
         </ButtonBlack> -->
@@ -109,10 +115,11 @@ export default {
         travellers: null,
         dateValue: null,
       },
+      datePicker: null,
     };
   },
   mounted() {
-    flatpickr("#search-trip__date", {
+    this.datePicker = flatpickr("#search-trip__date", {
       minDate: new Date(),
       mode: "range",
       defaultDate: null,
@@ -121,7 +128,7 @@ export default {
   },
   methods: {
     searchTrip() {
-      this.filterObject.dateValue = null;
+      this.datePicker.clear();
       const isAllFiltersEmpty = Object.values(this.filterObject).every(
         (val) => val === null
       );
@@ -158,7 +165,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .search-trip {
   &__title {
     background-color: #fff;
@@ -236,9 +243,9 @@ export default {
     .rhombus-icon {
       height: 17px;
       width: auto;
-
-      stroke-width: 120px;
-      polygon {
+      stroke-width: 100px;
+      clip-path: polygon(50% 0%, 95% 50%, 50% 100%, 5% 50%);
+      :deep(path) {
         stroke: var(--gray);
       }
     }

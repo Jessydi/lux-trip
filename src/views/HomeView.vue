@@ -10,16 +10,13 @@
         <div class="open-screen__background">
           <img
             class="open-screen__img open-screen__img-1"
-            src="../assets/backgrounds/mountains-1.png"
-          />
+            src="../assets/backgrounds/mountains-1.png" />
           <img
             class="open-screen__img open-screen__img-2"
-            src="../assets/backgrounds/mountains-2.png"
-          />
+            src="../assets/backgrounds/mountains-2.png" />
           <img
             class="open-screen__img open-screen__img-3"
-            src="../assets/backgrounds/mountains-3.png"
-          />
+            src="../assets/backgrounds/mountains-3.png" />
         </div>
         <div class="open-screen__rhombuses">
           <IRhombusBlur class="blured-rhombus blured-rhombus-1"></IRhombusBlur>
@@ -33,15 +30,15 @@
     <main>
       <div class="wrapper">
         <SearchTrip></SearchTrip>
-
-        <!-- <TopExperiences></TopExperiences> -->
+        <TopExperiences></TopExperiences>
         <LuxuryPackages></LuxuryPackages>
-        <BookCategories title="Book with us" v-slot:default="slotProps">
+        <BookCategories
+          title="Book with us"
+          v-slot:default="slotProps">
           <BookCategory
             v-for="(bookCategory, index) in slotProps.bookCategories"
             :key="index"
-            :bookCategory="bookCategory"
-          ></BookCategory>
+            :bookCategory="bookCategory"></BookCategory>
         </BookCategories>
         <WhyLT></WhyLT>
         <CustomiseTrip></CustomiseTrip>
@@ -59,7 +56,7 @@ import SearchTrip from "@/components/SearchTrip.vue";
 
 //  розібратися з підвантаженням коли з'явиться більше подорожів в бд, бо зараз не зрозуміло що відображати в цих табах
 
-// import TopExperiences from "@/components/TopExperiences.vue";
+import TopExperiences from "@/components/TopExperiences.vue";
 import LuxuryPackages from "@/components/LuxuryPackages.vue";
 import BookCategories from "@/components/BookCategories.vue";
 import BookCategory from "@/components/BookCategory.vue";
@@ -74,7 +71,7 @@ export default {
   components: {
     IRhombusBlur,
     SearchTrip,
-    // TopExperiences,
+    TopExperiences,
     LuxuryPackages,
     BookCategories,
     BookCategory,
@@ -86,11 +83,13 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .home {
   .open-screen {
     position: relative;
     z-index: 0;
+    pointer-events: none;
+    user-select: none;
     .container {
       display: flex;
       flex-direction: column;
@@ -156,15 +155,19 @@ export default {
       position: absolute;
       margin: 0 auto;
       height: 100%;
+      & :deep(svg) {
+        width: auto;
+        height: 100%;
+      }
       .blured-rhombus {
         position: absolute;
-        width: auto;
         z-index: 1;
+
         &-1 {
-          bottom: 0;
+          top: 50%;
           left: 50%;
-          translate: -50% 0;
-          height: clamp(138px, 19vw, 213px);
+          translate: -50% 0%;
+          height: clamp(90px, 19vw, 210px);
         }
         &-2 {
           top: 60%;

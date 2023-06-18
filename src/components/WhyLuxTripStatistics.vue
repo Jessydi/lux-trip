@@ -33,18 +33,15 @@
       <img
         class="clouds clouds-1"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
       <img
         class="clouds clouds-2"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
       <img
         class="clouds clouds-3"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
     </div>
   </div>
 </template>
@@ -110,7 +107,7 @@ export default {
         inset: 0;
         margin: auto;
         stroke-width: 3px;
-        polygon {
+        path {
           stroke: var(--gray);
         }
       }

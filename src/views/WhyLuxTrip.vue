@@ -9,8 +9,7 @@
         <div class="open-screen__background">
           <img
             class="open-screen__img open-screen__img-1"
-            src="../assets/backgrounds/why-lt-bg-full-page.png"
-          />
+            src="../assets/backgrounds/why-lt-bg-full-page.png" />
         </div>
       </div>
     </div>
@@ -70,6 +69,8 @@ export default {
   .open-screen {
     position: relative;
     z-index: 0;
+    pointer-events: none;
+    user-select: none;
     .container {
       display: flex;
       flex-direction: column;

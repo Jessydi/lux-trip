@@ -1,8 +1,18 @@
 <template>
   <div class="rating">
-    <span v-if="selectedGrade" class="rating__value">{{ selectedGrade }}</span>
-    <span v-if="title" class="rating__title">{{ title }}</span>
-    <div class="rating__rhombuses" @mouseleave="hoveredGrade = null">
+    <span
+      v-if="selectedGrade"
+      class="rating__value"
+      >{{ selectedGrade }}</span
+    >
+    <span
+      v-if="title"
+      class="rating__title"
+      >{{ title }}</span
+    >
+    <div
+      class="rating__rhombuses"
+      @mouseleave="hoveredGrade = null">
       <div
         v-for="i in 5"
         @mouseover="hoverRating(i)"
@@ -11,13 +21,12 @@
         class="rating__rhombus"
         :class="{
           pointer: !disabled,
-        }"
-      >
+        }">
         <IRhombus
           :class="{
             filled: i <= hoveredGrade || i <= Math.round(selectedGrade),
-          }"
-        >
+            translucent: hoveredGrade && i > hoveredGrade,
+          }">
         </IRhombus>
       </div>
     </div>
@@ -66,13 +75,12 @@ export default {
   },
   watch: {
     rating(newRating) {
-      console.log(newRating);
       this.selectedGrade = newRating;
     },
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .rating {
   text-align: center;
   min-width: 18px;
@@ -94,9 +102,13 @@ export default {
       color: white;
       height: 16px;
       width: auto;
-      stroke-width: 50;
+      stroke-width: 20;
+      transition: 0.2s;
       &.filled {
         fill: white;
+      }
+      &.translucent {
+        opacity: 0.5;
       }
     }
   }

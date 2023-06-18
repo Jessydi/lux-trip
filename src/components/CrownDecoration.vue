@@ -1,10 +1,13 @@
 <template>
   <div
     class="crown-decoration"
-    :class="{ 'single-crown': singleCrown, 'no-crown': noCrown }"
-  >
-    <ICrown v-if="!noCrown" class="crown-1"></ICrown>
-    <ICrown v-if="!(singleCrown || noCrown)" class="crown-2"></ICrown>
+    :class="{ 'single-crown': singleCrown, 'no-crown': noCrown }">
+    <ICrown
+      v-if="!noCrown"
+      class="crown-1"></ICrown>
+    <ICrown
+      v-if="!(singleCrown || noCrown)"
+      class="crown-2"></ICrown>
   </div>
 </template>
 <script>
@@ -51,7 +54,7 @@ export default {
     width: calc(50% - 50px);
     height: calc(100% + 10px);
     min-width: 30px;
-    bottom: 0;
+    bottom: 1px;
     transition: 0.2s ease;
   }
   &::before {
@@ -85,10 +88,9 @@ export default {
     border-bottom: 1px solid #fff;
     border-radius: var(--border-radius);
 
-    margin-bottom: -1px;
     &::after,
     &::before {
-      margin-bottom: -1px;
+      margin-bottom: -2px;
     }
   }
 }

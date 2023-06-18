@@ -8,12 +8,14 @@
         @input="
           $emit('update:modelValue', $event.target.value),
             (optionChecked = $event.target.value)
-        "
-      >
+        ">
         <option value="">
           {{ placeholder }}
         </option>
-        <option v-for="(option, index) in options" :value="option" :key="index">
+        <option
+          v-for="(option, index) in options"
+          :value="option"
+          :key="index">
           {{ option }}
         </option>
       </select>
@@ -22,24 +24,26 @@
         hoverNext
         :aria-hidden="!isOptionVisible"
         tabindex="-1"
-        @focusout="isOptionVisible = false"
+        @focusout="closeSelectCustom"
         @keydown.down.prevent="hoverNext"
         @keydown.up.prevent="hoverPrev"
         @keydown.enter="select"
         @keydown.space.prevent="select"
-        @keydown.esc="closeSelectCustom"
-      >
-        <div class="select-custom__trigger" @click="toggleSelectCustom">
+        @keydown.esc="closeSelectCustom">
+        <div
+          class="select-custom__trigger"
+          @click="toggleSelectCustom">
           {{ optionChecked ? optionChecked : placeholder }}
         </div>
-        <div class="select-custom__options" v-show="isOptionVisible">
+        <div
+          class="select-custom__options"
+          v-show="isOptionVisible">
           <div
             data-value=""
             class="select-custom__option"
             @click="select"
             @mouseover="optionHoveredIndex = -1"
-            :class="{ hovered: optionHoveredIndex == -1 }"
-          >
+            :class="{ hovered: optionHoveredIndex == -1 }">
             {{ placeholder }}
           </div>
           <div
@@ -49,8 +53,7 @@
             class="select-custom__option"
             @click="select"
             @mouseover="optionHoveredIndex = index"
-            :class="{ hovered: optionHoveredIndex == index }"
-          >
+            :class="{ hovered: optionHoveredIndex == index }">
             {{ option }}
           </div>
         </div>
@@ -85,10 +88,12 @@ export default {
   methods: {
     toggleSelectCustom() {
       this.isOptionVisible = !this.isOptionVisible;
+      this.optionHoveredIndex = this.options.indexOf(this.optionChecked, 0);
     },
     closeSelectCustom() {
       if (this.isOptionVisible) {
         this.isOptionVisible = false;
+        this.optionHoveredIndex = this.options.indexOf(this.optionChecked, 0);
       }
     },
     hoverNext() {

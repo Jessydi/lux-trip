@@ -11,8 +11,11 @@
         <ButtonTransparent>view all</ButtonTransparent>
       </h2>
       <SliderComponent :splide-object="splideObject">
-        <SplideSlide v-for="(card, index) in packageCards" :key="index"
-          ><CollectionCard :card-object="card"></CollectionCard>
+        <SplideSlide
+          v-for="(card, index) in packageCards"
+          :key="index"
+        >
+          <CollectionCard :card-object="card"></CollectionCard>
         </SplideSlide>
       </SliderComponent>
     </div>
@@ -39,7 +42,7 @@ export default {
         perPage: 3,
         perMove: 1,
         breakpoints: {
-          900: {
+          899: {
             destroy: false,
             perPage: 2,
             gap: "20px",
@@ -84,18 +87,22 @@ export default {
 <style lang="scss">
 .luxury-packages {
   position: relative;
+
   .container {
     position: relative;
   }
+
   .btn-transparent {
     width: 140px;
   }
+
   &__bg {
     position: absolute;
     width: 100%;
     top: 80%;
     z-index: -2;
   }
+
   &::before {
     content: "";
     width: 100%;
@@ -114,6 +121,7 @@ export default {
       transparent 100%
     );
   }
+
   &::after {
     z-index: -1;
     content: "";
@@ -123,17 +131,20 @@ export default {
     top: 80%;
     background: linear-gradient(180deg, transparent 0%, var(--bg-main) 100%);
   }
+
   h2 {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     padding-bottom: 20px;
     gap: 30px;
+
     span {
       text-align: left;
     }
   }
 }
+
 @media (min-width: 900px) {
   .luxury-packages {
     .container {
@@ -145,29 +156,37 @@ export default {
 
     .splide {
       display: contents;
+
       &__slide:nth-child(3n + 1) {
         translate: 0 120px;
       }
+
       &__slide:nth-child(3n) {
         translate: 0 -30px;
       }
+
       &__arrows {
         display: none;
       }
+
       .splide__track {
         display: contents;
+
         .splide__list {
           display: contents;
         }
       }
     }
+
     &__bg {
       max-height: 1000px;
       object-fit: cover;
     }
+
     &::after {
       max-height: 1000px;
     }
+
     h2 {
       flex-direction: column;
       align-items: flex-start;

@@ -1,131 +1,4 @@
 <template>
-  <div class="reviews">
-    <h3>Reviews Scores and Score Breakdown</h3>
-    <ButtonTransparent @click="scrollToCommentForm" class="to-comment-form"
-      >Post comment</ButtonTransparent
-    >
-    <div class="reviews__statistics">
-      <RatingComponent
-        class="rating__overall"
-        :rating="averageRating.overallAverageRating"
-        disabled
-        title="35 reviews"
-      ></RatingComponent>
-      <RatingComponent
-        :rating="averageRating.comfortAverageRating"
-        disabled
-        title="Comfort"
-      ></RatingComponent>
-      <RatingComponent
-        :rating="averageRating.hospitalityAverageRating"
-        disabled
-        title="Hospitality"
-      ></RatingComponent>
-      <RatingComponent
-        :rating="averageRating.hygieneAverageRating"
-        disabled
-        title="Hygiene"
-      ></RatingComponent>
-      <RatingComponent
-        :rating="averageRating.receptionAverageRating"
-        disabled
-        title="Reception"
-      ></RatingComponent>
-    </div>
-    <div class="reviews__comments">
-      <div
-        class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
-        :key="index"
-      >
-        <p class="comment__text">{{ reviews.commentText }}</p>
-        <div class="comment__info">
-          <div class="comment__user-name">
-            {{ reviews.userName }}
-          </div>
-          <div class="comment__date">
-            {{ formattedDate(reviews.date) }}
-          </div>
-        </div>
-        <div class="rating__services">
-          <RatingComponent
-            :rating="reviews.rating.comfort"
-            title="Comfort"
-            disabled
-          ></RatingComponent>
-
-          <RatingComponent
-            :rating="reviews.rating.hospitality"
-            title="Hospitality"
-            disabled
-          ></RatingComponent>
-
-          <RatingComponent
-            :rating="reviews.rating.hygiene"
-            title="Hygiene"
-            disabled
-          ></RatingComponent>
-
-          <RatingComponent
-            :rating="reviews.rating.reception"
-            title="Reception"
-            disabled
-          ></RatingComponent>
-        </div>
-      </div>
-    </div>
-    <div ref="commentForm" class="reviews__post-review">
-      <h3>Post a Review</h3>
-      <form class="post-review-form">
-        <div class="comment-form">
-          <Input
-            v-model="commentForm.userName"
-            type="text"
-            placeholder="Name"
-          ></Input>
-          <Input
-            v-model="commentForm.userEmail"
-            type="email"
-            placeholder="Email"
-          ></Input>
-          <Input
-            v-model="commentForm.comment"
-            type="textarea"
-            placeholder="Comment"
-          ></Input>
-        </div>
-        <div class="rating-form">
-          <RatingComponent
-            :rating="ratingForm.comfort"
-            @select-grade="(n) => (ratingForm.comfort = n)"
-            title="Comfort"
-          ></RatingComponent>
-          <RatingComponent
-            :rating="ratingForm.hospitality"
-            @select-grade="(n) => (ratingForm.hospitality = n)"
-            title="Hospitality"
-          ></RatingComponent>
-          <RatingComponent
-            :rating="ratingForm.hygiene"
-            @select-grade="(n) => (ratingForm.hygiene = n)"
-            title="Hygiene"
-          ></RatingComponent>
-          <RatingComponent
-            :rating="ratingForm.reception"
-            @select-grade="(n) => (ratingForm.reception = n)"
-            title="Reception"
-          ></RatingComponent>
-        </div>
-        <ButtonBlack @click.prevent="addComment">
-          <CrownDecoration></CrownDecoration>
-          <span>Post review</span></ButtonBlack
-        >
-        <div class="error-message" :class="{ visible: isError }">
-          {{ errorMessage }}
-        </div>
-      </form>
-    </div>
-  </div>
   <!-- <div class="reviews">
     <h3>Reviews Scores and Score Breakdown</h3>
     <ButtonTransparent @click="scrollToCommentForm" class="to-comment-form"
@@ -162,7 +35,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -247,7 +120,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -289,7 +162,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -374,7 +247,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -416,7 +289,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -501,7 +374,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -543,7 +416,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -628,7 +501,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -670,7 +543,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -755,7 +628,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -797,7 +670,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -882,7 +755,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -924,7 +797,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1009,7 +882,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1051,7 +924,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1136,7 +1009,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1178,7 +1051,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1263,7 +1136,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1305,7 +1178,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1390,7 +1263,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1432,7 +1305,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1517,7 +1390,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1559,7 +1432,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1644,7 +1517,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1686,7 +1559,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1771,7 +1644,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1813,7 +1686,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -1898,7 +1771,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -1940,7 +1813,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2025,7 +1898,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2067,7 +1940,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2152,7 +2025,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2194,7 +2067,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2279,7 +2152,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2321,7 +2194,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2406,7 +2279,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2448,7 +2321,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2533,7 +2406,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2575,7 +2448,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2660,7 +2533,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2702,7 +2575,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2787,7 +2660,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2829,7 +2702,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -2914,7 +2787,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -2956,7 +2829,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3041,7 +2914,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -3083,7 +2956,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3168,7 +3041,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -3210,7 +3083,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3295,7 +3168,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -3337,7 +3210,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3422,7 +3295,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -3464,7 +3337,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3549,7 +3422,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -3591,7 +3464,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3676,7 +3549,7 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
@@ -3718,7 +3591,7 @@
     <div class="reviews__comments">
       <div
         class="comment"
-        v-for="(reviews, index) in reviewsWithComment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
         :key="index"
       >
         <p class="comment__text">{{ reviews.commentText }}</p>
@@ -3803,12 +3676,140 @@
           <CrownDecoration></CrownDecoration>
           <span>Post review</span></ButtonBlack
         >
-        <div class="error-message" :class="{ visible: isError }">
+        <div class="error-message" :class="{ visible: error }">
           {{ errorMessage }}
         </div>
       </form>
     </div>
   </div> -->
+  <div class="reviews">
+    <h3>Reviews Scores and Score Breakdown</h3>
+    <ButtonTransparent
+      @click="scrollToCommentForm"
+      class="to-comment-form"
+      >Post comment</ButtonTransparent
+    >
+    <div class="reviews__statistics">
+      <RatingComponent
+        class="rating__overall"
+        :rating="averageRating.overallAverageRating"
+        disabled
+        :title="`${reviewsAmount} reviews`"></RatingComponent>
+      <RatingComponent
+        :rating="averageRating.comfortAverageRating"
+        disabled
+        title="Comfort"></RatingComponent>
+      <RatingComponent
+        :rating="averageRating.hospitalityAverageRating"
+        disabled
+        title="Hospitality"></RatingComponent>
+      <RatingComponent
+        :rating="averageRating.hygieneAverageRating"
+        disabled
+        title="Hygiene"></RatingComponent>
+      <RatingComponent
+        :rating="averageRating.receptionAverageRating"
+        disabled
+        title="Reception"></RatingComponent>
+    </div>
+    <div class="reviews__comments">
+      <div
+        class="comment"
+        v-for="(reviews, index) in reviewsWithCommentArray"
+        :key="index">
+        <p class="comment__text">{{ reviews.commentText }}</p>
+        <div class="comment__info">
+          <div class="comment__user-name">
+            {{ reviews.userName }}
+          </div>
+          <div class="comment__date">
+            {{ formattedDate(reviews.date) }}
+          </div>
+        </div>
+        <div class="rating__services">
+          <RatingComponent
+            :rating="reviews.rating.comfort"
+            title="Comfort"
+            disabled></RatingComponent>
+
+          <RatingComponent
+            :rating="reviews.rating.hospitality"
+            title="Hospitality"
+            disabled></RatingComponent>
+
+          <RatingComponent
+            :rating="reviews.rating.hygiene"
+            title="Hygiene"
+            disabled></RatingComponent>
+
+          <RatingComponent
+            :rating="reviews.rating.reception"
+            title="Reception"
+            disabled></RatingComponent>
+        </div>
+      </div>
+    </div>
+    <Transition
+      name="slide-up"
+      mode="out-in">
+      <div
+        ref="commentForm"
+        class="reviews__post-review"
+        v-if="!reviewSent">
+        <h3>Post a Review</h3>
+        <form
+          @submit="addComment"
+          class="post-review-form">
+          <div class="comment-form">
+            <Input
+              v-model="commentForm.userName"
+              type="text"
+              placeholder="Name"></Input>
+            <Input
+              v-model="commentForm.userEmail"
+              type="email"
+              placeholder="Email"></Input>
+            <Input
+              v-model="commentForm.comment"
+              type="textarea"
+              placeholder="Comment"></Input>
+          </div>
+          <div class="rating-form">
+            <RatingComponent
+              :rating="ratingForm.comfort"
+              @select-grade="(n) => (ratingForm.comfort = n)"
+              title="Comfort"></RatingComponent>
+            <RatingComponent
+              :rating="ratingForm.hospitality"
+              @select-grade="(n) => (ratingForm.hospitality = n)"
+              title="Hospitality"></RatingComponent>
+            <RatingComponent
+              :rating="ratingForm.hygiene"
+              @select-grade="(n) => (ratingForm.hygiene = n)"
+              title="Hygiene"></RatingComponent>
+            <RatingComponent
+              :rating="ratingForm.reception"
+              @select-grade="(n) => (ratingForm.reception = n)"
+              title="Reception"></RatingComponent>
+          </div>
+
+          <ButtonBlack @click.prevent="addComment">
+            <CrownDecoration></CrownDecoration>
+            <span>Post review</span></ButtonBlack
+          >
+          <ErrorMessage
+            :error="error"
+            :errorMessage="errorMessage"></ErrorMessage>
+        </form>
+      </div>
+      <div
+        v-else
+        class="reviews__thanks-block">
+        <h2>Your review is sent</h2>
+        <h2>Thank you for your time</h2>
+      </div>
+    </Transition>
+  </div>
 </template>
 <script>
 import RatingComponent from "@/components/RatingComponent.vue";
@@ -3816,25 +3817,36 @@ import ButtonTransparent from "@/components/ButtonTransparent.vue";
 import ButtonBlack from "@/components/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 import Input from "@/components/Input.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   name: "ReviewTab",
   data() {
     return {
       errorMessage: null,
-      isError: false,
+      error: false,
+      // commentForm: {
+      //   userName: null,
+      //   userEmail: null,
+      //   comment: null,
+      // },
+      // ratingForm: {
+      //   comfort: null,
+      //   hospitality: null,
+      //   hygiene: null,
+      //   reception: null,
+      // },
       commentForm: {
-        userName: null,
+        userName: "null",
         userEmail: null,
-        comment: null,
+        comment: "null",
       },
       ratingForm: {
-        comfort: null,
-        hospitality: null,
-        hygiene: null,
-        reception: null,
+        comfort: 1,
+        hospitality: 1,
+        hygiene: 1,
+        reception: 1,
       },
-      reviewsWithComment: this.reviewsWithCommentArray,
     };
   },
   components: {
@@ -3843,27 +3855,40 @@ export default {
     ButtonTransparent,
     CrownDecoration,
     Input,
+    ErrorMessage,
   },
   methods: {
+    isValidDate(date) {
+      return (
+        date &&
+        Object.prototype.toString.call(date) === "[object Date]" &&
+        !isNaN(date)
+      );
+    },
     formattedDate(date) {
-      const options = {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      };
+      if ("seconds" in date) {
+        date = new Date(date.seconds * 1000);
+      }
 
-      return date.toLocaleString("en-US", options);
+      if (this.isValidDate(date)) {
+        const options = {
+          month: "short",
+          day: "2-digit",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        };
+
+        return date.toLocaleString("en-US", options);
+      }
     },
     scrollToCommentForm() {
-      console.log(this.$refs.commentForm);
       this.$refs.commentForm.scrollIntoView({ behavior: "smooth" });
     },
     addComment() {
       this.validateComent();
-      if (!this.isError) {
+      if (!this.error) {
         let newComment = {
           commentText: this.commentForm.comment
             ? this.commentForm.comment
@@ -3880,82 +3905,62 @@ export default {
             : null,
           date: new Date(),
         };
-        this.fullTripInfo.reviews.push(newComment);
-        console.log(this.fullTripInfo.reviews);
-        // for (var service in this.ratingForm) {
-        //   if (Object.hasOwn(this.ratingForm, service)) {
-        //     this.ratingForm[service] = null;
-        //   }
-        // }
+
+        this.$emit("addComment", newComment);
       }
     },
     validateComent() {
+      this.error = false;
       if (Object.values(this.ratingForm).some((el) => el === null)) {
         this.errorMessage = "Please, rate all services.";
-        this.isError = true;
+        this.error = true;
         setTimeout(() => {
-          this.isError = false;
-          console.log(this.isError);
+          this.error = false;
+          console.log(this.error);
         }, 5000);
       } else if (!this.commentForm.userName) {
         this.errorMessage = "Please, write your name.";
-        this.isError = true;
+        this.error = true;
         setTimeout(() => {
-          this.isError = false;
-          console.log(this.isError);
+          this.error = false;
         }, 5000);
       }
     },
   },
   props: {
     averageRating: { type: [Object, Array, Number], require: true },
-    reviewsWithCommentArray: { type: [Object, Array, Number], require: true },
+    reviewsWithCommentArray: {
+      type: [Object, Array, Number],
+      require: true,
+    },
+    reviewsAmount: { type: Number, require: true },
+    reviewSent: { type: Boolean, require: true },
   },
+  emits: ["addComment"],
 };
 </script>
 <style lang="scss">
 .reviews {
-  .error-message {
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    translate: -50% 0;
-    color: var(--error-red);
-    font-size: 18px;
-    line-height: 20px;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 1s;
-
-    &.visible {
-      opacity: 1;
-      visibility: visible;
-      animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.3s both;
-      transform: translate3d(0, 0, 0);
-    }
+  .slide-up-enter-active,
+  .slide-up-leave-active {
+    transition: all 0.5s ease-out;
   }
 
-  @keyframes shake {
-    10%,
-    90% {
-      transform: translate3d(-1px, 0, 0);
-    }
+  .slide-up-enter-from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
 
-    20%,
-    80% {
-      transform: translate3d(2px, 0, 0);
-    }
-
-    30%,
-    50%,
-    70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-
-    40%,
-    60% {
-      transform: translate3d(4px, 0, 0);
-    }
+  .slide-up-leave-to {
+    opacity: 0;
+    // height: 200px;
+    transform: translateY(-100px);
+  }
+  &__thanks-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 250px;
   }
   .rating {
     display: flex;
@@ -3978,7 +3983,7 @@ export default {
       fill: var(--gray);
     }
     svg {
-      polygon {
+      path {
         stroke: var(--gray);
       }
     }
@@ -3998,7 +4003,7 @@ export default {
       }
       svg {
         height: 30px;
-        polygon {
+        path {
           stroke: var(--gray);
         }
       }
@@ -4096,6 +4101,112 @@ export default {
         justify-items: center;
         gap: 20px;
         margin-bottom: 20px;
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .reviews {
+    .to-comment-form {
+      max-width: 215px;
+      margin: 0 auto 60px auto;
+    }
+    &__statistics {
+      padding: 0 clamp(60px, 7vw, 100px);
+      flex-wrap: nowrap;
+      margin-bottom: 60px;
+
+      .rating {
+        flex: 1 1 auto;
+        .rating {
+          &__rhombuses {
+            margin-bottom: 20px;
+          }
+        }
+        &__overall {
+          flex: 2 1 auto;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 20px;
+          .rating {
+            &__title {
+              flex: 1 1 100%;
+              text-align: left;
+            }
+            &__value {
+              order: 2;
+              flex: initial;
+            }
+            &__rhombuses {
+              margin-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+
+    &__comments {
+      .comment {
+        grid-template-columns: 2fr 1fr;
+        gap: 25px clamp(30px, 4vw, 50px);
+        padding: 50px clamp(30px, 5vw, 60px) 30px clamp(30px, 5vw, 60px);
+        margin: 0px 0px 20px 0;
+        &__text {
+          line-height: 30px;
+        }
+        &__info {
+          order: 3;
+        }
+        &__user-name {
+          font-size: 18px;
+          line-height: 17px;
+          margin-bottom: 6px;
+        }
+        .rating {
+          &__services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            justify-content: initial;
+          }
+        }
+      }
+    }
+
+    &__post-review {
+      .post-review-form {
+        grid-template-columns: 2fr 1fr;
+        gap: 80px 40px;
+        button {
+          grid-area: 2 / 1 / 3 / 3;
+        }
+        .comment-form {
+          display: flex;
+          flex-direction: column;
+          .input:not(:last-child) {
+            margin-bottom: 20px;
+          }
+          textarea {
+            flex: 1 1 auto;
+          }
+        }
+        .rating-form {
+          margin-bottom: 00px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .reviews {
+    &__comments {
+      .comment {
+        .rating {
+          &__services {
+            height: fit-content;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+          }
+        }
       }
     }
   }

@@ -49,12 +49,15 @@ export default {
 <style scoped lang="scss">
 .why-lux-trip-contact {
   position: relative;
+
   .container {
     max-width: 540px;
   }
+
   &__link {
     width: 100%;
   }
+
   &__bg {
     position: absolute;
     width: 100%;
@@ -78,6 +81,7 @@ export default {
       transparent 40%
     );
   }
+
   &::after {
     z-index: -2;
     content: "";
@@ -87,18 +91,21 @@ export default {
     position: absolute;
     top: 80%;
     background: linear-gradient(
-      transparent 80%,
-      rgba(226, 211, 206, 0.3) 90%,
+      transparent 70%,
+      rgba(226, 211, 206, 0.3) 80%,
       var(--bg-main)
     );
   }
+
   h3 {
     margin-bottom: 25px;
   }
+
   p:not(:last-child) {
     margin-bottom: 25px;
   }
 }
+
 @media (min-width: 768px) {
   .why-lux-trip-contact {
     &__bg {
@@ -107,14 +114,17 @@ export default {
       object-fit: cover;
       top: 10%;
     }
+
     &::before {
       top: 10%;
     }
+
     &::after {
       min-height: 800px;
       max-height: 1000px;
       top: 10%;
     }
+
     h3 {
       margin-bottom: 35px;
     }

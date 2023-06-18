@@ -52,28 +52,23 @@
       <img
         class="clouds clouds-1"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
       <img
         class="clouds clouds-2"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
       <img
         class="clouds clouds-3"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
       <img
         class="clouds clouds-4"
         src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        alt="clouds" />
       <img
         class="customise-bg"
         src="@/assets/backgrounds/customise-bg.png"
-        alt="customise-bgX"
-      />
+        alt="customise-bgX" />
     </div>
   </div>
 </template>
@@ -90,7 +85,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .customise-trip {
   position: relative;
   &__free {
@@ -117,7 +112,7 @@ export default {
     display: grid;
     grid-template-columns: auto 1fr;
     overflow: hidden;
-    margin-bottom: -2px;
+    margin-bottom: -3px;
     gap: 13px;
     &:not(:last-child) {
       .step__number::after {
@@ -125,7 +120,7 @@ export default {
         position: absolute;
         height: 1000px;
         width: 1px;
-        translate: -100% -2px;
+        translate: -50% -4px;
         left: 50%;
         top: 100%;
         background-color: #fff;
@@ -145,12 +140,9 @@ export default {
       }
     }
     &__rhombus {
-      width: 81px;
+      width: 80px;
       height: auto;
-      stroke-width: 8;
-      polygon {
-        stroke: #fff;
-      }
+      stroke-width: 4;
     }
 
     &__title {
@@ -226,7 +218,7 @@ export default {
         line-height: 80px;
       }
       &__rhombus {
-        width: 115px;
+        width: 116px;
       }
     }
     &__bg {

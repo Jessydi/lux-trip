@@ -4,8 +4,7 @@
       <img
         class="book-category__img"
         :src="require(`@/assets/book-categories/${bookCategory.src}`)"
-        alt="category image"
-      />
+        alt="category image" />
       <div class="book-category__img-content">
         <router-link
           :to="{ name: bookCategory.routeSrc }"
@@ -16,14 +15,15 @@
         <IRhombusBlur class="rhombus-blur"></IRhombusBlur>
       </div>
     </div>
-    <div v-if="fullContent" class="book-category__text-block">
+    <div
+      v-if="fullContent"
+      class="book-category__text-block">
       <p class="book-category__description">
         {{ bookCategory.description }}
       </p>
       <router-link
         :to="{ name: bookCategory.routeSrc }"
-        class="book-category__name"
-      >
+        class="book-category__name">
         <ButtonBlack>
           <CrownDecoration></CrownDecoration>
           <span>Make A Request</span>
@@ -59,13 +59,13 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .book-category {
   position: relative;
-  border-radius: 10px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
   .rhombus,
   .rhombus-blur {
     position: absolute;
@@ -77,13 +77,17 @@ export default {
   }
   .rhombus {
     width: 75px;
-    polygon {
+    & :deep(path) {
       stroke: var(--gray);
       stroke-width: 5;
     }
   }
   .rhombus-blur {
     width: 67px;
+    & :deep(svg) {
+      stroke: transparent;
+      stroke-width: 0;
+    }
   }
   &__img-block {
     position: relative;
@@ -99,9 +103,8 @@ export default {
   &__img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    overflow: hidden;
     border-radius: 10px;
+    overflow: hidden;
   }
   &__name {
     text-transform: uppercase;
@@ -109,7 +112,7 @@ export default {
     line-height: 43px;
     color: #fff;
     text-align: center;
-    z-index: 1;
+    z-index: 2;
   }
   &__text-block {
     padding: 25px 25px 35px 25px;

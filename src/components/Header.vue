@@ -1,12 +1,18 @@
 <template>
   <header
     class="header"
-    :class="{ 'why-lux-trip': $route.name == 'why-lux-trip' }"
-  >
-    <img class="header__bg" :src="headerBg" />
+    :class="{ 'why-lux-trip': $route.name == 'why-lux-trip' }">
+    <img
+      class="header__bg"
+      :src="headerBg" />
     <div class="header__content">
-      <CallbackButton class="header__callback"></CallbackButton>
-      <router-link class="header__logo" :to="{ name: 'home' }">
+      <CallbackButton
+        @click="luxTripStore.closeMobileMenu"
+        class="header__callback"></CallbackButton>
+      <router-link
+        @click="luxTripStore.closeMobileMenu"
+        class="header__logo"
+        :to="{ name: 'home' }">
         <ILogo></ILogo>
       </router-link>
       <TheNavigation></TheNavigation>
@@ -15,8 +21,12 @@
 </template>
 <script>
 import TheNavigation from "@/components/Navigation.vue";
-import ILogo from "@/components/icons/ILogo.vue";
 import CallbackButton from "@/components/CallbackButton.vue";
+
+import { useLuxTripStore } from "@/store/index";
+import { mapStores } from "pinia";
+
+import ILogo from "@/components/icons/ILogo.vue";
 export default {
   name: "TheHeader",
   data() {
@@ -29,10 +39,12 @@ export default {
     ILogo,
     CallbackButton,
   },
+
   computed: {
     headerBg() {
       return require(`@/assets/backgrounds/${this.headerImageSrc}.jpg`);
     },
+    ...mapStores(useLuxTripStore),
   },
 };
 </script>

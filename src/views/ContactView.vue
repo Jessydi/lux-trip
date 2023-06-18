@@ -13,8 +13,7 @@
             >
             <router-link
               class="contact__link"
-              :to="{ name: 'home', hash: '#callback' }"
-            >
+              :to="{ name: 'home', hash: '#callback' }">
               <ButtonBlack>
                 <span>Call Me Back</span>
               </ButtonBlack>
@@ -48,7 +47,7 @@ export default {
       contactData: {
         phone: "+410782058388",
         formatedPhone: "+41 (078) 205 83 88",
-        email: "zavrahnyj.00@gmail.com",
+        email: "zavrazhnyj.00@gmail.com",
         address: "Via Peri 17, 6900 Lugano, Switzerland",
       },
     };
@@ -70,7 +69,7 @@ export default {
     background: rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     text-align: center;
-    backdrop-filter: blur(65px);
+    backdrop-filter: blur(20px);
   }
   &__link {
     width: 100%;

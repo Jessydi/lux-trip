@@ -5,11 +5,12 @@
         <TripCard
           v-for="(tripCard, index) in luxTripStore.trips"
           :cardObject="tripCard"
-          :key="index"
-        >
+          :key="index">
         </TripCard>
       </div>
-      <div v-show="luxTripStore.canLoadMore" class="packages-loader__load-more">
+      <div
+        v-show="luxTripStore.canLoadMore"
+        class="packages-loader__load-more">
         <ButtonWhite @click="loadMore">
           <CrownDecoration></CrownDecoration>
           <span>Load more</span>
@@ -83,7 +84,8 @@ export default {
           width: 100vw;
           height: 600px;
           bottom: 0;
-          left: 0;
+          left: 50%;
+          translate: -50% 0;
           background: linear-gradient(transparent, var(--bg-main));
           pointer-events: none;
         }

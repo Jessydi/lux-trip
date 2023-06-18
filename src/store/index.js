@@ -515,6 +515,7 @@ function getUrlFromSrc(src) {
 
 export const useLuxTripStore = defineStore("luxTrip", {
   state: () => ({
+    mobileNavigation: false,
     trips: [],
     filterParams: {
       travelCategory: null,
@@ -526,6 +527,7 @@ export const useLuxTripStore = defineStore("luxTrip", {
     canLoadMore: false,
   }),
   actions: {
+    // firestore
     async addTrips() {
       try {
         for (const trip of tripsArray) {
@@ -556,6 +558,45 @@ export const useLuxTripStore = defineStore("luxTrip", {
             restImages: restImages,
             masonryImages: masonryImages,
           };
+
+          let comfortAverageRating =
+            trip.fullTripInfo.reviews.reduce(
+              (accumulator, currentValue) =>
+                accumulator + +currentValue.rating.comfort,
+              0
+            ) / trip.fullTripInfo.reviews.length;
+          let hospitalityAverageRating =
+            trip.fullTripInfo.reviews.reduce(
+              (accumulator, currentValue) =>
+                accumulator + +currentValue.rating.hospitality,
+              0
+            ) / trip.fullTripInfo.reviews.length;
+          let hygieneAverageRating =
+            trip.fullTripInfo.reviews.reduce(
+              (accumulator, currentValue) =>
+                accumulator + +currentValue.rating.hygiene,
+              0
+            ) / trip.fullTripInfo.reviews.length;
+          let receptionAverageRating =
+            trip.fullTripInfo.reviews.reduce(
+              (accumulator, currentValue) =>
+                accumulator + +currentValue.rating.reception,
+              0
+            ) / trip.fullTripInfo.reviews.length;
+          let overallAverageRating =
+            (comfortAverageRating +
+              hospitalityAverageRating +
+              hygieneAverageRating +
+              receptionAverageRating) /
+            4;
+          const averageRatingObject = {
+            comfortAverageRating: comfortAverageRating.toFixed(2),
+            hospitalityAverageRating: hospitalityAverageRating.toFixed(2),
+            hygieneAverageRating: hygieneAverageRating.toFixed(2),
+            receptionAverageRating: receptionAverageRating.toFixed(2),
+            overallAverageRating: overallAverageRating.toFixed(2),
+          };
+
           await setDoc(tripDocRef, {
             imgSrc: await getUrlFromSrc(trip.imgSrc),
             location: trip.location,
@@ -566,6 +607,8 @@ export const useLuxTripStore = defineStore("luxTrip", {
             travelType: trip.travelType,
             travellers: trip.travellers,
             date: trip.date,
+            averageRatingObject: averageRatingObject,
+            reviewsAmount: trip.fullTripInfo.reviews.length,
             id: tripDocRef.id,
           });
 
@@ -624,11 +667,23 @@ export const useLuxTripStore = defineStore("luxTrip", {
           tripObject = this.trips.find((trip) => trip.id === id);
         }
         tripObject.fullTripInfo = docSnap.data();
-        console.log(this.trips);
       } catch (e) {
         console.error(e);
       }
     },
+    //
+
+    // mobile menu
+    toggleMobileMenu() {
+      if (!this.mobileNavigation) {
+        window.scrollTo(0, 0);
+      }
+      this.mobileNavigation = !this.mobileNavigation;
+    },
+    closeMobileMenu() {
+      this.mobileNavigation = false;
+    },
+    //
   },
   getters: {
     isStoreFiltersEmpty: (state) =>

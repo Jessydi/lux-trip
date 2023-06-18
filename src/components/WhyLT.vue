@@ -11,16 +11,13 @@
         <div class="lt-benefits__images">
           <ImageWithRhombus
             class="lt-benefits__img lt-benefits__img-1"
-            imgSrc="why-lt/why-lt-img-1.jpg"
-          ></ImageWithRhombus>
+            imgSrc="why-lt/why-lt-img-1.jpg"></ImageWithRhombus>
           <ImageWithRhombus
             class="lt-benefits__img lt-benefits__img-2"
-            imgSrc="why-lt/why-lt-img-2.jpg"
-          ></ImageWithRhombus>
+            imgSrc="why-lt/why-lt-img-2.jpg"></ImageWithRhombus>
           <ImageWithRhombus
             class="lt-benefits__img lt-benefits__img-3"
-            imgSrc="why-lt/why-lt-img-3.jpg"
-          ></ImageWithRhombus>
+            imgSrc="why-lt/why-lt-img-3.jpg"></ImageWithRhombus>
           <IRhombusBlur class="rhombus-center"></IRhombusBlur>
           <IRhombusBlur class="rhombus-small rhombus-small-1"></IRhombusBlur>
         </div>
@@ -35,8 +32,7 @@
           </p>
           <ImageWithRhombus
             class="lt-benefits__img lt-benefits__img-4"
-            imgSrc="why-lt/why-lt-img-4.jpg"
-          ></ImageWithRhombus>
+            imgSrc="why-lt/why-lt-img-4.jpg"></ImageWithRhombus>
           <p class="lt-benefits__text-forum">
             We craft and plan unique itineraries tailored to customers’
             interests and with strong attention to detail.
@@ -48,8 +44,7 @@
       <img
         class="lt-benefits__bg"
         src="@/assets/backgrounds/why-lt-bg.png"
-        alt="background mountains"
-      />
+        alt="background mountains" />
     </div>
   </div>
 </template>
@@ -181,6 +176,7 @@ export default {
         line-height: 40px;
         max-width: initial;
         &-enlarged {
+          // text-shadow: 0 0 20px var(--bg-main);
           left: initial;
         }
       }

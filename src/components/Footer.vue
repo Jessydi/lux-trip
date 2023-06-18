@@ -3,35 +3,43 @@
     <div class="footer__bg">
       <img
         class="footer__bg-img footer__bg-img-sky"
-        src="../assets/backgrounds/sky-footer.jpg"
-      />
+        src="../assets/backgrounds/sky-footer.jpg" />
       <img
         class="footer__bg-img footer__bg-img-mountains"
-        src="../assets/backgrounds/mountains-1.png"
-      />
+        src="../assets/backgrounds/mountains-1.png" />
       <div class="footer__bg-gradient"></div>
     </div>
     <div class="container">
       <div class="footer__content">
-        <router-link class="footer__logo" :to="{ name: 'home' }">
+        <router-link
+          class="footer__logo"
+          :to="{ name: 'home' }">
           <ILogo></ILogo>
         </router-link>
         <div class="footer__callback">
           <CallbackButton></CallbackButton>
         </div>
-        <router-link class="footer__link" :to="{ name: 'packages' }"
+        <router-link
+          class="footer__link"
+          :to="{ name: 'packages' }"
           >Luxury packages</router-link
         >
 
-        <router-link class="footer__link" :to="{ name: 'booking' }"
+        <router-link
+          class="footer__link"
+          :to="{ name: 'booking' }"
           >Book with us</router-link
         >
 
-        <router-link class="footer__link" :to="{ name: 'why-lux-trip' }"
+        <router-link
+          class="footer__link"
+          :to="{ name: 'why-lux-trip' }"
           >Why Lux Trips</router-link
         >
 
-        <router-link class="footer__link" :to="{ name: 'contact' }"
+        <router-link
+          class="footer__link"
+          :to="{ name: 'contact' }"
           >Contact</router-link
         >
       </div>
@@ -59,7 +67,7 @@ export default {
 .footer {
   overflow: visible;
   position: relative;
-  margin-top: auto;
+
   &__content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -69,12 +77,14 @@ export default {
     row-gap: 40px;
     column-gap: clamp(30px, 13vw, 200px);
   }
+
   .container {
     padding: 55px 15px 28px 15px;
     display: flex;
     flex-direction: column;
     gap: 75px;
   }
+
   &__bg {
     &-img {
       position: absolute;
@@ -83,13 +93,16 @@ export default {
       width: 100%;
       object-position: top;
       bottom: 0;
+
       &-sky {
         height: 550px;
       }
+
       &-mountains {
         height: 180px;
       }
     }
+
     &-gradient {
       background: linear-gradient(
         rgb(226, 211, 206) 0%,
@@ -103,6 +116,7 @@ export default {
       z-index: -1;
     }
   }
+
   &__logo {
     grid-column: 1/ 3;
 
@@ -111,6 +125,7 @@ export default {
       height: auto;
     }
   }
+
   &__link {
     justify-self: end;
     font-size: 16px;
@@ -118,12 +133,15 @@ export default {
     text-transform: uppercase;
     color: var(--black-main);
   }
+
   &__link:nth-child(even) {
     justify-self: start;
   }
+
   &__callback {
     grid-column: 1/ 3;
   }
+
   &__bottom {
     display: flex;
     flex-direction: column;
@@ -134,11 +152,13 @@ export default {
     font-size: 12px;
     line-height: 16px;
     font-family: var(--manrope);
+
     a {
       color: #fff;
     }
   }
 }
+
 @media (min-width: 768px) {
   .footer {
     .container {
@@ -153,21 +173,26 @@ export default {
       column-gap: clamp(20px, 2.6vw, 60px);
       grid-auto-flow: column;
     }
+
     &__link,
     &__link:nth-child(even) {
       justify-self: center;
     }
+
     &__bg {
       &-img {
         object-fit: cover;
+
         &-sky {
           height: 550px;
         }
       }
     }
+
     &__callback {
       grid-column: 3/ 4;
     }
+
     &__logo {
       grid-column: 1/ 6;
 
@@ -175,6 +200,7 @@ export default {
         width: clamp(121px, 14vw, 215px);
       }
     }
+
     &__bottom {
       flex-direction: row;
       justify-content: space-between;

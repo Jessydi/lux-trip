@@ -1,35 +1,35 @@
 <template>
   <div class="trip-page">
     <main>
-      <div class="container" v-if="fullTripInfo">
+      <div
+        class="container"
+        v-if="tripInfo">
         <h2>Romantic Winter Destinations</h2>
         <div class="big-card">
           <img
             class="big-card__img"
-            :src="fullTripInfo.bigImgSrc"
-            alt="Machu Picchu"
-          />
+            :src="tripInfo.fullTripInfo.bigImgSrc"
+            alt="Machu Picchu" />
           <div class="big-card__content">
             <div class="big-card__bottom">
               <div class="big-card__destination">
                 <div class="big-card__country">
-                  <IPin></IPin> {{ fullTripInfo.country }}
+                  <IPin></IPin> {{ tripInfo.fullTripInfo.country }}
                 </div>
                 <div class="big-card__place">
-                  {{ fullTripInfo.destination }}
+                  {{ tripInfo.fullTripInfo.destination }}
                 </div>
               </div>
               <div class="big-card__price">
                 from
                 <span class="big-card__price-value"
-                  >€ {{ fullTripInfo.price }}</span
+                  >€ {{ tripInfo.fullTripInfo.price }}</span
                 >
               </div>
             </div>
             <RatingComponent
-              :rating="averageRating.overallAverageRating"
-              disabled
-            ></RatingComponent>
+              :rating="tripInfo.averageRatingObject.overallAverageRating"
+              disabled></RatingComponent>
           </div>
           <ButtonWhite>
             <CrownDecoration></CrownDecoration>
@@ -41,47 +41,49 @@
             <TabComponent title="Information">
               <div class="information">
                 <div class="information__text">
-                  <h3>{{ fullTripInfo.name }}</h3>
-                  <p>{{ fullTripInfo.description }}</p>
+                  <h3>{{ tripInfo.fullTripInfo.name }}</h3>
+                  <p>{{ tripInfo.fullTripInfo.description }}</p>
                   <div class="information__main">
                     <div class="information__column">
                       <div class="information__name">Destination</div>
                       <div class="information__value">
-                        {{ fullTripInfo.destination }}
+                        {{ tripInfo.fullTripInfo.destination }}
                       </div>
                     </div>
                     <div class="information__column">
                       <div class="information__name">Departure</div>
                       <div class="information__value">
-                        {{ fullTripInfo.departure }}
+                        {{ tripInfo.fullTripInfo.departure }}
                       </div>
                     </div>
                     <div class="information__column">
                       <div class="information__name">Departure Time</div>
                       <div class="information__value">
-                        {{ fullTripInfo.departureTime }}
+                        {{ tripInfo.fullTripInfo.departureTime }}
                       </div>
                     </div>
                     <div class="information__column">
                       <div class="information__name">Return Time</div>
                       <div class="information__value">
-                        {{ fullTripInfo.returnTime }}
+                        {{ tripInfo.fullTripInfo.returnTime }}
                       </div>
                     </div>
                     <div class="information__column">
                       <div class="information__name">Dress Code</div>
                       <div class="information__value">
-                        {{ fullTripInfo.dressCode }}
+                        {{ tripInfo.fullTripInfo.dressCode }}
                       </div>
                     </div>
                   </div>
                   <div class="information__included">
                     <div class="information__included-title">included</div>
-                    <ul class="included-list" v-if="fullTripInfo.included">
+                    <ul
+                      class="included-list"
+                      v-if="tripInfo.fullTripInfo.included">
                       <li
-                        v-for="(included, index) in fullTripInfo.included"
-                        :key="index"
-                      >
+                        v-for="(included, index) in tripInfo.fullTripInfo
+                          .included"
+                        :key="index">
                         <IIncluded></IIncluded>{{ included }}
                       </li>
                     </ul>
@@ -92,12 +94,11 @@
                     </div>
                     <ul
                       class="not-included-list"
-                      v-if="fullTripInfo.notIncluded"
-                    >
+                      v-if="tripInfo.fullTripInfo.notIncluded">
                       <li
-                        v-for="(notIncluded, index) in fullTripInfo.notIncluded"
-                        :key="index"
-                      >
+                        v-for="(notIncluded, index) in tripInfo.fullTripInfo
+                          .notIncluded"
+                        :key="index">
                         <INotIncluded></INotIncluded>{{ notIncluded }}
                       </li>
                     </ul>
@@ -106,9 +107,8 @@
                 <div class="information__card">
                   <img
                     class="information__card-img"
-                    :src="fullTripInfo.smallImgSrc"
-                    alt="Machu Picchu"
-                  />
+                    :src="tripInfo.fullTripInfo.smallImgSrc"
+                    alt="Machu Picchu" />
                   <ButtonWhite>
                     <CrownDecoration></CrownDecoration>
                     <span>Book now</span>
@@ -119,12 +119,13 @@
             <TabComponent title="Luxury Tour Plan"
               ><div class="tour-plan">
                 <h3>Luxury Tour Plan</h3>
-                <div class="days" ref="tourPlan">
+                <div
+                  class="days"
+                  ref="tourPlan">
                   <div
-                    v-for="(day, index) in fullTripInfo.tourPlan"
+                    v-for="(day, index) in tripInfo.fullTripInfo.tourPlan"
                     :key="index"
-                    class="day"
-                  >
+                    class="day">
                     <div class="day__number">
                       <span>{{ index + 1 }}</span
                       ><IRhombus class="day__rhombus"></IRhombus>
@@ -136,8 +137,7 @@
                         <ul class="included-list">
                           <li
                             v-for="(included, index) in day.included"
-                            :key="index"
-                          >
+                            :key="index">
                             <IIncluded></IIncluded>{{ included }}
                           </li>
                         </ul>
@@ -145,7 +145,9 @@
                     </div>
                   </div>
                 </div>
-                <ButtonBlack class="button-pdf" @click="generatePdf">
+                <ButtonBlack
+                  class="button-pdf"
+                  @click="generatePdf">
                   <CrownDecoration></CrownDecoration>
                   <span>download pdf</span></ButtonBlack
                 >
@@ -213,63 +215,60 @@
                 <div class="photos">
                   <img
                     class="photo-top"
-                    :src="fullTripInfo.gallery.topImg"
-                    :alt="fullTripInfo.name"
-                  />
+                    :src="tripInfo.fullTripInfo.gallery.topImg"
+                    :alt="tripInfo.fullTripInfo.name" />
                   <div
                     class="photos__masonry"
-                    v-if="fullTripInfo.gallery.masonryImages"
-                  >
+                    v-if="tripInfo.fullTripInfo.gallery.masonryImages">
                     <div class="column">
                       <img
                         v-for="(
                           img, index
-                        ) in fullTripInfo.gallery.masonryImages.slice(
+                        ) in tripInfo.fullTripInfo.gallery.masonryImages.slice(
                           0,
                           this.halfMasonryLength
                         )"
                         :key="index"
                         :src="img"
-                        :alt="fullTripInfo.name"
-                      />
+                        :alt="tripInfo.fullTripInfo.name" />
                     </div>
                     <div class="column">
                       <img
                         v-for="(
                           img, index
-                        ) in fullTripInfo.gallery.masonryImages.slice(
+                        ) in tripInfo.fullTripInfo.gallery.masonryImages.slice(
                           this.halfMasonryLength
                         )"
                         :key="index"
                         :src="img"
-                        :alt="fullTripInfo.name"
-                      />
+                        :alt="tripInfo.fullTripInfo.name" />
                     </div>
                   </div>
                   <div
                     class="photos__rest"
-                    v-if="fullTripInfo.gallery.restImages"
-                  >
+                    v-if="tripInfo.fullTripInfo.gallery.restImages">
                     <img
-                      v-for="(img, index) in fullTripInfo.gallery.restImages"
+                      v-for="(img, index) in tripInfo.fullTripInfo.gallery
+                        .restImages"
                       :key="index"
                       :src="img"
-                      :alt="fullTripInfo.name"
-                    />
+                      :alt="tripInfo.fullTripInfo.name" />
                   </div>
                   <img
                     class="photo-bottom"
-                    :src="fullTripInfo.gallery.bottomImg"
-                    :alt="fullTripInfo.name"
-                  />
+                    :src="tripInfo.fullTripInfo.gallery.bottomImg"
+                    :alt="tripInfo.fullTripInfo.name" />
                 </div>
               </div>
             </TabComponent>
             <TabComponent title="Reviews">
               <ReviewsTab
-                :averageRating="averageRating"
+                @addComment="addComment"
+                :averageRating="tripInfo.averageRatingObject"
                 :reviewsWithCommentArray="reviewsWithComment"
-              ></ReviewsTab>
+                :reviewsAmount="tripInfo.reviewsAmount"
+                :reviewSent="this.reviewSent"
+                ></ReviewsTab>
             </TabComponent>
             <TabComponent title="Cancellation policy">
               <div class="cancellation-policy">
@@ -343,6 +342,8 @@ import { defineAsyncComponent } from "vue";
 
 import { mapStores } from "pinia";
 import { useLuxTripStore } from "../store/index";
+import { db } from "@/firebase/firebaseInit";
+import { doc, runTransaction } from "firebase/firestore";
 
 import IPin from "@/components/icons/IPin.vue";
 import IIncluded from "@/components/icons/IIncluded.vue";
@@ -369,8 +370,6 @@ export default {
   },
   data() {
     return {
-      errorMessage: null,
-      isError: false,
       commentForm: {
         userName: null,
         userEmail: null,
@@ -393,27 +392,28 @@ export default {
       //   hygiene: 5,
       //   reception: 5,
       // },
-      fullTripInfo: null,
+      tripInfo: null,
+      reviewSent:false,
     };
   },
   created() {
     this.$watch(
       () => this.$route.params,
       () => {
-        this.fetchData();
+        this.getFullTripInfo();
       },
       { immediate: true }
     );
   },
   methods: {
-    async fetchData() {
-      this.fullTripInfo = null;
+    async getFullTripInfo() {
+      this.tripInfo = null;
       //  this.error = null;
       // this.loading = true;
       await this.luxTripStore.getDetailsAboutTrip(this.$route.params.id);
-      this.fullTripInfo = this.luxTripStore.trips.find(
+      this.tripInfo = this.luxTripStore.trips.find(
         (trip) => trip.id === this.$route.params.id
-      ).fullTripInfo;
+      );
     },
     generatePdf() {
       // need to refactor later
@@ -429,7 +429,7 @@ export default {
         verticalOffset = 40,
         margin = 20;
 
-      this.fullTripInfo.tourPlan.forEach((day, index) => {
+      this.tripInfo.fullTripInfo.tourPlan.forEach((day, index) => {
         font = fonts[0];
         size = sizes[0];
 
@@ -476,57 +476,100 @@ export default {
         verticalOffset += margin;
       });
 
-      pdf.save(this.fullTripInfo.name.replace(" ", "") + "Plan");
+      pdf.save(this.tripInfo.fullTripInfo.name.replace(" ", "") + "Plan");
+    },
+    async addComment(newComment) {
+      // this.tripInfo.fullTripInfo.reviews.push(newComment);
+      console.log(newComment);
+      const tripRef = doc(db, `trips`, this.$route.params.id);
+      const tripDetailsRef = doc(
+        db,
+        `trips/${this.$route.params.id}/tripDetail`,
+        this.$route.params.id
+      );
+
+      await runTransaction(db, async (transaction) => {
+        const tripRefSnap = await transaction.get(tripRef);
+        const tripDetailsRefSnap = await transaction.get(tripDetailsRef);
+        if (!(tripRefSnap || tripDetailsRefSnap)) {
+          throw "Document does not exist!";
+        }
+        let tripData = tripRefSnap.data();
+        let tripDetailsData = tripDetailsRefSnap.data();
+        const oldReviewsAmount = tripData.reviewsAmount;
+        const newReviewsAmount = tripData.reviewsAmount + 1;
+
+        let comfortAverageRating =
+          (oldReviewsAmount *
+            tripData.averageRatingObject.comfortAverageRating +
+            newComment.rating.comfort) /
+          newReviewsAmount;
+
+        let hospitalityAverageRating =
+          (oldReviewsAmount *
+            tripData.averageRatingObject.hospitalityAverageRating +
+            newComment.rating.hospitality) /
+          newReviewsAmount;
+
+        let hygieneAverageRating =
+          (oldReviewsAmount *
+            tripData.averageRatingObject.hygieneAverageRating +
+            newComment.rating.hygiene) /
+          newReviewsAmount;
+
+        let receptionAverageRating =
+          (oldReviewsAmount *
+            tripData.averageRatingObject.receptionAverageRating +
+            newComment.rating.reception) /
+          newReviewsAmount;
+        let overallAverageRating =
+          (comfortAverageRating +
+            hospitalityAverageRating +
+            hygieneAverageRating +
+            receptionAverageRating) /
+          4;
+        const newAverageRatingObject = {
+          comfortAverageRating: comfortAverageRating.toFixed(2),
+          hospitalityAverageRating: hospitalityAverageRating.toFixed(2),
+          hygieneAverageRating: hygieneAverageRating.toFixed(2),
+          receptionAverageRating: receptionAverageRating.toFixed(2),
+          overallAverageRating: overallAverageRating.toFixed(2),
+        };
+        const newReviewArray = tripDetailsData.reviews;
+        newReviewArray.push(newComment);
+
+        transaction.update(tripRef, {
+          averageRatingObject: newAverageRatingObject,
+          reviewsAmount: newReviewsAmount,
+        });
+        transaction.update(tripDetailsRef, {
+          reviews: newReviewArray,
+        });
+        return {
+          averageRatingObject: newAverageRatingObject,
+          reviewsAmount: newReviewsAmount,
+          reviews: newReviewArray,
+        };
+      }).then((r) => {
+        this.tripInfo.averageRatingObject = r.averageRatingObject;
+        this.tripInfo.reviewsAmount = r.reviewsAmount;
+        this.tripInfo.fullTripInfo.reviews = r.reviews;
+        this.reviewSent= true
+      });
     },
   },
   computed: {
     ...mapStores(useLuxTripStore),
     halfMasonryLength() {
-      return Math.floor(this.fullTripInfo.gallery.masonryImages.length / 2);
+      return Math.floor(
+        this.tripInfo.fullTripInfo.gallery.masonryImages.length / 2
+      );
     },
     reviewsWithComment() {
-      return this.fullTripInfo.reviews.filter((review) => review.commentText);
-    },
-    averageRating() {
-      let comfortAverageRating =
-        this.fullTripInfo.reviews.reduce(
-          (accumulator, currentValue) =>
-            accumulator + +currentValue.rating.comfort,
-          0
-        ) / this.fullTripInfo.reviews.length;
-      let hospitalityAverageRating =
-        this.fullTripInfo.reviews.reduce(
-          (accumulator, currentValue) =>
-            accumulator + +currentValue.rating.hospitality,
-          0
-        ) / this.fullTripInfo.reviews.length;
-      let hygieneAverageRating =
-        this.fullTripInfo.reviews.reduce(
-          (accumulator, currentValue) =>
-            accumulator + +currentValue.rating.hygiene,
-          0
-        ) / this.fullTripInfo.reviews.length;
-      let receptionAverageRating =
-        this.fullTripInfo.reviews.reduce(
-          (accumulator, currentValue) =>
-            accumulator + +currentValue.rating.reception,
-          0
-        ) / this.fullTripInfo.reviews.length;
-      let overallAverageRating =
-        (comfortAverageRating +
-          hospitalityAverageRating +
-          hygieneAverageRating +
-          receptionAverageRating) /
-        4;
-      const averageRatingObject = {
-        comfortAverageRating: comfortAverageRating.toFixed(2),
-        hospitalityAverageRating: hospitalityAverageRating.toFixed(2),
-        hygieneAverageRating: hygieneAverageRating.toFixed(2),
-        receptionAverageRating: receptionAverageRating.toFixed(2),
-        overallAverageRating: overallAverageRating.toFixed(2),
-      };
-
-      return averageRatingObject;
+      console.log("updated");
+      return this.tripInfo.fullTripInfo.reviews.filter(
+        (review) => review.commentText
+      );
     },
   },
 };
@@ -744,14 +787,14 @@ export default {
         display: grid;
         grid-template-columns: auto 1fr;
         overflow: hidden;
-        margin-bottom: -2px;
+        margin-bottom: -3px;
         &:not(:last-child) {
           .day__number::after {
             content: "";
             position: absolute;
             height: 1000px;
             width: 1px;
-            translate: -100% -2px;
+            translate: -50% -4px;
             left: 50%;
             top: 100%;
             background-color: var(--gray);
@@ -774,10 +817,10 @@ export default {
           }
         }
         &__rhombus {
-          width: 37px;
+          width: 38px;
           height: auto;
-          stroke-width: 8;
-          polygon {
+          stroke-width: 4;
+          path {
             stroke: var(--gray);
           }
         }
@@ -821,6 +864,11 @@ export default {
           width: 100%;
           border-radius: 10px;
         }
+        &__masonry {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
         &__masonry,
         &__rest {
           img {
@@ -841,192 +889,6 @@ export default {
       }
       p:not(:last-child) {
         margin-bottom: 20px;
-      }
-    }
-    .reviews {
-      .error-message {
-        position: absolute;
-        bottom: -50px;
-        left: 50%;
-        translate: -50% 0;
-        color: var(--error-red);
-        font-size: 18px;
-        line-height: 20px;
-        visibility: hidden;
-        opacity: 0;
-        transition: all 1s;
-
-        &.visible {
-          opacity: 1;
-          visibility: visible;
-          animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.3s both;
-          transform: translate3d(0, 0, 0);
-        }
-      }
-
-      @keyframes shake {
-        10%,
-        90% {
-          transform: translate3d(-1px, 0, 0);
-        }
-
-        20%,
-        80% {
-          transform: translate3d(2px, 0, 0);
-        }
-
-        30%,
-        50%,
-        70% {
-          transform: translate3d(-4px, 0, 0);
-        }
-
-        40%,
-        60% {
-          transform: translate3d(4px, 0, 0);
-        }
-      }
-      .rating {
-        display: flex;
-        flex-direction: column;
-        &__title,
-        &__value {
-          font-family: var(--manrope);
-          color: var(--gray);
-        }
-        &__title {
-          order: 3;
-        }
-        &__value {
-          display: none;
-        }
-        &__rhombuses {
-          margin: 0 0 15px 0;
-        }
-        svg.filled {
-          fill: var(--gray);
-        }
-        svg {
-          polygon {
-            stroke: var(--gray);
-          }
-        }
-      }
-      .to-comment-form {
-        margin-bottom: 40px;
-      }
-      &__statistics {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-        margin-bottom: 40px;
-        .rating {
-          flex: 1 1 calc(50% - 30px);
-          svg.filled {
-            fill: var(--gray);
-          }
-          svg {
-            height: 30px;
-            polygon {
-              stroke: var(--gray);
-            }
-          }
-          &__overall {
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            flex: 1 1 100%;
-            gap: 24px;
-            .rating {
-              &__value,
-              &__title {
-                flex: 0 1 100px;
-              }
-              &__value {
-                display: block;
-                font-size: 55px;
-                line-height: 75px;
-              }
-              &__rhombuses {
-                margin: 0;
-              }
-            }
-          }
-        }
-      }
-
-      &__comments {
-        margin-bottom: 60px;
-        .comment {
-          background-color: rgba(226, 211, 206, 0.2);
-          margin: 0 -25px 20px -25px;
-          padding: 28px 32px;
-          border-radius: 10px;
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 25px;
-          &:last-child {
-            margin-bottom: 0px;
-          }
-          &__text,
-          &__user-name,
-          &__date {
-            font-family: var(--manrope);
-            color: var(--black-secondary);
-          }
-          &__text {
-            line-height: 24px;
-          }
-          &__user-name {
-            font-size: 16px;
-            line-height: 15px;
-            font-weight: 500;
-            margin-bottom: 1px;
-          }
-
-          &__date {
-            font-size: 14px;
-            line-height: 13px;
-            font-weight: 300;
-          }
-          &__info {
-          }
-          .rating {
-            &__services {
-              display: flex;
-              justify-content: space-evenly;
-            }
-            svg {
-              height: 17px;
-            }
-            &__title {
-              font-weight: 500;
-              font-size: 12px;
-              line-height: 16px;
-            }
-          }
-        }
-      }
-
-      &__post-review {
-        .post-review-form {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 40px;
-          position: relative;
-          .comment-form {
-            .input:not(:last-child) {
-              margin-bottom: 10px;
-            }
-          }
-          .rating-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            justify-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-          }
-        }
       }
     }
   }
@@ -1152,7 +1014,7 @@ export default {
             flex: 0 0 250px;
           }
           &__rhombus {
-            width: 65px;
+            width: 66px;
           }
           &__description {
             font-size: 18px;
@@ -1165,13 +1027,12 @@ export default {
           gap: 25px;
           &__masonry {
             display: flex;
+            flex-direction: row;
+            gap: 25px;
             .column {
               display: flex;
               flex-direction: column;
               flex: 1 1 50%;
-              &:nth-child(1) {
-                margin-right: 25px;
-              }
             }
             img {
               flex-grow: 1;
@@ -1201,114 +1062,6 @@ export default {
         }
         p:not(:last-child) {
           margin-bottom: 40px;
-        }
-      }
-      .reviews {
-        .to-comment-form {
-          max-width: 215px;
-          margin: 0 auto 60px auto;
-        }
-        &__statistics {
-          padding: 0 clamp(60px, 7vw, 100px);
-          flex-wrap: nowrap;
-          margin-bottom: 60px;
-
-          .rating {
-            flex: 1 1 auto;
-            .rating {
-              &__rhombuses {
-                margin-bottom: 20px;
-              }
-            }
-            &__overall {
-              flex: 2 1 auto;
-              flex-wrap: wrap;
-              justify-content: flex-start;
-              gap: 20px;
-              .rating {
-                &__title {
-                  flex: 1 1 100%;
-                  text-align: left;
-                }
-                &__value {
-                  order: 2;
-                  flex: initial;
-                }
-                &__rhombuses {
-                  margin-bottom: 0px;
-                }
-              }
-            }
-          }
-        }
-
-        &__comments {
-          .comment {
-            grid-template-columns: 2fr 1fr;
-            gap: 25px clamp(30px, 4vw, 50px);
-            padding: 50px clamp(30px, 5vw, 60px) 30px clamp(30px, 5vw, 60px);
-            margin: 0px 0px 20px 0;
-            &__text {
-              line-height: 30px;
-            }
-            &__info {
-              order: 3;
-            }
-            &__user-name {
-              font-size: 18px;
-              line-height: 17px;
-              margin-bottom: 6px;
-            }
-            .rating {
-              &__services {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-                justify-content: initial;
-              }
-            }
-          }
-        }
-
-        &__post-review {
-          .post-review-form {
-            grid-template-columns: 2fr 1fr;
-            gap: 80px 40px;
-            button {
-              grid-area: 2 / 1 / 3 / 3;
-            }
-            .comment-form {
-              display: flex;
-              flex-direction: column;
-              .input:not(:last-child) {
-                margin-bottom: 20px;
-              }
-              textarea {
-                flex: 1 1 auto;
-              }
-            }
-            .rating-form {
-              margin-bottom: 00px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-@media (min-width: 1200px) {
-  .trip-page {
-    .tab {
-      .reviews {
-        &__comments {
-          .comment {
-            .rating {
-              &__services {
-                height: fit-content;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-              }
-            }
-          }
         }
       }
     }

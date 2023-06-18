@@ -4,15 +4,16 @@
     height="510"
     fill="none"
     viewBox="0 0 264 510"
-    stroke-width="1"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <polygon points="132,0 264,255 132,510 0,255" stroke="#F1F1F1" />
+    stroke-width="2"
+    preserveAspectRatio="none meet"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      stroke="white"
+      d="M 132 10 L 254 255 L 132 500 L 10 255  Z" />
   </svg>
 </template>
 <style scoped>
 svg {
   display: block;
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 </style>

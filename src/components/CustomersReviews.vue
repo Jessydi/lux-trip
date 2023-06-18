@@ -9,7 +9,9 @@
         </h2>
       </div>
       <SliderComponent :splide-object="splideObject">
-        <SplideSlide v-for="(review, index) in customersReviews" :key="index"
+        <SplideSlide
+          v-for="(review, index) in customersReviews"
+          :key="index"
           ><CustomerReview :reviewObject="review"></CustomerReview>
         </SplideSlide>
       </SliderComponent>
@@ -17,8 +19,7 @@
     <img
       class="customers-reviews__bg"
       src="@/assets/backgrounds/customers-reviews-bg.png"
-      alt="girl in pool"
-    />
+      alt="girl in pool" />
   </div>
 </template>
 <script>
@@ -97,6 +98,7 @@ export default {
       ],
       splideObject: {
         type: "loop",
+        drag: "free",
         gap: "94px",
         perPage: 2,
         perMove: 1,
@@ -160,6 +162,9 @@ export default {
       margin-right: -290px;
       &__arrows {
         display: block;
+        .splide__arrow--next {
+          right: 250px;
+        }
       }
       &::after {
         content: "";

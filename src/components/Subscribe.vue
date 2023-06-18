@@ -1,7 +1,9 @@
 <template>
   <div class="subscribe">
     <div class="container">
-      <CrownDecoration singleCrown :border-radius="10"></CrownDecoration>
+      <CrownDecoration
+        singleCrown
+        :border-radius="10"></CrownDecoration>
       <div class="subscribe__content">
         <div class="container">
           <div class="subscribe__title">
@@ -13,12 +15,14 @@
               class="subscribe__email"
               type="email"
               blured
-              placeholder="Email address"
-            ></Input>
-            <ButtonWhite>
+              placeholder="Email address"></Input>
+            <ButtonWhite @click.prevent="subscribe">
               <CrownDecoration></CrownDecoration>
               <span>Subscribe</span>
             </ButtonWhite>
+            <ErrorMessage
+              :error="error"
+              :errorMessage="errorMessage"></ErrorMessage>
           </div>
         </div>
       </div>
@@ -29,13 +33,44 @@
 import ButtonWhite from "@/components/ButtonWhite.vue";
 import Input from "@/components/Input.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   name: "SubscribeComponent",
   components: {
     ButtonWhite,
     Input,
+    ErrorMessage,
     CrownDecoration,
+  },
+  data() {
+    return {
+      error: false,
+      errorMessage: null,
+      contactForm: {
+        email: null,
+      },
+    };
+  },
+  methods: {
+    validateContactForm() {
+      this.error = false;
+
+      if (!this.contactForm.phone) {
+        this.error = true;
+        this.errorMessage = "Please, enter your email";
+        setTimeout(() => {
+          this.error = false;
+          console.log(this.error);
+        }, 5000);
+      }
+    },
+    subscribe() {
+      this.validateContactForm();
+      if (!this.error) {
+        console.log("subscribed");
+      }
+    },
   },
 };
 </script>
@@ -94,6 +129,7 @@ export default {
     max-width: 70%;
   }
   &__form {
+    position: relative;
   }
 }
 @media (min-width: 768px) {

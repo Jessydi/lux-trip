@@ -1,8 +1,13 @@
 <template>
-  <div class="burger" v-if="mobile" @click="toggleMobileMenu">
+  <div
+    class="burger"
+    v-if="mobile"
+    @click="luxTripStore.toggleMobileMenu">
     <div class="burger__icon"></div>
   </div>
-  <nav class="navigation" v-else>
+  <nav
+    class="navigation"
+    v-else>
     <ul class="navigation__list">
       <li class="navigation__item">
         <router-link :to="{ name: 'home' }">Home</router-link>
@@ -25,39 +30,51 @@
     </ul>
   </nav>
   <Transition name="fade">
-    <nav class="navigation navigation-mobile" v-show="mobileMenu">
+    <nav
+      class="navigation navigation-mobile"
+      v-show="luxTripStore.mobileNavigation">
       <div class="navigation__content">
         <ul class="navigation__list">
           <IRhombus class="rhombus-icon"></IRhombus>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+            <router-link
+              :to="{ name: 'home' }"
+              @click="luxTripStore.closeMobileMenu"
               >Home</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'packages' }" @click="toggleMobileMenu"
+            <router-link
+              :to="{ name: 'packages' }"
+              @click="luxTripStore.closeMobileMenu"
               >Luxury packages</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'booking' }" @click="toggleMobileMenu"
+            <router-link
+              :to="{ name: 'booking' }"
+              @click="luxTripStore.closeMobileMenu"
               >Book with us</router-link
             >
           </li>
           <li class="navigation__item">
             <router-link
               :to="{ name: 'why-lux-trip' }"
-              @click="toggleMobileMenu"
+              @click="luxTripStore.closeMobileMenu"
               >Why Lux Trips</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'contact' }" @click="toggleMobileMenu"
+            <router-link
+              :to="{ name: 'contact' }"
+              @click="luxTripStore.closeMobileMenu"
               >Contact</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link :to="{ name: 'home' }" @click="toggleMobileMenu"
+            <router-link
+              :to="{ name: 'home' }"
+              @click="luxTripStore.closeMobileMenu"
               >Client Area</router-link
             >
           </li>
@@ -67,6 +84,9 @@
   </Transition>
 </template>
 <script>
+import { useLuxTripStore } from "@/store/index";
+import { mapStores } from "pinia";
+
 import IRhombus from "@/components/icons/IRhombus.vue";
 export default {
   name: "TheNavigation",
@@ -76,7 +96,6 @@ export default {
   data() {
     return {
       mobile: false,
-      mobileMenu: false,
     };
   },
   created() {
@@ -91,21 +110,23 @@ export default {
         return;
       }
       this.mobile = false;
-      this.mobileMenu = false;
+      this.luxTripStore.closeMobileMenu();
       return;
     },
-    toggleMobileMenu() {
-      this.mobileMenu = !this.mobileMenu;
-    },
   },
-  watch: {
-    mobileMenu() {
-      if (this.mobileMenu) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "auto";
-      }
-    },
+
+  // схоже що він повинен бути в самому store, треба перевірити
+  // watch: {
+  //   "this.mobileNavigation"() {
+  //     if (this.useLuxTripStore.mobileNavigation) {
+  //       document.body.style.overflow = "hidden";
+  //     } else {
+  //       document.body.style.overflow = "auto";
+  //     }
+  //   },
+  // },
+  computed: {
+    ...mapStores(useLuxTripStore),
   },
 };
 </script>
