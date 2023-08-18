@@ -3,18 +3,20 @@
     <img
       src="@/assets/backgrounds/beach-bg.jpg"
       alt="beach"
-      class="luxury-packages__bg"
-    />
+      class="luxury-packages__bg" />
     <div class="container">
       <h2>
         <span>Luxury Packages</span>
-        <ButtonTransparent>view all</ButtonTransparent>
+        <ButtonTransparent
+          class="link"
+          @click="searchTrips"
+          >view all</ButtonTransparent
+        >
       </h2>
       <SliderComponent :splide-object="splideObject">
         <SplideSlide
           v-for="(card, index) in packageCards"
-          :key="index"
-        >
+          :key="index">
           <CollectionCard :card-object="card"></CollectionCard>
         </SplideSlide>
       </SliderComponent>
@@ -24,9 +26,19 @@
 <script>
 import SliderComponent from "@/components/SliderComponent.vue";
 import CollectionCard from "@/components/CollectionCard.vue";
-import ButtonTransparent from "@/components/ButtonTransparent.vue";
+import ButtonTransparent from "@/components/formComponents/ButtonTransparent.vue";
 import { SplideSlide } from "@splidejs/vue-splide";
 
+import { useLuxTripStore } from "@/store/index";
+import { mapStores } from "pinia";
+
+import { db } from "@/firebase/firebaseInit";
+import {
+  collection,
+  getCountFromServer,
+  where,
+  query,
+} from "firebase/firestore";
 export default {
   components: {
     SliderComponent,
@@ -56,31 +68,53 @@ export default {
       packageCards: [
         {
           imgSrc: "package-cover-1.jpg",
-          name: "New destinations for 2022",
-          placesNumber: 47,
+          name: "Best Summer Destinations",
+          placesNumber: "10+",
         },
         {
           imgSrc: "package-cover-2.jpg",
           name: "Best Winter Destinations",
-          placesNumber: 34,
+          placesNumber: "10+",
         },
         {
           imgSrc: "package-cover-3.jpg",
           name: "The world's most extraordinary places",
-          placesNumber: 29,
+          placesNumber: "10+",
         },
         {
           imgSrc: "package-cover-4.jpg",
           name: "Your health is matter",
-          placesNumber: 29,
+          placesNumber: "10+",
         },
         {
           imgSrc: "package-cover-5.jpg",
           name: "Experiences Away From Crowd",
-          placesNumber: 168,
+          placesNumber: "10+",
         },
       ],
     };
+  },
+  async created() {
+    const tripCollection = collection(db, "trips");
+
+    for (let i = 0; i < this.packageCards.length; i++) {
+      let countForCategory = await getCountFromServer(
+        query(
+          tripCollection,
+          where("category", "==", this.packageCards[i].name)
+        )
+      );
+      this.packageCards[i].placesNumber = countForCategory.data().count;
+    }
+  },
+  methods: {
+    searchTrips() {
+      this.luxTripStore.clearFilter();
+      this.$router.push({ name: "packages" });
+    },
+  },
+  computed: {
+    ...mapStores(useLuxTripStore),
   },
 };
 </script>

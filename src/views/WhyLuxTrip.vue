@@ -28,11 +28,11 @@
 
 <script>
 import SubscribeComponent from "@/components/Subscribe.vue";
-import WhyLuxTripBenefits from "@/components/WhyLuxTripBenefits.vue";
-import WhyLuxTripStatistics from "@/components/WhyLuxTripStatistics.vue";
-import WhyLuxTripExclusive from "@/components/WhyLuxTripExclusive.vue";
-import WhyLuxTripBooking from "@/components/WhyLuxTripBooking.vue";
-import WhyLuxTripContact from "@/components/WhyLuxTripContact.vue";
+import WhyLuxTripBenefits from "@/components/whyLTPage/WhyLuxTripBenefits.vue";
+import WhyLuxTripStatistics from "@/components/whyLTPage/WhyLuxTripStatistics.vue";
+import WhyLuxTripExclusive from "@/components/whyLTPage/WhyLuxTripExclusive.vue";
+import WhyLuxTripBooking from "@/components/whyLTPage/WhyLuxTripBooking.vue";
+import WhyLuxTripContact from "@/components/whyLTPage/WhyLuxTripContact.vue";
 
 export default {
   name: "HomeView",

@@ -11,7 +11,7 @@
         class="header__callback"></CallbackButton>
       <router-link
         @click="luxTripStore.closeMobileMenu"
-        class="header__logo"
+        class="header__logo link"
         :to="{ name: 'home' }">
         <ILogo></ILogo>
       </router-link>
@@ -21,7 +21,7 @@
 </template>
 <script>
 import TheNavigation from "@/components/Navigation.vue";
-import CallbackButton from "@/components/CallbackButton.vue";
+import CallbackButton from "@/components/formComponents/CallbackButton.vue";
 
 import { useLuxTripStore } from "@/store/index";
 import { mapStores } from "pinia";

@@ -12,7 +12,12 @@ export default {};
   color: #fff;
   span {
     position: relative;
-    z-index: 1;
+  }
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    opacity: initial;
+    box-shadow: 0 0 8px 2px var(--black-main);
   }
   &:active {
     opacity: 1;

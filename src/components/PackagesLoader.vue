@@ -9,7 +9,7 @@
         </TripCard>
       </div>
       <div
-        v-show="luxTripStore.canLoadMore"
+        v-show="luxTripStore.canLoadMore && luxTripStore.trips.length"
         class="packages-loader__load-more">
         <ButtonWhite @click="loadMore">
           <CrownDecoration></CrownDecoration>
@@ -22,8 +22,9 @@
 <script>
 import { useLuxTripStore } from "@/store/index";
 import { mapStores } from "pinia";
+import { mapWritableState } from "pinia";
 import TripCard from "@/components/TripCard";
-import ButtonWhite from "@/components/ButtonWhite.vue";
+import ButtonWhite from "@/components/formComponents/ButtonWhite.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 export default {
   components: {
@@ -33,25 +34,36 @@ export default {
   },
   data() {
     return {
-      cardsOnOnePage: 12,
-      page: 1,
+      cards: null,
     };
   },
 
   computed: {
     ...mapStores(useLuxTripStore),
-    cardsArray() {
-      return this.luxTripStore.slice(0, this.cardsOnOnePage * this.page);
-    },
+    ...mapWritableState(useLuxTripStore, ["page"]),
   },
-  created() {
-    this.luxTripStore.getTrips();
+  async created() {
+    if (this.page == 0) {
+      if (this.luxTripStore.isStoreFiltersEmpty) {
+        await this.luxTripStore.getTripsPageWithoutFilter();
+      } else {
+        await this.luxTripStore.getTripsPageWithFilter(
+          this.luxTripStore.queryForActiveFilters.q
+        );
+      }
+      this.page += 1;
+    }
   },
   methods: {
-    loadMore() {
-      // додати перевірку на наявність в сторі
+    async loadMore() {
+      if (this.luxTripStore.isStoreFiltersEmpty) {
+        await this.luxTripStore.getTripsPageWithoutFilter();
+      } else {
+        await this.luxTripStore.getTripsPageWithFilter(
+          this.luxTripStore.queryForActiveFilters.q
+        );
+      }
       this.page += 1;
-      this.luxTripStore.getTrips(this.luxTripStore.queryForActiveFilters);
     },
   },
 };
@@ -63,6 +75,9 @@ export default {
     gap: 30px;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     margin-bottom: 50px;
+    .trip-card {
+      max-width: 540px;
+    }
   }
   &-loader {
     &__load-more {

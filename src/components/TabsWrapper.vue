@@ -1,13 +1,13 @@
 <template>
   <div class="tabs">
-    <div class="tabs__header">
+    <div class="tabs__header scrollable horizontal">
       <ul class="tabs__list">
         <li
           v-for="(title, index) in tabsTitles"
           :key="index"
           :class="{ active: selectedTitle == title }"
           @click="selectTab(title)"
-        >
+          tabindex="0">
           {{ title }}
         </li>
       </ul>
@@ -30,34 +30,29 @@ export default {
   methods: {
     selectTab(title) {
       this.selectedTitle = title;
+      this.$emit("selected", this.selectedTitle);
     },
   },
-
   provide() {
     return {
       selectedTitle: computed(() => this.selectedTitle || this.tabsTitles[0]),
     };
   },
+  emits: ["selected"],
 };
 </script>
 <style lang="scss">
-@media (hover: hover) {
-  .tabs {
-    &__header {
-      &::-webkit-scrollbar {
-        height: 4px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--gray);
-      }
-    }
-  }
-}
+// @media (hover: hover) {
+//   .tabs {
+//     &__header {
+//     }
+//   }
+// }
 .tabs {
   &__header {
     overflow-x: auto;
-    padding-bottom: 15px;
+    padding: 1px 1px 5px 1px;
+    margin-bottom: 10px;
   }
   &__list {
     display: flex;
@@ -67,7 +62,7 @@ export default {
     li {
       font-size: 24px;
       line-height: 24px;
-      color: var(--gray);
+      color: var(--grey);
       position: relative;
       cursor: pointer;
       transition: 0.3s;
@@ -93,6 +88,12 @@ export default {
         &::after {
           opacity: 1;
         }
+      }
+      &:focus {
+        outline: none;
+      }
+      &:focus-visible {
+        outline: 1px solid var(--grey);
       }
     }
   }

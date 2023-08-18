@@ -8,7 +8,7 @@
             <div class="contact__name">Phone</div>
             <a
               :href="`tel:${contactData.phone}`"
-              class="contact__value contact__phone"
+              class="contact__value contact__phone link"
               >{{ contactData.formatedPhone }}</a
             >
             <router-link
@@ -28,7 +28,7 @@
 
             <a
               :href="`mailto:${contactData.email}`"
-              class="contact__value contact__email"
+              class="contact__value contact__email link"
               >{{ contactData.email }}</a
             >
           </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 export default {
   name: "ContactView",
   data() {

@@ -16,6 +16,7 @@
     "normalize-package-data": "^2.5.0",
     "pinia": "^2.0.34",
     "sass-loader": "^13.2.0",
+    "v8n": "^1.5.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

@@ -73,7 +73,7 @@
   </div>
 </template>
 <script>
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import IRhombus from "@/components/icons/IRhombus.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 

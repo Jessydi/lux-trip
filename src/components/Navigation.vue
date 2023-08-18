@@ -10,22 +10,19 @@
     v-else>
     <ul class="navigation__list">
       <li class="navigation__item">
-        <router-link :to="{ name: 'home' }">Home</router-link>
+        <router-link class="link" :to="{ name: 'home' }">Home</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'packages' }">Luxury packages</router-link>
+        <router-link class="link" :to="{ name: 'packages' }">Luxury packages</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'booking' }">Book with us</router-link>
+        <router-link class="link" :to="{ name: 'booking' }">Book with us</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'why-lux-trip' }">Why Lux Trips</router-link>
+        <router-link class="link" :to="{ name: 'why-lux-trip' }">Why Lux Trips</router-link>
       </li>
       <li class="navigation__item">
-        <router-link :to="{ name: 'contact' }">Contact</router-link>
-      </li>
-      <li class="navigation__item">
-        <router-link :to="{ name: 'home' }">Client Area</router-link>
+        <router-link class="link" :to="{ name: 'contact' }">Contact</router-link>
       </li>
     </ul>
   </nav>
@@ -35,47 +32,40 @@
       v-show="luxTripStore.mobileNavigation">
       <div class="navigation__content">
         <ul class="navigation__list">
-          <IRhombus class="rhombus-icon"></IRhombus>
+          <IRhombus class="rhombus"></IRhombus>
           <li class="navigation__item">
-            <router-link
+            <router-link class="link" 
               :to="{ name: 'home' }"
               @click="luxTripStore.closeMobileMenu"
               >Home</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link
+            <router-link class="link"
               :to="{ name: 'packages' }"
               @click="luxTripStore.closeMobileMenu"
               >Luxury packages</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link
+            <router-link class="link"
               :to="{ name: 'booking' }"
               @click="luxTripStore.closeMobileMenu"
               >Book with us</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link
+            <router-link class="link"
               :to="{ name: 'why-lux-trip' }"
               @click="luxTripStore.closeMobileMenu"
               >Why Lux Trips</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link
+            <router-link class="link"
               :to="{ name: 'contact' }"
               @click="luxTripStore.closeMobileMenu"
               >Contact</router-link
-            >
-          </li>
-          <li class="navigation__item">
-            <router-link
-              :to="{ name: 'home' }"
-              @click="luxTripStore.closeMobileMenu"
-              >Client Area</router-link
             >
           </li>
         </ul>
@@ -207,9 +197,9 @@ export default {
         position: relative;
         height: fit-content;
 
-        .rhombus-icon {
+        .rhombus {
           position: absolute;
-          height: 100%;
+          height: 115%;
           width: auto;
           top: 50%;
           left: 50%;

@@ -49,9 +49,9 @@
   </div>
 </template>
 <script>
-import IRhombusBlur from "./icons/IRhombusBlur.vue";
+import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 import ImageWithRhombus from "@/components/ImageWithRhombus.vue";
-import ButtonTransparent from "@/components/ButtonTransparent.vue";
+import ButtonTransparent from "@/components/formComponents/ButtonTransparent.vue";
 
 export default {
   components: {

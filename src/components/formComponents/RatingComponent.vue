@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import IRhombus from "./icons/IRhombus.vue";
+import IRhombus from "@/components/icons/IRhombus.vue";
 
 export default {
   components: {

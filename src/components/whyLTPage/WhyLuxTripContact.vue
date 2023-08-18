@@ -18,8 +18,7 @@
       </p>
       <router-link
         class="why-lux-trip-contact__link"
-        :to="{ name: 'home', hash: '#callback' }"
-      >
+        :to="{ name: 'home', hash: '#callback' }">
         <ButtonBlack>
           <CrownDecoration></CrownDecoration>
           <span>Contact us</span>
@@ -29,12 +28,11 @@
     <img
       src="@/assets/backgrounds/girl-bg-1.jpg"
       alt="girl"
-      class="why-lux-trip-contact__bg"
-    />
+      class="why-lux-trip-contact__bg" />
   </div>
 </template>
 <script>
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 export default {
   components: {

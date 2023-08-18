@@ -10,12 +10,18 @@ export default {};
 .btn-white {
   background-color: #fff;
   color: var(--white-main);
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    opacity: initial;
+    box-shadow: 0 0 8px 2px #fff;
+  }
   span {
     position: relative;
-    z-index: 1;
   }
   &:active {
     opacity: 1;
+    box-shadow: 0 0 5px 1px #fff;
   }
 }
 </style>

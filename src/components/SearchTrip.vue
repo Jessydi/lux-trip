@@ -16,9 +16,9 @@
           <span>Luxury Tours</span>
 
           <SelectComponent
-            class="select-component"
+            class="select-component plain"
             id="search-trip__destination"
-            v-model="filterObject.travelCategory"
+            v-model="luxTripStore.searchTripsFilterParams.travelCategory"
             placeholder="Where are you going?"
             :options="[
               'Romantic Winter Destinations',
@@ -33,9 +33,9 @@
           <span>Travel type</span>
 
           <SelectComponent
-            class="select-component"
+            class="select-component plain"
             id="search-trip__travel-type"
-            v-model="filterObject.travelType"
+            v-model="luxTripStore.searchTripsFilterParams.travelType"
             placeholder="Choose trip type"
             :options="['Adventure', 'Romantic']"></SelectComponent>
         </label>
@@ -45,15 +45,19 @@
           <ICalendar></ICalendar>
           <span>When</span>
           <input
+            class="input-date"
             type="text"
             id="search-trip__date"
-            v-model="filterObject.dateValue"
+            v-model="luxTripStore.searchTripsFilterParams.dateValue"
             autocomplete="off"
             placeholder="Select Date"
             :size="dateInputLength" />
           <button
             class="clear-date"
-            @click.prevent="datePicker.clear()"></button>
+            @click.prevent="
+              datePicker.clear();
+              luxTripStore.searchTripsFilterParams.dateValue = null;
+            "></button>
         </label>
         <label
           class="search-trip__input"
@@ -61,33 +65,27 @@
           <IPerson></IPerson>
           <span>Travellers</span>
           <SelectComponent
-            class="select-component"
+            class="select-component plain"
             id="search-trip__travellers"
-            v-model="filterObject.travellers"
+            v-model="luxTripStore.searchTripsFilterParams.travellers"
             placeholder="Any amount"
-            :options="[1, 2, 3]"></SelectComponent>
+            :options="['1', '2', '3']"></SelectComponent>
         </label>
-        <!-- <ButtonBlack @click.prevent="searchTrip">
-          <ISearch></ISearch>
-          <span>find</span>
-        </ButtonBlack> -->
-        <ButtonBlack @click.prevent="luxTripStore.addTrips()">
+        <ButtonBlack @click.prevent="searchTrip">
           <ISearch></ISearch>
           <span>find</span>
         </ButtonBlack>
+        <!-- <ButtonBlack @click.prevent="luxTripStore.addTrips()">
+          <ISearch></ISearch>
+          <span>add trips</span>
+        </ButtonBlack> -->
       </form>
     </div>
   </div>
 </template>
 <script>
-import IPerson from "./icons/IPerson.vue";
-import ICalendar from "./icons/ICalendar.vue";
-import ISun from "./icons/ISun.vue";
-import IRhombus from "./icons/IRhombus.vue";
-import ISearch from "./icons/ISearch.vue";
-
-import SelectComponent from "./Select.vue";
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import SelectComponent from "@/components/formComponents/Select.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 
 import flatpickr from "flatpickr";
@@ -96,6 +94,11 @@ import "flatpickr/dist/flatpickr.css";
 import { useLuxTripStore } from "@/store/index";
 import { mapStores } from "pinia";
 
+import IPerson from "@/components/icons/IPerson.vue";
+import ICalendar from "@/components/icons/ICalendar.vue";
+import ISun from "@/components/icons/ISun.vue";
+import IRhombus from "@/components/icons/IRhombus.vue";
+import ISearch from "@/components/icons/ISearch.vue";
 export default {
   components: {
     CrownDecoration,
@@ -109,12 +112,6 @@ export default {
   },
   data() {
     return {
-      filterObject: {
-        travelCategory: null,
-        travelType: null,
-        travellers: null,
-        dateValue: null,
-      },
       datePicker: null,
     };
   },
@@ -127,40 +124,35 @@ export default {
     });
   },
   methods: {
-    searchTrip() {
-      this.datePicker.clear();
-      const isAllFiltersEmpty = Object.values(this.filterObject).every(
-        (val) => val === null
-      );
-      if (isAllFiltersEmpty) {
-        if (this.luxTripStore.isStoreFiltersEmpty) {
+    async searchTrip() {
+      if (
+        await this.luxTripStore.changeFilter(
+          this.luxTripStore.searchTripsFilterParams
+        )
+      ) {
+        if (this.$route.name != "packages") {
+          this.$router.push({ name: "packages" });
           return;
         }
-        this.luxTripStore.getTrips();
-        this.luxTripStore.filterParams = this.filterObject;
-        return;
+
+        if (this.luxTripStore.isStoreFiltersEmpty) {
+          await this.luxTripStore.getTripsPageWithoutFilter();
+        } else {
+          await this.luxTripStore.getTripsPageWithFilter(
+            this.luxTripStore.queryForActiveFilters.q
+          );
+        }
       }
-      this.luxTripStore.filterParams = this.filterObject;
-      this.luxTripStore.getTrips(this.luxTripStore.queryForActiveFilters);
     },
   },
   computed: {
     dateInputLength: function () {
-      if (this.filterObject.dateValue) {
-        return this.filterObject.dateValue.length;
+      if (this.luxTripStore.searchTripsFilterParams.dateValue) {
+        return this.luxTripStore.searchTripsFilterParams.dateValue.length;
       }
       return "10";
     },
     ...mapStores(useLuxTripStore),
-  },
-  watch: {
-    "filterObject.dateValue": {
-      handler(newDate) {
-        if (newDate && newDate.includes("to")) {
-          this.filterObject.dateValue = newDate.replace("to", "-");
-        }
-      },
-    },
   },
 };
 </script>
@@ -174,12 +166,13 @@ export default {
     font-size: 26px;
     line-height: 28px;
     text-transform: uppercase;
-    color: var(--gray);
+    color: var(--grey);
     max-width: min(calc(100% - 32px), 330px);
     text-align: center;
     position: relative;
     margin: 0 auto;
     top: 25px;
+    z-index: 1;
     span {
       position: relative;
       z-index: 1;
@@ -240,15 +233,7 @@ export default {
         line-height: 25px;
       }
     }
-    .rhombus-icon {
-      height: 17px;
-      width: auto;
-      stroke-width: 100px;
-      clip-path: polygon(50% 0%, 95% 50%, 50% 100%, 5% 50%);
-      :deep(path) {
-        stroke: var(--gray);
-      }
-    }
+
     .clear-date {
       position: absolute;
       cursor: pointer;
@@ -266,7 +251,7 @@ export default {
         top: 50%;
         transform-origin: center;
         translate: -50% -50%;
-        background-color: var(--gray);
+        background-color: var(--grey);
       }
       &::after {
         rotate: -45deg;

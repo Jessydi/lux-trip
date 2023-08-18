@@ -1,5 +1,8 @@
 <template>
-  <Splide :options="splideOptions" aria-label="" :has-track="false">
+  <Splide
+    :options="splideOptions"
+    aria-label=""
+    :has-track="false">
     <SplideTrack>
       <slot></slot>
     </SplideTrack>
@@ -16,7 +19,7 @@
 </template>
 <script>
 import { Splide, SplideTrack } from "@splidejs/vue-splide";
-import IArrow from "./icons/IArrow.vue";
+import IArrow from "@/components/icons/IArrow.vue";
 
 import "@splidejs/vue-splide/css";
 
@@ -53,7 +56,7 @@ export default {
   &__arrow {
     width: 75px;
     height: 75px;
-    background-color: var(--gray);
+    background-color: var(--grey);
     border-radius: 0px;
     transition: all 0.2s;
     opacity: initial;
@@ -103,7 +106,7 @@ export default {
         background-color: white;
 
         &.is-active {
-          background-color: var(--gray);
+          background-color: var(--grey);
         }
       }
     }

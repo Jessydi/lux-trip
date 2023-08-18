@@ -12,8 +12,18 @@
       d="M 132 10 L 254 255 L 132 500 L 10 255  Z" />
   </svg>
 </template>
-<style scoped>
+<style scoped lang="scss">
 svg {
   display: block;
+}
+
+.rhombus-icon {
+  height: 17px;
+  width: auto;
+  stroke-width: 100px;
+  clip-path: polygon(50% 0%, 95% 50%, 50% 100%, 5% 50%);
+  path {
+    stroke: var(--grey);
+  }
 }
 </style>

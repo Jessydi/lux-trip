@@ -12,7 +12,7 @@
     <div class="container">
       <div class="footer__content">
         <router-link
-          class="footer__logo"
+          class="footer__logo link"
           :to="{ name: 'home' }">
           <ILogo></ILogo>
         </router-link>
@@ -20,25 +20,25 @@
           <CallbackButton></CallbackButton>
         </div>
         <router-link
-          class="footer__link"
+          class="footer__link link"
           :to="{ name: 'packages' }"
           >Luxury packages</router-link
         >
 
         <router-link
-          class="footer__link"
+          class="footer__link link"
           :to="{ name: 'booking' }"
           >Book with us</router-link
         >
 
         <router-link
-          class="footer__link"
+          class="footer__link link"
           :to="{ name: 'why-lux-trip' }"
           >Why Lux Trips</router-link
         >
 
         <router-link
-          class="footer__link"
+          class="footer__link link"
           :to="{ name: 'contact' }"
           >Contact</router-link
         >
@@ -46,7 +46,7 @@
       <div class="footer__bottom">
         <div class="footer__credits">© 2022 Made by Olexandr Zavrazhnyj</div>
         <div class="footer__privacy">
-          <a href="#">Company Site</a> | <a href="#">Privacy Policy</a>
+          <a class="link" href="#">Company Site</a> | <a class="link" href="#">Privacy Policy</a>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
 </template>
 <script>
 import ILogo from "@/components/icons/ILogo.vue";
-import CallbackButton from "@/components/CallbackButton.vue";
+import CallbackButton from "@/components/formComponents/CallbackButton.vue";
 export default {
   name: "TheFooter",
   components: {

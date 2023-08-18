@@ -6,11 +6,18 @@
       alt="package card image" />
     <div class="collection-card__content">
       <div class="collection-card__title">
-        <router-link :to="{ name: 'home' }">{{ cardObject.name }}</router-link>
+        <span
+          class="link"
+          tabindex="0"
+          @keydown.space.prevent="searchTrips"
+          @keydown.enter="searchTrips"
+          @click="searchTrips"
+          >{{ cardObject.name }}</span
+        >
       </div>
-      <router-link
-        :to="{ name: 'home' }"
-        class="collection-card__link">
+      <span
+        @click="searchTrips"
+        class="collection-card__link link">
         <span class="collection-card__places">
           <span class="collection-card__number"
             >{{ cardObject.placesNumber }}
@@ -20,15 +27,17 @@
         </span>
         <IRhombus class="rhombus"></IRhombus>
         <IRhombusBlur class="rhombus-blur"></IRhombusBlur>
-      </router-link>
+      </span>
     </div>
   </div>
 </template>
 <script>
-import IRhombusBlur from "./icons/IRhombusBlur.vue";
-import IRhombus from "./icons/IRhombus.vue";
-import IArrow from "./icons/IArrow.vue";
+import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
+import IRhombus from "@/components/icons/IRhombus.vue";
+import IArrow from "@/components/icons/IArrow.vue";
 
+import { useLuxTripStore } from "@/store/index";
+import { mapStores } from "pinia";
 export default {
   components: {
     IRhombusBlur,
@@ -40,6 +49,23 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  methods: {
+    async searchTrips() {
+      await this.luxTripStore.changeFilter(this.categoryFilter);
+      this.$router.push({ name: "packages" });
+    },
+  },
+  computed: {
+    categoryFilter() {
+      return {
+        travelCategory: this.cardObject.name,
+        travelType: null,
+        travellers: null,
+        dateValue: null,
+      };
+    },
+    ...mapStores(useLuxTripStore),
   },
 };
 </script>
@@ -122,6 +148,9 @@ export default {
       margin-top: 8px;
     }
   }
+  .link {
+    color: #fff;
+  }
   &__link {
     position: relative;
     width: 55%;
@@ -140,7 +169,7 @@ export default {
     .rhombus-blur {
       z-index: -1;
       &:deep(path) {
-        stroke: var(--gray);
+        stroke: var(--grey);
       }
     }
     .rhombus {

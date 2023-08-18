@@ -40,6 +40,7 @@ export default {
   min-height: 100vh;
   &.not-scrollable {
     max-width: 100%;
+    width: 100%;
     overflow: hidden;
     position: fixed;
   }
@@ -47,6 +48,38 @@ export default {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+  }
+  .scrollable {
+    scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-foreground);
+      // border-left: 4px solid white;
+      // border-right: 4px solid white;
+    }
+    &::-webkit-scrollbar {
+      // width: 10px;
+      width: 2px;
+      height: 12px;
+    }
+    &::-webkit-scrollbar-track {
+      margin: 20px 0 0px 0;
+      // border-left: 4px solid white;
+      // border-right: 4px solid white;
+      background-color: var(--scrollbar-background);
+    }
+    &.horizontal {
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-track {
+        border-top: 4px solid var(--scrollbar-background);
+        border-bottom: 4px solid var(--scrollbar-background);
+        border-left: none;
+        border-right: none;
+      }
+      &::-webkit-scrollbar-track {
+        border: 4px solid var(--scrollbar-background) none 4px solid
+          var(--scrollbar-background) none;
+      }
+    }
   }
 }
 
@@ -69,11 +102,15 @@ ol {
     list-style: none;
   }
 }
-a {
+a,
+.link {
   text-decoration: none;
   color: #000;
   transition: 0.2s;
   display: inline-block;
+  cursor: pointer;
+}
+.link {
   &:hover {
     opacity: 0.7;
   }
@@ -81,11 +118,20 @@ a {
 img {
   display: block;
 }
+*:disabled {
+  border-color: var(--disabled) !important;
+}
 button {
   border: 0;
   background-color: transparent;
   text-transform: uppercase;
   cursor: pointer;
+}
+form {
+  border-radius: 10px;
+  &.white {
+    background-color: #fff;
+  }
 }
 p {
   font-size: 16px;
@@ -107,9 +153,12 @@ p {
   width: 100%;
   position: relative;
   white-space: nowrap;
+  min-width: 200px;
   &:hover,
-  &:focus {
-    opacity: 0.8;
+  &:focus,
+  &:focus-visible {
+    outline: none;
+
   }
 }
 input,
@@ -119,6 +168,17 @@ textarea {
   color: var(--black-main);
   &::placeholder {
     color: var(--black-main);
+  }
+}
+
+.input-date {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border: 0;
+  }
+  &:focus-visible {
+    background-color: rgba(226, 211, 206, 0.5);
   }
 }
 
@@ -155,9 +215,12 @@ main {
   --black-main: #0c0b10;
   --black-secondary: #1d1a1a;
   --home-title: #fcfcfc;
-  --gray: #79655e;
+  --grey: #79655e;
   --blue: #0b2034;
-  --error-red: rgb(179, 38, 38);
+  --error-red: #e95555;
+  --disabled: #f0f0f0;
+  --scrollbar-foreground: var(--grey);
+  --scrollbar-background: var(--bg-main);
 }
 
 @media (min-width: 768px) {
@@ -190,6 +253,9 @@ main {
   p {
     font-size: 18px;
     line-height: 36px;
+  }
+  .container {
+    padding: 0 20px;
   }
 }
 </style>

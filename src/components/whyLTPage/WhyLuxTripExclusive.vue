@@ -28,7 +28,9 @@
             around the world.
           </p>
         </div>
-        <router-link class="exclusive__link" :to="{ name: 'packages' }">
+        <router-link
+          class="exclusive__link"
+          :to="{ name: 'packages' }">
           <ButtonBlack>
             <CrownDecoration></CrownDecoration>
             <span>Luxury packages</span>
@@ -39,15 +41,14 @@
     <img
       src="@/assets/backgrounds/beach-bg.jpg"
       alt="beach"
-      class="why-lux-trip-exclusive__bg"
-    />
+      class="why-lux-trip-exclusive__bg" />
   </div>
 </template>
 <script>
 import ImageWithRhombus from "@/components/ImageWithRhombus.vue";
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
-import IRhombusBlur from "./icons/IRhombusBlur.vue";
+import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 
 export default {
   components: {

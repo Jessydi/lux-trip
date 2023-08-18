@@ -6,68 +6,71 @@
         :border-radius="10"></CrownDecoration>
       <div class="subscribe__content">
         <div class="container">
-          <div class="subscribe__title">
-            Get weekly inspiration and expert advice
-          </div>
-          <p class="subscribe__text">Sign up for our Weekly Newsletter</p>
-          <div class="subscribe__form">
-            <Input
-              class="subscribe__email"
-              type="email"
-              blured
-              placeholder="Email address"></Input>
-            <ButtonWhite @click.prevent="subscribe">
-              <CrownDecoration></CrownDecoration>
-              <span>Subscribe</span>
-            </ButtonWhite>
-            <ErrorMessage
-              :error="error"
-              :errorMessage="errorMessage"></ErrorMessage>
-          </div>
+          <template v-if="!subscribed">
+            <div class="subscribe__title">
+              Get weekly inspiration and expert advice
+            </div>
+            <p class="subscribe__text">Sign up for our Weekly Newsletter</p>
+            <div class="subscribe__form">
+              <Input
+                class="subscribe__email"
+                type="email"
+                blured
+                placeholder="Email address"
+                id="emailInput"
+                v-model="email"
+                :errorMessage="errorMessage"
+                @focus="errorMessage = null"></Input>
+              <ButtonWhite @click.prevent="subscribe">
+                <CrownDecoration></CrownDecoration>
+                <span>Subscribe</span>
+              </ButtonWhite>
+            </div>
+          </template>
+          <h2
+            class="subscribed"
+            v-else>
+            you have successfully subscribed to our newsletter
+          </h2>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import ButtonWhite from "@/components/ButtonWhite.vue";
-import Input from "@/components/Input.vue";
+import ButtonWhite from "@/components/formComponents/ButtonWhite.vue";
+import Input from "@/components/formComponents/Input.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
-import ErrorMessage from "@/components/ErrorMessage.vue";
+import v8n from "v8n";
 
 export default {
   name: "SubscribeComponent",
   components: {
     ButtonWhite,
     Input,
-    ErrorMessage,
     CrownDecoration,
   },
   data() {
     return {
-      error: false,
       errorMessage: null,
-      contactForm: {
-        email: null,
-      },
+      email: null,
+      subscribed: false,
     };
   },
   methods: {
-    validateContactForm() {
-      this.error = false;
-
-      if (!this.contactForm.phone) {
-        this.error = true;
-        this.errorMessage = "Please, enter your email";
-        setTimeout(() => {
-          this.error = false;
-          console.log(this.error);
-        }, 5000);
+    validateEmail() {
+      if (
+        !v8n()
+          .pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+          .test(this.email)
+      ) {
+        this.errorMessage = "invalid email";
       }
     },
     subscribe() {
-      this.validateContactForm();
-      if (!this.error) {
+      this.validateEmail();
+      if (!this.errorMessage) {
+        this.subscribed = true;
         console.log("subscribed");
       }
     },
@@ -107,6 +110,13 @@ export default {
     .container {
       max-width: 750px;
       padding: 74px 16px 90px;
+      min-height: 565px;
+    }
+    .subscribed {
+      color: #fff;
+      line-height: 1.5;
+      font-size: 69px;
+      text-transform: uppercase;
     }
   }
   &__text,
@@ -141,9 +151,7 @@ export default {
     }
     &__email {
       margin-bottom: 0;
-      flex: 1 1 auto;
-      margin-right: -50px;
-      padding-right: 50px;
+      // padding-right: 50px;
       text-overflow: ellipsis;
     }
     &__content {
@@ -170,7 +178,11 @@ export default {
     &__form {
       display: flex;
       .btn {
-        flex: 1 0 330px;
+        flex: 0 1 330px;
+      }
+      .input-component {
+        flex: 1 1 400px;
+        margin-right: -50px;
       }
     }
   }

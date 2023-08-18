@@ -47,7 +47,7 @@
 </template>
 <script>
 import { db } from "@/firebase/firebaseInit";
-import IRhombus from "./icons/IRhombus.vue";
+import IRhombus from "@/components/icons/IRhombus.vue";
 import { collection, getCountFromServer } from "firebase/firestore";
 export default {
   components: {
@@ -108,7 +108,7 @@ export default {
         margin: auto;
         stroke-width: 3px;
         path {
-          stroke: var(--gray);
+          stroke: var(--grey);
         }
       }
       &:nth-child(1) {

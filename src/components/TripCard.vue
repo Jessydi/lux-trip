@@ -20,7 +20,7 @@
         </div>
 
         <router-link
-          class="trip-card__name"
+          class="trip-card__name link"
           :to="{
             name: 'package-page',
             params: { id: cardData.id },
@@ -39,8 +39,8 @@
   </div>
 </template>
 <script>
-import IPin from "./icons/IPin.vue";
-import RatingComponent from "./RatingComponent.vue";
+import IPin from "@/components/icons/IPin.vue";
+import RatingComponent from "@/components/formComponents/RatingComponent.vue";
 
 export default {
   components: {
@@ -79,7 +79,7 @@ export default {
     transition: 0.3s;
     &-link {
       width: 100%;
-      &-link:hover {
+      &:hover {
         opacity: 1;
       }
     }

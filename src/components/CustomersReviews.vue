@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import IDoubleRhombus from "./icons/IDoubleRhombus.vue";
+import IDoubleRhombus from "@/components/icons/IDoubleRhombus.vue";
 
 import CustomerReview from "@/components/CustomerReview.vue";
 import SliderComponent from "@/components/SliderComponent.vue";

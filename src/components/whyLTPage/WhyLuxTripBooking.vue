@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import BookCategory from "@/components/BookCategory.vue";
 import SliderComponent from "@/components/SliderComponent.vue";
 import { SplideSlide } from "@splidejs/vue-splide";

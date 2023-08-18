@@ -8,14 +8,16 @@
           Experiences
         </h2>
       </div>
-      <TabsWrapper>
+      <TabsWrapper @selected="tabChanged">
         <TabComponent
-          v-for="(category, index) in categories"
+          v-for="(category, index) in luxTripStore.topTrips"
           :key="index"
           :title="category.place"
-        >
+          vShow>
           <SliderComponent :splide-object="splideObject">
-            <SplideSlide v-for="(card, index) in category.cards" :key="index"
+            <SplideSlide
+              v-for="(card, index) in category.cards"
+              :key="index"
               ><TripCard :card-object="card"></TripCard>
             </SplideSlide>
           </SliderComponent>
@@ -30,11 +32,17 @@ import TripCard from "@/components/TripCard.vue";
 import TabsWrapper from "@/components/TabsWrapper.vue";
 import TabComponent from "@/components/TabComponent.vue";
 
-import IDoubleRhombus from "./icons/IDoubleRhombus.vue";
+import { useLuxTripStore } from "@/store/index";
+import { mapWritableState } from "pinia";
+import { mapStores } from "pinia";
+import { db } from "@/firebase/firebaseInit";
+import { collection, query, where, orderBy, limit } from "firebase/firestore";
+
+import IDoubleRhombus from "@/components/icons/IDoubleRhombus.vue";
 
 import { SplideSlide } from "@splidejs/vue-splide";
 export default {
-  name: "HomeView",
+  name: "TopExperiences",
   components: {
     SliderComponent,
     TripCard,
@@ -42,6 +50,17 @@ export default {
     TabsWrapper,
     TabComponent,
     IDoubleRhombus,
+  },
+  async created() {
+    if (!this.luxTripStore.worldsTopTripsLoaded) {
+      const continentTripsObject = this.luxTripStore.topTrips.find(
+        (category) => category.place == "World"
+      );
+      const tripsArray = (await this.luxTripStore.getTrips()).docsArray;
+      continentTripsObject.cards.push(...tripsArray);
+
+      this.worldsTopTripsLoaded = true;
+    }
   },
   data() {
     return {
@@ -60,329 +79,72 @@ export default {
           },
         },
       },
-      categories: [
-        {
-          place: "World",
-          cards: [
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-          ],
-        },
-        {
-          place: "Africa",
-          cards: [
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-          ],
-        },
-        {
-          place: "Asia",
-          cards: [
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-          ],
-        },
-        {
-          place: "Europe",
-          cards: [
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-          ],
-        },
-        {
-          place: "North America",
-          cards: [
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-          ],
-        },
-        {
-          place: "South America",
-          cards: [
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-          ],
-        },
-        {
-          place: "Antarctica",
-          cards: [
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-          ],
-        },
-        {
-          place: "Australia",
-          cards: [
-            {
-              imgSrc: "trip-card-img-1.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.0,
-            },
-            {
-              imgSrc: "trip-card-img-2.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 2.1,
-            },
-            {
-              imgSrc: "trip-card-img-3.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 1.4,
-            },
-            {
-              imgSrc: "trip-card-img-4.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 4.4,
-            },
-            {
-              imgSrc: "trip-card-img-5.jpg",
-              location: "Austria",
-              name: "Winter Park Ski Holiday",
-              price: 1490,
-              rating: 3.8,
-            },
-          ],
-        },
-      ],
     };
+  },
+
+  methods: {
+    async tabChanged(tabTitle) {
+      // тут також можна перевіряти чи підвантажені worldTop, і серед них шукати підвантажені для кожного континенту, і довантажувати ті яких не вистачило
+      debugger;
+      if (tabTitle == "World") {
+        return;
+      }
+      let q;
+      const continentTripsObject = this.luxTripStore.topTrips.find(
+        (category) => category.place == tabTitle
+      );
+      if (continentTripsObject.cards.length == 0) {
+        const topContinentTrips = this.luxTripStore.topTrips
+          .find((category) => category.place == "World")
+          .cards.sort(
+            (a, b) =>
+              b.averageRatingObject.overallAverageRating -
+              a.averageRatingObject.overallAverageRating
+          )
+          .filter((trip) => trip.continent === tabTitle);
+        console.log(topContinentTrips.length);
+        if (
+          !(topContinentTrips.length >= 12) &&
+          continentTripsObject.cards.length < 12
+        ) {
+          const loadedTripsId = topContinentTrips.map((trip) => trip.id);
+
+          if (loadedTripsId.length) {
+            console.log("there");
+            q = query(
+              collection(db, "trips"),
+              orderBy("id"),
+              orderBy("averageRatingObject.overallAverageRating", "desc"),
+              where("continent", "==", tabTitle),
+              where("id", "not-in", loadedTripsId),
+              limit(12 - loadedTripsId.length)
+            );
+          } else {
+            console.log("wow!");
+            q = query(
+              collection(db, "trips"),
+              orderBy("averageRatingObject.overallAverageRating", "desc"),
+              where("continent", "==", tabTitle),
+              limit(12)
+            );
+          }
+          const tripsArray = (await this.luxTripStore.getTrips(q)).docsArray;
+          continentTripsObject.cards.push(...tripsArray);
+          continentTripsObject.cards.push(...topContinentTrips);
+
+          // console.log(continentTripsObject.cards);
+          continentTripsObject.cards.sort(
+            (a, b) =>
+              b.averageRatingObject.overallAverageRating -
+              a.averageRatingObject.overallAverageRating
+          );
+        }
+      }
+    },
+  },
+  computed: {
+    ...mapStores(useLuxTripStore),
+    ...mapWritableState(useLuxTripStore, ["worldsTopTripsLoaded"]),
   },
 };
 </script>

@@ -8,7 +8,7 @@
       <div class="book-category__img-content">
         <router-link
           :to="{ name: bookCategory.routeSrc }"
-          class="book-category__name"
+          class="book-category__name link"
           >{{ bookCategory.name }}</router-link
         >
         <IRhombus class="rhombus"></IRhombus>
@@ -35,7 +35,7 @@
 <script>
 import IRhombus from "@/components/icons/IRhombus.vue";
 import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
-import ButtonBlack from "@/components/ButtonBlack.vue";
+import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 export default {
   components: {
@@ -78,7 +78,7 @@ export default {
   .rhombus {
     width: 75px;
     & :deep(path) {
-      stroke: var(--gray);
+      stroke: var(--grey);
       stroke-width: 5;
     }
   }

@@ -40,7 +40,7 @@
             :key="index"
             :bookCategory="bookCategory"></BookCategory>
         </BookCategories>
-        <WhyLT></WhyLT>
+        <WhyLTComponent></WhyLTComponent>
         <CustomiseTrip></CustomiseTrip>
         <SubscribeComponent id="emailback"></SubscribeComponent>
         <CustomersReviews></CustomersReviews>
@@ -60,7 +60,7 @@ import TopExperiences from "@/components/TopExperiences.vue";
 import LuxuryPackages from "@/components/LuxuryPackages.vue";
 import BookCategories from "@/components/BookCategories.vue";
 import BookCategory from "@/components/BookCategory.vue";
-import WhyLT from "@/components/WhyLT.vue";
+import WhyLTComponent from "@/components/WhyLTComponent.vue";
 import CustomiseTrip from "@/components/CustomiseTrip.vue";
 import SubscribeComponent from "@/components/Subscribe.vue";
 import CustomersReviews from "@/components/CustomersReviews.vue";
@@ -75,7 +75,7 @@ export default {
     LuxuryPackages,
     BookCategories,
     BookCategory,
-    WhyLT,
+    WhyLTComponent,
     CustomiseTrip,
     SubscribeComponent,
     CustomersReviews,

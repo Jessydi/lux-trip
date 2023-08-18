@@ -11,7 +11,7 @@
   </router-link>
 </template>
 <script>
-import ICrown from "./icons/ICrown.vue";
+import ICrown from "@/components/icons/ICrown.vue";
 export default {
   data() {
     return {

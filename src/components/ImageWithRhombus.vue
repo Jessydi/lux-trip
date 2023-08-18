@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import IRhombusBlur from "./icons/IRhombusBlur.vue";
+import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 
 export default {
   components: {
