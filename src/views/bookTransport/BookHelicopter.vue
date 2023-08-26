@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       bookTransport: {
-        img: "book-category-5.jpg",
+        img: "book-category-5",
         description: [
           "Opting for a helicopter is the best solution not to waste precious minutes on the road when planes cannot land close enough to your final destination.",
           "Lux Trip private aviation services offer helicopter rent and charter for VIP transfers, remote and exclusive location trips, public and private events, islands and yachts landing, professional visits, remote ski resorts and extreme sport activities, and sightseeing.",

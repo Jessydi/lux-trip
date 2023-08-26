@@ -7,9 +7,15 @@
           <span class="open-screen__title-extra-big">luxtrips</span>
         </h1>
         <div class="open-screen__background">
-          <img
-            class="open-screen__img open-screen__img-1"
-            src="../assets/backgrounds/why-lt-bg-full-page.png" />
+          <picture>
+            <source
+              type="image/avif"
+              srcset="@/assets/backgrounds/why-lt-bg.avif" />
+            <img
+              class="open-screen__img open-screen__img-1"
+              src="@/assets/backgrounds/why-lt-bg.webp"
+              alt="mountains" />
+          </picture>
         </div>
       </div>
     </div>

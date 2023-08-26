@@ -4,7 +4,17 @@
       <CrownDecoration
         singleCrown
         :border-radius="10"></CrownDecoration>
-      <div class="subscribe__content">
+      <div class="subscribe-content">
+        <picture >
+          <source
+            type="image/avif"
+            srcset="@/assets/backgrounds/subscribe-bg.avif" />
+          <img
+            class="subscribe-content__bg"
+            src="@/assets/backgrounds/subscribe-bg.webp"
+            alt="island"
+            loading="lazy" />
+        </picture>
         <div class="container">
           <template v-if="!subscribed">
             <div class="subscribe__title">
@@ -101,12 +111,16 @@ export default {
   &__email {
     margin-bottom: 34px;
   }
-  &__content {
+  &-content {
     overflow: hidden;
     border-radius: 10px;
-    background: url(@/assets/backgrounds/subscribe-bg.jpg) center/cover
-      no-repeat;
     position: relative;
+    &__bg {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
     .container {
       max-width: 750px;
       padding: 74px 16px 90px;

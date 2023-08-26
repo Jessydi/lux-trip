@@ -12,7 +12,7 @@
         </p>
       </div>
       <div class="exclusive">
-        <ImageWithRhombus imgSrc="why-lt/why-lt-img-4.jpg">
+        <ImageWithRhombus imgSrc="why-lt/why-lt-img-4">
           <IRhombusBlur class="rhombus-right"></IRhombusBlur>
         </ImageWithRhombus>
         <div class="exclusive__text">
@@ -38,10 +38,15 @@
         </router-link>
       </div>
     </div>
-    <img
-      src="@/assets/backgrounds/beach-bg.jpg"
-      alt="beach"
-      class="why-lux-trip-exclusive__bg" />
+    <picture >
+      <source
+        type="image/avif"
+        srcset="@/assets/backgrounds/beach-bg.avif" />
+      <img
+        class="why-lux-trip-exclusive__bg"
+        src="@/assets/backgrounds/beach-bg.webp"
+        alt="beach" />
+    </picture>
   </div>
 </template>
 <script>

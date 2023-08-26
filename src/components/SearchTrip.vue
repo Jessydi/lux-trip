@@ -69,7 +69,7 @@
             id="search-trip__travellers"
             v-model="luxTripStore.searchTripsFilterParams.travellers"
             placeholder="Any amount"
-            :options="['1', '2', '3']"></SelectComponent>
+            :options="['1', '2', '3', '4', '5', '6', '7']"></SelectComponent>
         </label>
         <ButtonBlack @click.prevent="searchTrip">
           <ISearch></ISearch>
@@ -142,6 +142,9 @@ export default {
             this.luxTripStore.queryForActiveFilters.q
           );
         }
+      } else {
+        this.$router.push({ name: "packages" });
+        return;
       }
     },
   },

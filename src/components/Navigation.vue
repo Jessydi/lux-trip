@@ -10,19 +10,39 @@
     v-else>
     <ul class="navigation__list">
       <li class="navigation__item">
-        <router-link class="link" :to="{ name: 'home' }">Home</router-link>
+        <router-link
+          class="link"
+          :to="{ name: 'home' }"
+          >Home</router-link
+        >
       </li>
       <li class="navigation__item">
-        <router-link class="link" :to="{ name: 'packages' }">Luxury packages</router-link>
+        <router-link
+          class="link"
+          :to="{ name: 'packages' }"
+          >Luxury packages</router-link
+        >
       </li>
       <li class="navigation__item">
-        <router-link class="link" :to="{ name: 'booking' }">Book with us</router-link>
+        <router-link
+          class="link"
+          :to="{ name: 'booking' }"
+          >Book with us</router-link
+        >
       </li>
       <li class="navigation__item">
-        <router-link class="link" :to="{ name: 'why-lux-trip' }">Why Lux Trips</router-link>
+        <router-link
+          class="link"
+          :to="{ name: 'why-lux-trip' }"
+          >Why Lux Trips</router-link
+        >
       </li>
       <li class="navigation__item">
-        <router-link class="link" :to="{ name: 'contact' }">Contact</router-link>
+        <router-link
+          class="link"
+          :to="{ name: 'contact' }"
+          >Contact</router-link
+        >
       </li>
     </ul>
   </nav>
@@ -34,35 +54,40 @@
         <ul class="navigation__list">
           <IRhombus class="rhombus"></IRhombus>
           <li class="navigation__item">
-            <router-link class="link" 
+            <router-link
+              class="link"
               :to="{ name: 'home' }"
               @click="luxTripStore.closeMobileMenu"
               >Home</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link class="link"
+            <router-link
+              class="link"
               :to="{ name: 'packages' }"
               @click="luxTripStore.closeMobileMenu"
               >Luxury packages</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link class="link"
+            <router-link
+              class="link"
               :to="{ name: 'booking' }"
               @click="luxTripStore.closeMobileMenu"
               >Book with us</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link class="link"
+            <router-link
+              class="link"
               :to="{ name: 'why-lux-trip' }"
               @click="luxTripStore.closeMobileMenu"
               >Why Lux Trips</router-link
             >
           </li>
           <li class="navigation__item">
-            <router-link class="link"
+            <router-link
+              class="link"
               :to="{ name: 'contact' }"
               @click="luxTripStore.closeMobileMenu"
               >Contact</router-link
@@ -120,6 +145,7 @@ export default {
   },
 };
 </script>
+
 <style scoped lang="scss">
 .fade-enter-active,
 .fade-leave-active {
@@ -168,8 +194,8 @@ export default {
   &-mobile {
     display: flex;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     background-color: var(--bg-main);
     left: 0;
     bottom: 0;
@@ -205,6 +231,7 @@ export default {
           left: 50%;
           translate: -50% -50%;
           z-index: -1;
+          stroke-width: 1;
         }
       }
       &__item {

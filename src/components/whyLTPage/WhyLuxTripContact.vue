@@ -25,10 +25,15 @@
         </ButtonBlack>
       </router-link>
     </div>
-    <img
-      src="@/assets/backgrounds/girl-bg-1.jpg"
-      alt="girl"
-      class="why-lux-trip-contact__bg" />
+    <picture >
+      <source
+        type="image/avif"
+        srcset="@/assets/backgrounds/whyLT-contact-bg.avif" />
+      <img
+        class="why-lux-trip-contact__bg"
+        src="@/assets/backgrounds/whyLT-contact-bg.webp"
+        alt="girl" />
+    </picture>
   </div>
 </template>
 <script>

@@ -51,24 +51,30 @@
     <div class="customise-trip__bg">
       <img
         class="clouds clouds-1"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a"
+        loading="lazy" />
       <img
         class="clouds clouds-2"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a"
+        loading="lazy" />
       <img
         class="clouds clouds-3"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a"
+        loading="lazy" />
       <img
         class="clouds clouds-4"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
-      <img
-        class="customise-bg"
-        src="@/assets/backgrounds/customise-bg.png"
-        alt="customise-bgX" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a"
+        loading="lazy" />
+      <picture>
+        <source
+          type="image/avif"
+          srcset="@/assets/backgrounds/customise-bg.avif" />
+        <img
+          class="customise-bg"
+          src="@/assets/backgrounds/customise-bg.webp"
+          alt="girl in flowers"
+          loading="lazy" />
+      </picture>
     </div>
   </div>
 </template>

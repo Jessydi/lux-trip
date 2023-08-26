@@ -1,9 +1,14 @@
 <template>
   <div class="luxury-packages">
-    <img
-      src="@/assets/backgrounds/beach-bg.jpg"
-      alt="beach"
-      class="luxury-packages__bg" />
+    <picture >
+      <source
+        type="image/avif"
+        srcset="@/assets/backgrounds/beach-bg.avif" />
+      <img
+        class="luxury-packages__bg"
+        src="@/assets/backgrounds/beach-bg.webp"
+        alt="beach" />
+    </picture>
     <div class="container">
       <h2>
         <span>Luxury Packages</span>
@@ -67,27 +72,27 @@ export default {
       },
       packageCards: [
         {
-          imgSrc: "package-cover-1.jpg",
+          imgSrc: "package-cover-1",
           name: "Best Summer Destinations",
           placesNumber: "10+",
         },
         {
-          imgSrc: "package-cover-2.jpg",
+          imgSrc: "package-cover-2",
           name: "Best Winter Destinations",
           placesNumber: "10+",
         },
         {
-          imgSrc: "package-cover-3.jpg",
+          imgSrc: "package-cover-3",
           name: "The world's most extraordinary places",
           placesNumber: "10+",
         },
         {
-          imgSrc: "package-cover-4.jpg",
+          imgSrc: "package-cover-4",
           name: "Your health is matter",
           placesNumber: "10+",
         },
         {
-          imgSrc: "package-cover-5.jpg",
+          imgSrc: "package-cover-5",
           name: "Experiences Away From Crowd",
           placesNumber: "10+",
         },
@@ -127,7 +132,8 @@ export default {
   }
 
   .btn-transparent {
-    width: 140px;
+    min-width: auto;
+    max-width: 140px;
   }
 
   &__bg {

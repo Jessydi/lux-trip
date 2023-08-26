@@ -8,15 +8,45 @@
           <span class="open-screen__title-big">Places </span>
         </h1>
         <div class="open-screen__background">
-          <img
-            class="open-screen__img open-screen__img-1"
-            src="../assets/backgrounds/mountains-1.png" />
-          <img
-            class="open-screen__img open-screen__img-2"
-            src="../assets/backgrounds/mountains-2.png" />
-          <img
-            class="open-screen__img open-screen__img-3"
-            src="../assets/backgrounds/mountains-3.png" />
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fmountains-1.avif?alt=media&token=2006a480-bc7f-4d27-8ba0-4d3a6bf96534
+              " />
+            <img
+              class="open-screen__img open-screen__img-1"
+              src="@/assets/backgrounds/mountains-1.webp"
+              alt="mountains" />
+          </picture>
+          <picture>
+            <source
+              type="image/avif"
+              media="(min-width: 1400px)"
+              srcset="
+                https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fmountains-2-big.avif?alt=media&token=1e0cb21e-ce13-46a2-844d-6368ece87716
+              " />
+            <source
+              type="image/avif"
+              srcset="
+                https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fmountains-2.avif?alt=media&token=2adcb7be-6610-4354-9ca9-571aeca9bea8
+              " />
+            <img
+              class="open-screen__img open-screen__img-2"
+              src="@/assets/backgrounds/mountains-2.webp"
+              alt="mountains" />
+          </picture>
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fmountains-3.avif?alt=media&token=a7713f0f-a2a6-4879-b6d7-b94a1f542538
+              " />
+            <img
+              class="open-screen__img open-screen__img-3"
+              src="@/assets/backgrounds/mountains-3.webp"
+              alt="mountains" />
+          </picture>
         </div>
         <div class="open-screen__rhombuses">
           <IRhombusBlur class="blured-rhombus blured-rhombus-1"></IRhombusBlur>
@@ -54,17 +84,71 @@
 import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 import SearchTrip from "@/components/SearchTrip.vue";
 
-//  розібратися з підвантаженням коли з'явиться більше подорожів в бд, бо зараз не зрозуміло що відображати в цих табах
+import { defineAsyncComponent } from "vue";
 
-import TopExperiences from "@/components/TopExperiences.vue";
+// import TopExperiences from "@/components/TopExperiences.vue";
 import LuxuryPackages from "@/components/LuxuryPackages.vue";
-import BookCategories from "@/components/BookCategories.vue";
-import BookCategory from "@/components/BookCategory.vue";
-import WhyLTComponent from "@/components/WhyLTComponent.vue";
-import CustomiseTrip from "@/components/CustomiseTrip.vue";
-import SubscribeComponent from "@/components/Subscribe.vue";
+// import BookCategories from "@/components/BookCategories.vue";
+// import BookCategory from "@/components/BookCategory.vue";
+// import WhyLTComponent from "@/components/WhyLTComponent.vue";
+// import CustomiseTrip from "@/components/CustomiseTrip.vue";
+// import SubscribeComponent from "@/components/Subscribe.vue";
 import CustomersReviews from "@/components/CustomersReviews.vue";
-import ContactComponent from "@/components/ContactComponent.vue";
+// import ContactComponent from "@/components/ContactComponent.vue";
+
+// const SearchTrip = defineAsyncComponent(() =>
+//   import(
+//
+//     /* webpackChunkName: " SearchTrip" */ "@/components/SearchTrip.vue"
+//   )
+// );
+const TopExperiences = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " TopExperiences" */ "@/components/TopExperiences.vue"
+  )
+);
+const BookCategories = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " BookCategories" */ "@/components/BookCategories.vue"
+  )
+);
+const BookCategory = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " BookCategory" */ "@/components/BookCategory.vue"
+  )
+);
+// const LuxuryPackages = defineAsyncComponent(() =>
+//   import(
+//
+//     /* webpackChunkName: " LuxuryPackages" */ "@/components/LuxuryPackages.vue"
+//   )
+// );
+const WhyLTComponent = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " WhyLTComponent" */ "@/components/WhyLTComponent.vue"
+  )
+);
+const CustomiseTrip = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " CustomiseTrip" */ "@/components/CustomiseTrip.vue"
+  )
+);
+const SubscribeComponent = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " SubscribeComponent" */ "@/components/Subscribe.vue"
+  )
+);
+// const CustomersReviews = defineAsyncComponent(() =>
+//   import(
+//
+//     /* webpackChunkName: " CustomersReviews" */ "@/components/CustomersReviews.vue"
+//   )
+// );
+const ContactComponent = defineAsyncComponent(() =>
+  import(
+    /* webpackChunkName: " ContactComponent" */ "@/components/ContactComponent.vue"
+  )
+);
 
 export default {
   name: "HomeView",

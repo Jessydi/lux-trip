@@ -2,9 +2,16 @@
   <header
     class="header"
     :class="{ 'why-lux-trip': $route.name == 'why-lux-trip' }">
-    <img
-      class="header__bg"
-      :src="headerBg" />
+    <picture class="header__bg-picture">
+      <source
+        class="header__bg"
+        type="image/avif"
+        srcset="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fsky.avif?alt=media&token=ecb32129-5db9-4b62-af3e-b43a3fec1862" />
+      <img
+        class="header__bg"
+        src="@/assets/backgrounds/sky.webp"
+        alt="sky" />
+    </picture>
     <div class="header__content">
       <CallbackButton
         @click="luxTripStore.closeMobileMenu"
@@ -29,11 +36,6 @@ import { mapStores } from "pinia";
 import ILogo from "@/components/icons/ILogo.vue";
 export default {
   name: "TheHeader",
-  data() {
-    return {
-      headerImageSrc: "sky",
-    };
-  },
   components: {
     TheNavigation,
     ILogo,
@@ -41,9 +43,6 @@ export default {
   },
 
   computed: {
-    headerBg() {
-      return require(`@/assets/backgrounds/${this.headerImageSrc}.jpg`);
-    },
     ...mapStores(useLuxTripStore),
   },
 };
@@ -78,7 +77,7 @@ export default {
     width: 100%;
   }
 
-  :not(.navigation, .header__bg) {
+  :not(.navigation, .header__bg, .header__bg-picture) {
     z-index: 10;
   }
   &__bg {

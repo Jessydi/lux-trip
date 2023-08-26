@@ -18,7 +18,8 @@ export default {};
   isolation: isolate;
 
   &:hover,
-  &:focus ,&:focus-visible {
+  &:focus,
+  &:focus-visible {
     opacity: initial;
     &::before {
       width: 100%;

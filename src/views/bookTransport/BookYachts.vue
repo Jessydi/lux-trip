@@ -127,7 +127,7 @@ export default {
   data() {
     return {
       bookTransport: {
-        img: "book-category-4.jpg",
+        img: "book-category-4",
         description: [
           "Lux Trips offers unparalleled yacht and boat charter experiences thanks to our network of the leading players in yachting activities. Our experts will select the best option for your sea adventure to create your dream getaway.",
           "For instance, a private luxury yacht to visit the Balearic islands, an explorer for a cruise of the endless Mediterranean sea, or a sailing boat for a romantic weekend or family holiday on Lago di Garda. Onboard entertainment (e.g. jetski, karaoke, etc.) and highly qualified personnel are at your service. ",

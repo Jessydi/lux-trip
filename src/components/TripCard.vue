@@ -6,10 +6,16 @@
         name: 'package-page',
         params: { id: cardData.id },
       }">
-      <img
-        class="trip-card__image"
-        :src="cardData.imgSrc"
-        alt="trip card image" />
+      <picture>
+        <source
+          type="image/avif"
+          :srcset="cardData.imgSrcAvif" />
+        <img
+          class="trip-card__image"
+          :src="cardData.imgSrcWebp"
+          alt="trip card image"
+          loading="lazy" />
+      </picture>
     </router-link>
 
     <div class="trip-card__content">

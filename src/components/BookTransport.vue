@@ -2,9 +2,18 @@
   <div class="book-transport">
     <div class="container">
       <div class="book-transport__content">
-        <img
-          :src="require(`@/assets/book-categories/${bookTransport.img}`)"
-          alt="transport image" />
+        <picture>
+          <source
+            type="image/avif"
+            :srcset="
+              require(`@/assets/book-categories/${bookTransport.img}.avif`)
+            " />
+          <img
+            :srcset="
+              require(`@/assets/book-categories/${bookTransport.img}.webp`)
+            "
+            alt="transport image" />
+        </picture>
         <h3>{{ bookTransport.subtitle }}</h3>
         <div class="book-transport__description">
           <p

@@ -32,16 +32,13 @@
     <div class="why-lux-trip-statistics__bg">
       <img
         class="clouds clouds-1"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a" />
       <img
         class="clouds clouds-2"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a" />
       <img
         class="clouds clouds-3"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds" />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a" />
     </div>
   </div>
 </template>

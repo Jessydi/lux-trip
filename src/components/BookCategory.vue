@@ -1,10 +1,18 @@
 <template>
   <div class="book-category">
     <div class="book-category__img-block">
-      <img
-        class="book-category__img"
-        :src="require(`@/assets/book-categories/${bookCategory.src}`)"
-        alt="category image" />
+      <picture>
+        <source
+          type="image/avif"
+          :srcset="
+            require(`@/assets/book-categories/${bookCategory.src}.avif`)
+          " />
+        <img
+          class="book-category__img"
+          :src="require(`@/assets/book-categories/${bookCategory.src}.webp`)"
+          alt="category image"
+          loading="lazy" />
+      </picture>
       <div class="book-category__img-content">
         <router-link
           :to="{ name: bookCategory.routeSrc }"

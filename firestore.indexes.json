@@ -1,0 +1,231 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "travellers",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "travellers",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "travelType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "continent",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "continent",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "nearestDate",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "travellers",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "travellers",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "travelType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "travelType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "travelType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "travellers",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "travelType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "travellers",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nearestDate",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "averageRatingObject.overallAverageRating",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

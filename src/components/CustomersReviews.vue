@@ -16,10 +16,17 @@
         </SplideSlide>
       </SliderComponent>
     </div>
-    <img
-      class="customers-reviews__bg"
-      src="@/assets/backgrounds/customers-reviews-bg.png"
-      alt="girl in pool" />
+
+    <picture>
+      <source
+        type="image/avif"
+        srcset="@/assets/backgrounds/customers-reviews-bg.avif" />
+      <img
+        class="customers-reviews__bg"
+        src="@/assets/backgrounds/customers-reviews-bg.webp"
+        alt="girl in pool"
+        loading="lazy" />
+    </picture>
   </div>
 </template>
 <script>
@@ -115,7 +122,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .customers-reviews {
   position: relative;
   .splide {

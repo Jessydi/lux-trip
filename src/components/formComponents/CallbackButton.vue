@@ -3,7 +3,9 @@
     <button class="callback-btn">
       {{ buttonText }}
     </button>
-    <button class="callback-btn callback-btn-wide-screen" v-bind="$attrs">
+    <button
+      class="callback-btn callback-btn-wide-screen"
+      v-bind="$attrs">
       <ICrown></ICrown>
       {{ buttonTextWideScreen }}
       <ICrown></ICrown>
@@ -27,6 +29,7 @@ export default {
 <style lang="scss">
 .callback-btn {
   border: 1px solid #fff;
+  color: var(--black-main);
   border-radius: 61px;
   padding: 10px 12px;
   transition: 0.3s ease;

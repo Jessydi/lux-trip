@@ -24,8 +24,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-
 *,
 *::after,
 *::before {
@@ -158,7 +156,6 @@ p {
   &:focus,
   &:focus-visible {
     outline: none;
-
   }
 }
 input,
@@ -184,9 +181,9 @@ textarea {
 
 main {
   background: linear-gradient(transparent, var(--bg-main) 100px),
-    no-repeat top -10px left 0px url(./assets/backgrounds/clouds-main-color-1.png),
+    no-repeat top -10px left 0px url(https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds-main-color-1.avif?alt=media&token=4a889dd6-90d8-4c95-bec7-3c9703b9a518),
     no-repeat top -10px right -150px
-      url(./assets/backgrounds/clouds-main-color-2.png);
+      url(https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds-main-color-2.avif?alt=media&token=cdc1af7b-45e1-4502-bcb8-f83c62665414);
 
   position: relative;
   flex: 1 1 auto;
@@ -209,7 +206,7 @@ main {
 :root {
   // fonts
   --manrope: "Manrope", Arial, Helvetica, sans-serif;
-  --forum: "Forum", Arial, Helvetica, sans-serif;
+  --forum: "Forum";
   // colors
   --bg-main: #e2d3ce;
   --black-main: #0c0b10;
@@ -231,8 +228,8 @@ main {
         var(--bg-main) 300px
       ),
       no-repeat top 73px left 0px
-        url(./assets/backgrounds/clouds-main-color-1.png),
-      no-repeat top -5px right 0px url(./assets/backgrounds/clouds-main-color-2.png);
+        url(https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds-main-color-1.avif?alt=media&token=4a889dd6-90d8-4c95-bec7-3c9703b9a518),
+      no-repeat top -5px right 0px url(https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds-main-color-2.avif?alt=media&token=cdc1af7b-45e1-4502-bcb8-f83c62665414);
 
     position: relative;
     .wrapper {

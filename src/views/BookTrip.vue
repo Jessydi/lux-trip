@@ -1074,16 +1074,27 @@ export default {
       console.log(this.tripInfo);
     },
     getAvaliableDates() {
-      this.avaliableDates = this.tripInfo.date.map((date) => {
-        date = new Date(date.seconds * 1000);
+      if (!Array.isArray(this.tripInfo.date)) {
+        let date = new Date(this.tripInfo.date.seconds * 1000);
         const day = date.getUTCDate();
         const month =
           date.getMonth() < 9
             ? "0" + (date.getMonth() + 1)
             : date.getMonth() + 1;
         const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-      });
+        this.avaliableDates = [`${day}-${month}-${year}`];
+      } else {
+        this.avaliableDates = this.tripInfo.date.map((date) => {
+          date = new Date(date.seconds * 1000);
+          const day = date.getUTCDate();
+          const month =
+            date.getMonth() < 9
+              ? "0" + (date.getMonth() + 1)
+              : date.getMonth() + 1;
+          const year = date.getFullYear();
+          return `${day}-${month}-${year}`;
+        });
+      }
     },
     getTravellers() {
       for (let i = 0; i < this.tripInfo.travellers; i++) {

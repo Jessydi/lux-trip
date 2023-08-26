@@ -56,10 +56,13 @@ export default {
       const continentTripsObject = this.luxTripStore.topTrips.find(
         (category) => category.place == "World"
       );
-      const tripsArray = (await this.luxTripStore.getTrips()).docsArray;
-      continentTripsObject.cards.push(...tripsArray);
-
-      this.worldsTopTripsLoaded = true;
+      const tripResponse = await this.luxTripStore.getTrips();
+      if (tripResponse) {
+        const { docsArray, lastDocSnap } = tripResponse;
+        this.luxTripStore.lastDocSnap = lastDocSnap;
+        continentTripsObject.cards.push(...docsArray);
+        this.luxTripStore.worldsTopTripsLoaded = true;
+      }
     }
   },
   data() {

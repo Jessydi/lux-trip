@@ -1,6 +1,14 @@
 <template>
   <div class="img-with-rhombus">
-    <img :src="require(`@/assets/${imgSrc}`)" />
+    <picture>
+      <source
+        type="image/avif"
+        :srcset="require(`@/assets/${imgSrc}.avif`)" />
+      <img
+        :src="require(`@/assets/${imgSrc}.webp`)"
+        alt="img with rhombus"
+        loading="lazy" />
+    </picture>
     <slot></slot>
     <IRhombusBlur class="rhombus"></IRhombusBlur>
   </div>

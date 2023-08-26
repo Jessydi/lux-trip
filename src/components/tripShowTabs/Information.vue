@@ -1,37 +1,37 @@
 <template>
   <div class="information">
     <div class="information__text">
-      <h3>{{ fullTripInfo.name }}</h3>
-      <p>{{ fullTripInfo.description }}</p>
+      <h3>{{ tripInfo.fullTripInfo.name }}</h3>
+      <p>{{ tripInfo.fullTripInfo.description }}</p>
       <div class="information__main">
         <div class="information__column">
           <div class="information__name">Destination</div>
           <div class="information__value">
-            {{ fullTripInfo.destination }}
+            {{ tripInfo.fullTripInfo.destination }}
           </div>
         </div>
         <div class="information__column">
           <div class="information__name">Departure</div>
           <div class="information__value">
-            {{ fullTripInfo.departure }}
+            {{ tripInfo.fullTripInfo.departure }}
           </div>
         </div>
         <div class="information__column">
           <div class="information__name">Departure Time</div>
           <div class="information__value">
-            {{ fullTripInfo.departureTime }}
+            {{ tripInfo.fullTripInfo.departureTime }}
           </div>
         </div>
         <div class="information__column">
           <div class="information__name">Return Time</div>
           <div class="information__value">
-            {{ fullTripInfo.returnTime }}
+            {{ tripInfo.fullTripInfo.returnTime }}
           </div>
         </div>
         <div class="information__column">
           <div class="information__name">Dress Code</div>
           <div class="information__value">
-            {{ fullTripInfo.dressCode }}
+            {{ tripInfo.fullTripInfo.dressCode }}
           </div>
         </div>
       </div>
@@ -39,9 +39,9 @@
         <div class="information__included-title">included</div>
         <ul
           class="included-list"
-          v-if="fullTripInfo.included">
+          v-if="tripInfo.fullTripInfo.included">
           <li
-            v-for="(included, index) in fullTripInfo.included"
+            v-for="(included, index) in tripInfo.fullTripInfo.included"
             :key="index">
             <IIncluded></IIncluded>{{ included }}
           </li>
@@ -51,9 +51,9 @@
         <div class="information__not-included-title">not included</div>
         <ul
           class="not-included-list"
-          v-if="fullTripInfo.notIncluded">
+          v-if="tripInfo.fullTripInfo.notIncluded">
           <li
-            v-for="(notIncluded, index) in fullTripInfo.notIncluded"
+            v-for="(notIncluded, index) in tripInfo.fullTripInfo.notIncluded"
             :key="index">
             <INotIncluded></INotIncluded>{{ notIncluded }}
           </li>
@@ -61,10 +61,15 @@
       </div>
     </div>
     <div class="information__card">
-      <img
-        class="information__card-img"
-        :src="fullTripInfo.smallImgSrc"
-        alt="Machu Picchu" />
+      <picture>
+        <source
+          type="image/avif"
+          :srcset="tripInfo.imgSrcAvif" />
+        <img
+          class="trip-card__image"
+          :src="tripInfo.imgSrcWebp"
+          alt="trip card image" />
+      </picture>
       <router-link
         class="contact__link"
         :to="{ name: 'package-booking-page', id: 'aasdasd' }">
@@ -90,7 +95,7 @@ export default {
     CrownDecoration,
   },
   props: {
-    fullTripInfo: {
+    tripInfo: {
       type: Object,
       required: true,
     },

@@ -2,9 +2,14 @@
   <div class="why-lux-trip-benefits">
     <div class="container">
       <div class="benefits">
-        <div class="benefit" v-for="(benefit, index) in benefits" :key="index">
+        <div
+          class="benefit"
+          v-for="(benefit, index) in benefits"
+          :key="index">
           <ImageWithRhombus :imgSrc="benefit.benefitImgSrc">
-            <IRhombusBlur v-if="index == 0" class="rhombus-left"></IRhombusBlur>
+            <IRhombusBlur
+              v-if="index == 0"
+              class="rhombus-left"></IRhombusBlur>
           </ImageWithRhombus>
           <h3 class="benefit__title">{{ benefit.benefitTitle }}</h3>
           <p class="benefit__description">
@@ -16,14 +21,12 @@
     <div class="why-lux-trip-benefits__bg">
       <img
         class="clouds clouds-1"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a"
+         />
       <img
         class="clouds clouds-2"
-        src="@/assets/backgrounds/clouds.png"
-        alt="clouds"
-      />
+        src="https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fclouds.avif?alt=media&token=51acda41-56c0-4211-bb4b-99e4a9aa049a"
+         />
     </div>
   </div>
 </template>
@@ -40,19 +43,19 @@ export default {
     return {
       benefits: [
         {
-          benefitImgSrc: "why-lt/why-lt-img-1.jpg",
+          benefitImgSrc: "why-lt/why-lt-img-1",
           benefitTitle: "Bespoke experience of travelling",
           benefitDescription:
             "Being expert Luxury Travel Designers, Lux Trips offers bespoke experience of travelling. ",
         },
         {
-          benefitImgSrc: "why-lt/why-lt-img-2.jpg",
+          benefitImgSrc: "why-lt/why-lt-img-2",
           benefitTitle: "Collecting precious moments is our utmost goal.",
           benefitDescription:
             "Our exclusive network of trusted local partners allows us to carefully curate every detail. ",
         },
         {
-          benefitImgSrc: "why-lt/why-lt-img-3.jpg",
+          benefitImgSrc: "why-lt/why-lt-img-3",
           benefitTitle: "We personalize each trip",
           benefitDescription:
             "Thanks to our extensive knowledge and operation in the industry, we personalize each trip according to the needs and wishes of our clients.  ",

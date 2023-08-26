@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       bookTransport: {
-        img: "book-category-2.jpg",
+        img: "book-category-2",
         description: [
           "Modern villas that offer breathtaking panoramic sea views with endless deep blue waves or traditionally charming chalets with a warm jacuzzi outside, set on top of a snowy mountain, looking out to a lush countryside, are ready to welcome you at the destination of your choice.",
           "No location is outside of our reach! Whether you prefer the finest luxury destinations like St. Moritz, Zermatt, Ibiza and Mykonos or wish to explore exotic spots of South Africa, Thailand or Australia, Lux Trips will tailor your accommodation with personalized services to ensure an exceptional stay for each member of your group.",

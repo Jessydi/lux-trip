@@ -1,12 +1,28 @@
 <template>
   <footer class="footer">
     <div class="footer__bg">
-      <img
-        class="footer__bg-img footer__bg-img-sky"
-        src="../assets/backgrounds/sky-footer.jpg" />
-      <img
-        class="footer__bg-img footer__bg-img-mountains"
-        src="../assets/backgrounds/mountains-1.png" />
+      <picture>
+        <source
+          type="image/avif"
+          srcset="
+            https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fsky.avif?alt=media&token=ecb32129-5db9-4b62-af3e-b43a3fec1862
+          " />
+        <img
+          class="footer__bg-img footer__bg-img-sky"
+          src="@/assets/backgrounds/sky.webp"
+          alt="sky" />
+      </picture>
+      <picture>
+        <source
+          type="image/avif"
+          srcset="
+            https://firebasestorage.googleapis.com/v0/b/firetrip-b1efe.appspot.com/o/backgrounds%2Fmountains-1.avif?alt=media&token=2006a480-bc7f-4d27-8ba0-4d3a6bf96534
+          " />
+        <img
+          class="footer__bg-img footer__bg-img-mountains"
+          src="@/assets/backgrounds/mountains-1.webp"
+          alt="mountains" />
+      </picture>
       <div class="footer__bg-gradient"></div>
     </div>
     <div class="container">
@@ -46,7 +62,17 @@
       <div class="footer__bottom">
         <div class="footer__credits">© 2022 Made by Olexandr Zavrazhnyj</div>
         <div class="footer__privacy">
-          <a class="link" href="#">Company Site</a> | <a class="link" href="#">Privacy Policy</a>
+          <a
+            class="link"
+            href="#"
+            >Company Site</a
+          >
+          |
+          <a
+            class="link"
+            href="#"
+            >Privacy Policy</a
+          >
         </div>
       </div>
     </div>
@@ -67,7 +93,7 @@ export default {
 .footer {
   overflow: visible;
   position: relative;
-
+  overflow: hidden;
   &__content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -95,7 +121,10 @@ export default {
       bottom: 0;
 
       &-sky {
-        height: 550px;
+        min-height: 800px;
+        object-fit: none;
+        top: 0;
+        bottom: initial;
       }
 
       &-mountains {
@@ -182,10 +211,6 @@ export default {
     &__bg {
       &-img {
         object-fit: cover;
-
-        &-sky {
-          height: 550px;
-        }
       }
     }
 

@@ -1,9 +1,17 @@
 <template>
   <div class="collection-card">
-    <img
-      class="collection-card__image"
-      :src="require(`@/assets/collections-cards/${cardObject.imgSrc}`)"
-      alt="package card image" />
+    <picture>
+      <source
+        type="image/avif"
+        :srcset="
+          require(`@/assets/collections-cards/${cardObject.imgSrc}.avif`)
+        " />
+      <img
+        class="collection-card__image"
+        :src="require(`@/assets/collections-cards/${cardObject.imgSrc}.webp`)"
+        alt="collections card image"
+        loading="lazy" />
+    </picture>
     <div class="collection-card__content">
       <div class="collection-card__title">
         <span
@@ -76,6 +84,9 @@ export default {
   transition: all 0.1s ease-in;
   width: 100%;
   max-width: 100%;
+  picture {
+    width: 100%;
+  }
   &__image {
     width: 100%;
     object-fit: cover;

@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       bookTransport: {
-        img: "book-category-1.jpg",
+        img: "book-category-1",
         description: [
           "All the latest top-of-the-range models described by elegance, class and technology are among our wide range of rentals and hiring.",
           "Do you wish to feel like a Formula 1 driver and test the famous circuit in Monza? Or do you prefer to sit back and relax while our driver brings you across the most picturesque Amalfi coast? All you have to do is choose the destination and we will arrange the rest!",

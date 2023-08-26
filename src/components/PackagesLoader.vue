@@ -51,7 +51,6 @@ export default {
           this.luxTripStore.queryForActiveFilters.q
         );
       }
-      this.page += 1;
     }
   },
   methods: {
@@ -63,7 +62,6 @@ export default {
           this.luxTripStore.queryForActiveFilters.q
         );
       }
-      this.page += 1;
     },
   },
 };

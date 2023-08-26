@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       bookTransport: {
-        img: "book-category-6.jpg",
+        img: "book-category-6",
         description: [
           "Our fully personalized private charters and jets will anticipate your every wish. To fit your unique travel needs, we guarantee the highest level of safety and comfort on the flight.",
           "Discrete services provided by the dedicated flight crew, bespoke interior design and most advanced fleet are the signature qualities of the Lux Trip flying experience. With the possibility of urgent takeoffs and multi-stop journeys no destination will stay out of your reach!",

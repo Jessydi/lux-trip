@@ -44,7 +44,7 @@
           <template>
             <TabComponent title="Information">
               <InformationTab
-                :fullTripInfo="tripInfo.fullTripInfo"></InformationTab
+                :tripInfo="tripInfo"></InformationTab
             ></TabComponent>
             <TabComponent
               vShow
@@ -185,6 +185,7 @@ export default {
       this.tripInfo = this.luxTripStore.trips.find(
         (trip) => trip.id === this.$route.params.id
       );
+      console.log(this.tripInfo);
     },
 
     async addComment(newComment) {
