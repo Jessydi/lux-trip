@@ -13,6 +13,7 @@
               class="contact-block__name"
               type="text"
               id="nameInput"
+              name="firstName"
               blured
               placeholder="Name"
               v-model="contactForm.values.name"
@@ -20,8 +21,10 @@
               @focus="contactForm.errors.name = null"></Input>
             <Input
               class="contact-block__phone"
+              type="text"
               id="phoneInput"
-              type="tel"
+              name="phone"
+              autocomplete="tel"
               blured
               placeholder="Phone"
               v-model="contactForm.values.phone"

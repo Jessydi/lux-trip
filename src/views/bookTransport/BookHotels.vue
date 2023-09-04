@@ -10,6 +10,7 @@
           @validated="(errors) => (formObject.errors = errors)">
           <Input
             type="text"
+            name="country"
             label="Location"
             placeholder="Country, city"
             v-model="formObject.values.location"

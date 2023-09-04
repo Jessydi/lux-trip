@@ -5,7 +5,7 @@
         singleCrown
         :border-radius="10"></CrownDecoration>
       <div class="subscribe-content">
-        <picture >
+        <picture>
           <source
             type="image/avif"
             srcset="@/assets/backgrounds/subscribe-bg.avif" />
@@ -26,6 +26,7 @@
                 class="subscribe__email"
                 type="email"
                 blured
+                name="email"
                 placeholder="Email address"
                 id="emailInput"
                 v-model="email"

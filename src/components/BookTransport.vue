@@ -41,12 +41,14 @@
               label="First name"
               placeholder="Write your first name"
               v-model="contactFormObject.values.name"
+              name="firstName"
               id="firstNameInput"
               :errorMessage="contactFormObject.errors.name"
               @focus="contactFormObject.errors.name = null"></Input>
             <Input
               type="email"
               label="Email"
+              name="email"
               placeholder="Write your email"
               v-model="contactFormObject.values.email"
               id="emailInput"

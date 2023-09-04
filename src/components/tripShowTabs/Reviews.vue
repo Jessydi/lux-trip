@@ -80,10 +80,12 @@
           <div class="comment-form">
             <Input
               v-model="commentForm.userName"
+              name="name"
               type="text"
               placeholder="Name"></Input>
             <Input
               v-model="commentForm.userEmail"
+              name="email"
               type="email"
               placeholder="Email"></Input>
             <Input

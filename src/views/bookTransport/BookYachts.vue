@@ -11,6 +11,7 @@
           <Input
             type="text"
             label="Location"
+            name="country"
             placeholder="Country, city"
             v-model="formObject.values.location"
             id="location"

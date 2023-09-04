@@ -46,6 +46,7 @@
                   class="form-step-edit">
                   <Input
                     type="text"
+                    name="country"
                     label="Country"
                     placeholder="Write your country"
                     v-model="bookForm.firstStage.values.country"
@@ -57,6 +58,7 @@
                   ></Input>
                   <Input
                     type="text"
+                    name="city"
                     label="City"
                     placeholder="Write your city"
                     v-model="bookForm.firstStage.values.city"
@@ -198,6 +200,7 @@
                   </h4>
                   <Input
                     type="text"
+                    name="firstName"
                     label="First name"
                     placeholder="Write your first name"
                     v-model="bookForm.secondStage.values.mainTraveler.firstName"
@@ -210,6 +213,7 @@
                     "></Input>
                   <Input
                     type="text"
+                    name="lastName"
                     label="Last name"
                     placeholder="Write your last name"
                     v-model="bookForm.secondStage.values.mainTraveler.lastName"
@@ -222,6 +226,7 @@
                     "></Input>
                   <Input
                     type="email"
+                    name="email"
                     label="Email"
                     placeholder="Write your email"
                     v-model="bookForm.secondStage.values.mainTraveler.email"
@@ -268,6 +273,7 @@
                       "></Input>
                     <Input
                       :id="`phoneNumber`"
+                      name="phone"
                       type="text"
                       placeholder="Phone number"
                       v-model="
@@ -288,6 +294,7 @@
                     <h4>Traveller {{ index + 2 }}</h4>
                     <Input
                       type="text"
+                      name="firstName"
                       label="First name"
                       placeholder="Write your first name"
                       v-model="
@@ -306,6 +313,7 @@
                       "></Input>
                     <Input
                       type="text"
+                      name="lastName"
                       label="Last name"
                       placeholder="Write your last name"
                       v-model="
@@ -369,6 +377,7 @@
                         "></Input>
                       <Input
                         :id="`phoneNumber-${index + 2}`"
+                        name="phoneNumber"
                         type="text"
                         placeholder="Phone number"
                         v-model="
