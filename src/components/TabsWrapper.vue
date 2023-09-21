@@ -29,8 +29,10 @@ export default {
   },
   methods: {
     selectTab(title) {
-      this.selectedTitle = title;
-      this.$emit("selected", this.selectedTitle);
+      if (this.selectedTitle != title) {
+        this.selectedTitle = title;
+        this.$emit("selected", this.selectedTitle);
+      }
     },
   },
   provide() {
@@ -88,6 +90,9 @@ export default {
         &::after {
           opacity: 1;
         }
+      }
+      &:hover {
+        color: var(--black-main);
       }
       &:focus {
         outline: none;

@@ -140,9 +140,9 @@ export default {
   //     }
   //   },
   // },
-    computed: {
-      ...mapStores(useLuxTripStore),
-    },
+  computed: {
+    ...mapStores(useLuxTripStore),
+  },
 };
 </script>
 

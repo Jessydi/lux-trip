@@ -1,28 +1,45 @@
 <template>
-  <router-link :to="{ name: 'home', hash: '#callback' }">
-    <button class="callback-btn">
+  <div class="callback-btn__wrapper">
+    <button
+      class="callback-btn"
+      @click="openModal">
       {{ buttonText }}
     </button>
     <button
       class="callback-btn callback-btn-wide-screen"
-      v-bind="$attrs">
+      v-bind="$attrs"
+      @click="openModal">
       <ICrown></ICrown>
       {{ buttonTextWideScreen }}
       <ICrown></ICrown>
     </button>
-  </router-link>
+    <CallbackModal
+      @close="closeModal"
+      :modal="modal"></CallbackModal>
+  </div>
 </template>
 <script>
 import ICrown from "@/components/icons/ICrown.vue";
+import CallbackModal from "@/components/modals/CallbackModal.vue";
 export default {
   data() {
     return {
       buttonText: "Call Me",
       buttonTextWideScreen: "Call Me Back",
+      modal: false,
     };
   },
   components: {
     ICrown,
+    CallbackModal,
+  },
+  methods: {
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+    },
   },
 };
 </script>

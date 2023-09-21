@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="app"
-    :class="{ 'not-scrollable': mobileNavigation }">
+  <div class="app">
     <TheHeader></TheHeader>
     <router-view />
     <TheFooter></TheFooter>
@@ -11,15 +9,10 @@
 import TheHeader from "@/components/Header";
 import TheFooter from "@/components/Footer";
 
-import { useLuxTripStore } from "@/store/index";
-import { mapWritableState } from "pinia";
 export default {
   components: {
     TheHeader,
     TheFooter,
-  },
-  computed: {
-    ...mapWritableState(useLuxTripStore, ["mobileNavigation"]),
   },
 };
 </script>
@@ -32,16 +25,14 @@ export default {
   box-sizing: border-box;
   font-family: var(--forum);
 }
+.disable-scroll {
+  overflow: hidden;
+}
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  &.not-scrollable {
-    max-width: 100%;
-    width: 100%;
-    overflow: hidden;
-    position: fixed;
-  }
+
   & > div {
     flex: 1 1 auto;
     display: flex;

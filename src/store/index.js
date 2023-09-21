@@ -3864,9 +3864,9 @@ let tripsArray = [
   },
 ];
 
-function getUrlFromSrc(src) {
+async function getUrlFromSrc(src) {
   const starsRef = ref(storage, src);
-  return getDownloadURL(starsRef)
+  return await getDownloadURL(starsRef)
     .then((r) => {
       return r;
     })
@@ -3934,9 +3934,13 @@ export const useLuxTripStore = defineStore("luxTrip", {
     tripsPerPage: 12,
     page: 0,
     lastDocSnap: null,
+
+    tripsLoaded: null,
+
+    modalOpened: false,
   }),
   actions: {
-    shallowEqual(object1, object2) {
+    checkObjectsEquality(object1, object2) {
       const keys1 = Object.keys(object1);
       const keys2 = Object.keys(object2);
 
@@ -3954,10 +3958,11 @@ export const useLuxTripStore = defineStore("luxTrip", {
     },
 
     async changeFilter(filterObject) {
-      if (!this.shallowEqual(filterObject, this.filterParams)) {
+      if (!this.checkObjectsEquality(filterObject, this.filterParams)) {
         this.page = 0;
         this.trips = [];
         this.lastDocSnap = null;
+
         this.filterParams = {
           travelCategory: filterObject.travelCategory,
           travelType: filterObject.travelType,
@@ -3976,8 +3981,10 @@ export const useLuxTripStore = defineStore("luxTrip", {
         );
         if (this.canBeLoadedWithFilter.data().count) {
           this.canLoadMore = true;
+          this.tripsLoaded = null;
         } else {
           this.canLoadMore = false;
+          this.tripsLoaded = false;
         }
         return true;
       }
@@ -4132,18 +4139,31 @@ export const useLuxTripStore = defineStore("luxTrip", {
         limit(12)
       )
     ) {
+      if (!this.trips.length) {
+        this.tripsLoaded = null;
+        console.log(this.tripsLoaded);
+      }
       try {
         const docsArray = [];
         const docsSnap = await getDocs(q);
         docsSnap.forEach((doc) => {
           docsArray.push(doc.data());
         });
+
+        if (docsArray.length) {
+          this.tripsLoaded = true;
+        } else {
+          this.tripsLoaded = false;
+        }
+        console.log(this.tripsLoaded, docsArray);
         return {
           docsArray: docsArray,
           lastDocSnap: docsSnap.docs[docsSnap.docs.length - 1],
         };
       } catch (e) {
         console.error(e);
+        this.tripsLoaded = false;
+        throw new Error(e);
       }
     },
 
@@ -4159,7 +4179,6 @@ export const useLuxTripStore = defineStore("luxTrip", {
             this.trips = this.topTrips.find(
               (category) => category.place == "World"
             ).cards;
-            console.log("here");
             this.page = 1;
             if (this.trips.length < this.tripsPerPage) {
               this.canLoadMore = false;
@@ -4211,7 +4230,6 @@ export const useLuxTripStore = defineStore("luxTrip", {
                       )
                     ) {
                       this.trips.push(trip);
-                      console.log(trip);
                     }
                   } else {
                     if (
@@ -4219,7 +4237,6 @@ export const useLuxTripStore = defineStore("luxTrip", {
                       trip.date.seconds * 1000 <= this.filterDate[1]
                     ) {
                       this.trips.push(trip);
-                      console.log(trip);
                     }
                   }
                 }
@@ -4312,10 +4329,26 @@ export const useLuxTripStore = defineStore("luxTrip", {
         window.scrollTo(0, 0);
       }
       this.mobileNavigation = !this.mobileNavigation;
+      this.toggleDocumentScroll();
     },
-
     closeMobileMenu() {
-      this.mobileNavigation = false;
+      if (this.mobileNavigation) {
+        this.mobileNavigation = false;
+        this.toggleDocumentScroll();
+      }
+    },
+    //
+    // modal
+    toggleModal() {
+      this.modalOpened = !this.modalOpened;
+      this.toggleDocumentScroll();
+    },
+    toggleDocumentScroll() {
+      if (document.body.classList.contains("disable-scroll")) {
+        document.body.classList.remove("disable-scroll");
+      } else {
+        document.body.classList.add("disable-scroll");
+      }
     },
     //
   },

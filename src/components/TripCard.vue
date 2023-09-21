@@ -34,7 +34,7 @@
           {{ cardData.name }}
         </router-link>
         <div class="trip-card__price">
-          <span>From</span>
+          <span>FROM</span>
           <div class="trip-card__price-value">€ {{ cardData.price }}</div>
         </div>
       </div>
@@ -83,6 +83,7 @@ export default {
     width: 100%;
     object-fit: cover;
     transition: 0.3s;
+    aspect-ratio: 350/571;
     &-link {
       width: 100%;
       &:hover {

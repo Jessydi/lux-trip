@@ -15,12 +15,25 @@
           :title="category.place"
           vShow>
           <SliderComponent :splide-object="splideObject">
-            <SplideSlide
-              v-for="(card, index) in category.cards"
-              :key="index"
-              ><TripCard :card-object="card"></TripCard>
-            </SplideSlide>
+            <template v-if="topTripsLoaded">
+              <SplideSlide
+                v-for="(card, index) in category.cards"
+                :key="index"
+                ><TripCard :card-object="card"></TripCard>
+              </SplideSlide>
+            </template>
+            <template v-if="topTripsLoaded === null">
+              <SplideSlide
+                v-for="n in 12"
+                :key="n">
+                <TripCardLoading />
+              </SplideSlide>
+            </template>
           </SliderComponent>
+          <template v-if="topTripsLoaded === false">
+            <h2>There is no trips for this continent yet(</h2>
+            <h2>Try our worlds best trip!</h2>
+          </template>
         </TabComponent>
       </TabsWrapper>
     </div>
@@ -29,6 +42,7 @@
 <script>
 import SliderComponent from "@/components/SliderComponent.vue";
 import TripCard from "@/components/TripCard.vue";
+import TripCardLoading from "@/components/TripCardLoading";
 import TabsWrapper from "@/components/TabsWrapper.vue";
 import TabComponent from "@/components/TabComponent.vue";
 
@@ -50,20 +64,7 @@ export default {
     TabsWrapper,
     TabComponent,
     IDoubleRhombus,
-  },
-  async created() {
-    if (!this.luxTripStore.worldsTopTripsLoaded) {
-      const continentTripsObject = this.luxTripStore.topTrips.find(
-        (category) => category.place == "World"
-      );
-      const tripResponse = await this.luxTripStore.getTrips();
-      if (tripResponse) {
-        const { docsArray, lastDocSnap } = tripResponse;
-        this.luxTripStore.lastDocSnap = lastDocSnap;
-        continentTripsObject.cards.push(...docsArray);
-        this.luxTripStore.worldsTopTripsLoaded = true;
-      }
-    }
+    TripCardLoading,
   },
   data() {
     return {
@@ -82,21 +83,36 @@ export default {
           },
         },
       },
+      topTripsLoaded: null,
     };
+  },
+  async created() {
+    if (!this.luxTripStore.worldsTopTripsLoaded) {
+      const continentTripsObject = this.luxTripStore.topTrips.find(
+        (category) => category.place == "World"
+      );
+      const tripResponse = await this.luxTripStore.getTrips();
+      if (tripResponse) {
+        const { docsArray, lastDocSnap } = tripResponse;
+        this.luxTripStore.lastDocSnap = lastDocSnap;
+        continentTripsObject.cards.push(...docsArray);
+        this.luxTripStore.worldsTopTripsLoaded = true;
+        this.topTripsLoaded = true;
+      } else {
+        this.topTripsLoaded = false;
+      }
+    }
   },
 
   methods: {
     async tabChanged(tabTitle) {
-      // тут також можна перевіряти чи підвантажені worldTop, і серед них шукати підвантажені для кожного континенту, і довантажувати ті яких не вистачило
-      debugger;
-      if (tabTitle == "World") {
-        return;
-      }
       let q;
       const continentTripsObject = this.luxTripStore.topTrips.find(
         (category) => category.place == tabTitle
       );
+
       if (continentTripsObject.cards.length == 0) {
+        this.topTripsLoaded = null;
         const topContinentTrips = this.luxTripStore.topTrips
           .find((category) => category.place == "World")
           .cards.sort(
@@ -105,15 +121,12 @@ export default {
               a.averageRatingObject.overallAverageRating
           )
           .filter((trip) => trip.continent === tabTitle);
-        console.log(topContinentTrips.length);
         if (
-          !(topContinentTrips.length >= 12) &&
+          topContinentTrips.length < 12 &&
           continentTripsObject.cards.length < 12
         ) {
           const loadedTripsId = topContinentTrips.map((trip) => trip.id);
-
           if (loadedTripsId.length) {
-            console.log("there");
             q = query(
               collection(db, "trips"),
               orderBy("id"),
@@ -123,7 +136,6 @@ export default {
               limit(12 - loadedTripsId.length)
             );
           } else {
-            console.log("wow!");
             q = query(
               collection(db, "trips"),
               orderBy("averageRatingObject.overallAverageRating", "desc"),
@@ -131,17 +143,27 @@ export default {
               limit(12)
             );
           }
-          const tripsArray = (await this.luxTripStore.getTrips(q)).docsArray;
-          continentTripsObject.cards.push(...tripsArray);
-          continentTripsObject.cards.push(...topContinentTrips);
+          try {
+            const tripsArray = (await this.luxTripStore.getTrips(q)).docsArray;
+            continentTripsObject.cards.push(...tripsArray);
+            continentTripsObject.cards.push(...topContinentTrips);
 
-          // console.log(continentTripsObject.cards);
-          continentTripsObject.cards.sort(
-            (a, b) =>
-              b.averageRatingObject.overallAverageRating -
-              a.averageRatingObject.overallAverageRating
-          );
+            if (continentTripsObject.cards.length) {
+              continentTripsObject.cards.sort(
+                (a, b) =>
+                  b.averageRatingObject.overallAverageRating -
+                  a.averageRatingObject.overallAverageRating
+              );
+              this.topTripsLoaded = true;
+            } else {
+              this.topTripsLoaded = false;
+            }
+          } catch (error) {
+            console.log(error);
+          }
         }
+      } else {
+        this.topTripsLoaded = true;
       }
     },
   },

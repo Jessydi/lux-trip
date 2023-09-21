@@ -67,14 +67,7 @@
             <CrownDecoration></CrownDecoration>
             <span>Make A Request</span>
           </ButtonBlack>
-          <div class="callback-buttons">
-            <router-link :to="{ name: 'home', hash: '#callback' }">
-              <ButtonTransparent>call me back</ButtonTransparent>
-            </router-link>
-            <router-link :to="{ name: 'home', hash: '#emailback' }">
-              <ButtonTransparent>email me back </ButtonTransparent>
-            </router-link>
-          </div>
+          <ContactButtons></ContactButtons>
         </template>
 
         <template v-else>
@@ -104,8 +97,8 @@ import v8n from "v8n";
 
 import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
-import ButtonTransparent from "@/components/formComponents/ButtonTransparent.vue";
 import Input from "@/components/formComponents/Input.vue";
+import ContactButtons from "@/components/formComponents/ContactButtons.vue";
 
 import IClock from "@/components/icons/IClock.vue";
 import IMan from "@/components/icons/IMan.vue";
@@ -169,9 +162,9 @@ export default {
   },
   components: {
     ButtonBlack,
-    ButtonTransparent,
     Input,
     CrownDecoration,
+    ContactButtons,
   },
   props: {
     bookTransport: {
@@ -301,24 +294,7 @@ export default {
   }
   &__form {
     padding: 30px 20px;
-    .callback-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      a {
-        flex: 1 1 150px;
-      }
-      &::before {
-        content: "or";
-        text-transform: uppercase;
-        text-align: center;
-        display: block;
-        flex: 1 1 100%;
-        font-size: 16px;
-        line-height: 18px;
-        color: var(--black-main);
-      }
-    }
+
     &-sent {
       display: flex;
       flex-wrap: wrap;

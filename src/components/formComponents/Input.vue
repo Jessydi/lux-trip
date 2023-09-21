@@ -23,7 +23,12 @@
         class="input"
         v-bind="$attrs"
         :id="id"
-        :class="{ blur: blured, error: errorMessage, icon: withIcon }"
+        :class="{
+          'center-placeholder': centerPlaceholder,
+          blur: blured,
+          error: errorMessage,
+          icon: withIcon,
+        }"
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)" />
@@ -55,6 +60,10 @@ export default {
     placeholder: {
       type: String,
       required: false,
+    },
+    centerPlaceholder: {
+      type: Boolean,
+      default: false,
     },
     modelValue: {
       type: String,
@@ -132,6 +141,11 @@ textarea.input {
   }
   &::placeholder {
     color: var(--black-main);
+  }
+  &.center-placeholder {
+    &::placeholder {
+      text-align: center;
+    }
   }
   &.blur {
     backdrop-filter: blur(10px);

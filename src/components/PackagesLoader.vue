@@ -1,7 +1,9 @@
 <template>
   <div class="packages-loader">
     <div class="container">
-      <div class="packages-list">
+      <div
+        v-if="luxTripStore.tripsLoaded"
+        class="packages-list">
         <TripCard
           v-for="(tripCard, index) in luxTripStore.trips"
           :cardObject="tripCard"
@@ -9,7 +11,23 @@
         </TripCard>
       </div>
       <div
-        v-show="luxTripStore.canLoadMore && luxTripStore.trips.length"
+        v-if="luxTripStore.tripsLoaded === null"
+        class="packages-list">
+        <TripCardLoading
+          v-for="n in 12"
+          :key="n" />
+      </div>
+      <div
+        v-if="luxTripStore.tripsLoaded === false"
+        class="packages-list error">
+        <h2>There is no trips for this filter. Please try another.</h2>
+      </div>
+      <div
+        v-show="
+          luxTripStore.canLoadMore &&
+          luxTripStore.trips.length &&
+          luxTripStore.tripsLoaded
+        "
         class="packages-loader__load-more">
         <ButtonWhite @click="loadMore">
           <CrownDecoration></CrownDecoration>
@@ -24,6 +42,7 @@ import { useLuxTripStore } from "@/store/index";
 import { mapStores } from "pinia";
 import { mapWritableState } from "pinia";
 import TripCard from "@/components/TripCard";
+import TripCardLoading from "@/components/TripCardLoading";
 import ButtonWhite from "@/components/formComponents/ButtonWhite.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 export default {
@@ -31,6 +50,7 @@ export default {
     TripCard,
     ButtonWhite,
     CrownDecoration,
+    TripCardLoading,
   },
   data() {
     return {

@@ -44,20 +44,22 @@
           for="search-trip__date">
           <ICalendar></ICalendar>
           <span>When</span>
-          <input
-            class="input-date"
-            type="text"
-            id="search-trip__date"
-            v-model="luxTripStore.searchTripsFilterParams.dateValue"
-            autocomplete="off"
-            placeholder="Select Date"
-            :size="dateInputLength" />
-          <button
-            class="clear-date"
-            @click.prevent="
-              datePicker.clear();
-              luxTripStore.searchTripsFilterParams.dateValue = null;
-            "></button>
+          <div class="input-date-wrapper">
+            <input
+              class="input-date"
+              type="text"
+              id="search-trip__date"
+              v-model="luxTripStore.searchTripsFilterParams.dateValue"
+              autocomplete="off"
+              placeholder="Select Date" />
+            <button
+              v-show="luxTripStore.searchTripsFilterParams.dateValue"
+              class="clear-date"
+              @click.prevent="
+                datePicker.clear();
+                luxTripStore.searchTripsFilterParams.dateValue = null;
+              "></button>
+          </div>
         </label>
         <label
           class="search-trip__input"
@@ -151,9 +153,20 @@ export default {
   computed: {
     dateInputLength: function () {
       if (this.luxTripStore.searchTripsFilterParams.dateValue) {
-        return this.luxTripStore.searchTripsFilterParams.dateValue.length;
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        var fontspec = "18px Manrope";
+        if (context.font !== fontspec) context.font = fontspec;
+        return (
+          context.measureText(
+            this.luxTripStore.searchTripsFilterParams.dateValue
+          ).width +
+          10 +
+          "px"
+        );
       }
-      return "10";
+      return "100px";
     },
     ...mapStores(useLuxTripStore),
   },
@@ -220,13 +233,18 @@ export default {
       line-height: 25px;
       font-family: var(--manrope);
     }
+    .input-date-wrapper {
+      grid-area: input;
+      position: relative;
+      padding-right: 20px;
+      width: fit-content;
+    }
     input {
       border: none;
       font-weight: 500;
       font-size: 18px;
-      line-height: 25px;
       grid-area: input;
-
+      line-height: 25px;
       &:focus {
         outline: 0;
       }
@@ -244,6 +262,7 @@ export default {
       width: 20px;
       right: 0;
       bottom: 3px;
+
       &::after,
       &::before {
         content: "";
@@ -255,6 +274,8 @@ export default {
         transform-origin: center;
         translate: -50% -50%;
         background-color: var(--grey);
+      transition: 0.2s;
+
       }
       &::after {
         rotate: -45deg;
@@ -262,10 +283,16 @@ export default {
       &::before {
         rotate: 45deg;
       }
+      &:hover {
+        &::after,
+        &::before {
+          background-color: var(--black-main);
+        }
+      }
     }
   }
   .flatpickr-input {
-    max-width: 240px;
+    width: v-bind(dateInputLength);
   }
   .btn {
     height: 70px;

@@ -671,14 +671,7 @@
                       <CrownDecoration></CrownDecoration>
                       <span>Book Now</span>
                     </ButtonBlack>
-                    <div class="callback-buttons">
-                      <router-link :to="{ name: 'home', hash: '#callback' }">
-                        <ButtonTransparent>call me back</ButtonTransparent>
-                      </router-link>
-                      <router-link :to="{ name: 'home', hash: '#emailback' }">
-                        <ButtonTransparent>email me back </ButtonTransparent>
-                      </router-link>
-                    </div>
+                    <ContactButtons></ContactButtons>
                   </div>
                 </template>
               </div>
@@ -712,6 +705,7 @@ import v8n from "v8n";
 
 import Input from "@/components/formComponents/Input.vue";
 import decoratedTitle from "@/components/DecoratedTitle.vue";
+import ContactButtons from "@/components/formComponents/ContactButtons.vue";
 import ButtonTransparent from "@/components/formComponents/ButtonTransparent.vue";
 import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
@@ -728,8 +722,9 @@ export default {
   components: {
     Input,
     decoratedTitle,
-    ButtonTransparent,
+    ContactButtons,
     ButtonBlack,
+    ButtonTransparent,
     CrownDecoration,
     SelectComponent,
     DateInput,
@@ -1229,24 +1224,7 @@ export default {
   }
   .confirm-block {
     padding: 70px 0px 0px 0px;
-    .callback-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      a {
-        flex: 1 1 150px;
-      }
-      &::before {
-        content: "or";
-        text-transform: uppercase;
-        text-align: center;
-        display: block;
-        flex: 1 1 100%;
-        font-size: 16px;
-        line-height: 18px;
-        color: var(--black-main);
-      }
-    }
+
     .request-button {
       margin-bottom: 30px;
     }

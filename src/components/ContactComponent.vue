@@ -87,6 +87,7 @@ export default {
       });
       try {
         contactSchema.check(this.contactForm.values);
+        return true;
       } catch (error) {
         error.cause.forEach((e) => {
           let errorMessage = "";
@@ -113,11 +114,11 @@ export default {
           }
           this.contactForm.errors[e.target] = errorMessage;
         });
+        return false;
       }
     },
     sendContactRequest() {
-      this.validateContactForm();
-      if (!(this.contactForm.errors.name || this.contactForm.errors.phone)) {
+      if (this.validateContactForm()) {
         this.contactSent = true;
 
         console.log("Contact request sent");
@@ -128,9 +129,6 @@ export default {
 </script>
 <style lang="scss">
 .contact-block {
-  &-sent {
-    text-transform: uppercase;
-  }
   &__title {
     margin-bottom: 50px;
   }
