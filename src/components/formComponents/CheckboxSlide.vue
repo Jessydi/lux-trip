@@ -45,6 +45,7 @@ export default {
   display: grid;
   grid-template-rows: auto 55px;
   gap: 15px;
+  max-width: fit-content;
   &__label {
     padding: 0 20px;
     font-family: var(--manrope);
@@ -153,26 +154,32 @@ input[type="checkbox"] {
       }
     }
   }
-  &:hover {
-    background-color: #f5f0ef;
-    & ~ .checkbox-slide__false {
-      span {
-        font-weight: 600;
-      }
-    }
-    &:checked {
-      & ~ .checkbox-slide__true {
-        span {
-          font-weight: 600;
-        }
-      }
-    }
-  }
+
   &:focus-visible {
     border-color: var(--grey);
     background-color: #f5f0ef;
     border-color: var(--grey);
     outline: none;
+  }
+}
+
+@media (pointer: fine) {
+  input[type="checkbox"] {
+    &:hover {
+      background-color: #f5f0ef;
+      & ~ .checkbox-slide__false {
+        span {
+          font-weight: 600;
+        }
+      }
+      &:checked {
+        & ~ .checkbox-slide__true {
+          span {
+            font-weight: 600;
+          }
+        }
+      }
+    }
   }
 }
 @media (min-width: 768px) {

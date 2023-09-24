@@ -95,6 +95,11 @@
 <script>
 import v8n from "v8n";
 
+import { nextTick } from "vue";
+
+import { mapStores } from "pinia";
+import { useLuxTripStore } from "../store/index";
+
 import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
 import CrownDecoration from "@/components/CrownDecoration.vue";
 import Input from "@/components/formComponents/Input.vue";
@@ -180,11 +185,14 @@ export default {
       require: true,
     },
   },
+  computed: {
+    ...mapStores(useLuxTripStore),
+  },
   methods: {
     sendRequest() {
       this.formSent = true;
     },
-    validateBooking() {
+    async validateBooking() {
       const schema = v8n().schema({
         ...this.formSchema,
         ...this.contactFormSchema,
@@ -200,26 +208,26 @@ export default {
           console.log(e);
           switch (e.rule.name) {
             case "null":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "empty":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "minLength":
-              errorMessage = `min ${e.rule.args[0]} symbol`;
+              errorMessage = `Min ${e.rule.args[0]} symbol`;
               break;
             case "pattern":
               switch (e.target) {
                 case "email":
-                  errorMessage = "please, check email format";
+                  errorMessage = "Please, check email format";
                   break;
                 default:
-                  errorMessage = "invalid format";
+                  errorMessage = "Invalid format";
                   break;
               }
               break;
             default:
-              errorMessage = "invalid value";
+              errorMessage = "Invalid value";
               break;
           }
           if (Object.hasOwn(this.contactFormObject.values, e.target)) {
@@ -230,6 +238,8 @@ export default {
           this.$emit("validated", transportErrorObject);
         });
       }
+      await nextTick();
+      this.luxTripStore.scrollToError();
       if (validationPassed) {
         this.sendRequest();
       }

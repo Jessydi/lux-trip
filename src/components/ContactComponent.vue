@@ -83,7 +83,7 @@ export default {
         phone: v8n()
           .not.null()
           .not.empty()
-          .pattern(/^\+[0-9()-]+$/),
+          .pattern(/^\+[0-9][0-9-()\s]{5,20}[0-9]$/),
       });
       try {
         contactSchema.check(this.contactForm.values);
@@ -93,23 +93,23 @@ export default {
           let errorMessage = "";
           switch (e.rule.name) {
             case "null":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "empty":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "pattern":
               switch (e.target) {
                 case "email":
-                  errorMessage = "please, check email format";
+                  errorMessage = "Please, check email format";
                   break;
                 case "phone":
-                  errorMessage = "invalid phone number";
+                  errorMessage = "Invalid phone number";
                   break;
               }
               break;
             default:
-              errorMessage = "invalid value";
+              errorMessage = "Invalid value";
               break;
           }
           this.contactForm.errors[e.target] = errorMessage;

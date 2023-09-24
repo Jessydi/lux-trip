@@ -86,7 +86,7 @@ export default {
     this.datePicker = flatpickr(`#${this.id}`, dateObject);
   },
   beforeUnmount() {
-    this.datePicker.close();
+    this.datePicker.destroy();
   },
 };
 </script>

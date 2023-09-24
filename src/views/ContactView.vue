@@ -11,13 +11,13 @@
               class="contact__value contact__phone link"
               >{{ contactData.formatedPhone }}</a
             >
-            <router-link
-              class="contact__link"
-              :to="{ name: 'home', hash: '#callback' }">
-              <ButtonBlack>
-                <span>Call Me Back</span>
-              </ButtonBlack>
-            </router-link>
+
+            <ButtonBlack @click.prevent="openCallbackModal">
+              <span>Call Me Back</span>
+            </ButtonBlack>
+            <CallbackModal
+              @close="closeCallbackModal"
+              :modal="callbackModal"></CallbackModal>
           </div>
           <div class="contact__item">
             <div class="contact__name">Address</div>
@@ -40,6 +40,8 @@
 
 <script>
 import ButtonBlack from "@/components/formComponents/ButtonBlack.vue";
+import CallbackModal from "@/components/modals/CallbackModal.vue";
+
 export default {
   name: "ContactView",
   data() {
@@ -50,9 +52,20 @@ export default {
         email: "zavrazhnyj.00@gmail.com",
         address: "Via Peri 17, 6900 Lugano, Switzerland",
       },
+      emailbackModal: false,
+      callbackModal: false,
     };
   },
-  components: { ButtonBlack },
+
+  methods: {
+    openCallbackModal() {
+      this.callbackModal = true;
+    },
+    closeCallbackModal() {
+      this.callbackModal = false;
+    },
+  },
+  components: { ButtonBlack, CallbackModal },
 };
 </script>
 <style scoped lang="scss">

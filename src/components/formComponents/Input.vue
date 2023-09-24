@@ -8,7 +8,7 @@
     <div class="input-wrapper">
       <slot></slot>
       <textarea
-        class="input"
+        class="input scrollable"
         v-bind="$attrs"
         :id="id"
         :class="{ blur: blured, error: errorMessage, icon: withIcon }"
@@ -97,6 +97,17 @@ textarea.input {
   resize: none;
   padding: 20px 30px;
   border-radius: 20px;
+  &.scrollable {
+    &::-webkit-scrollbar-track {
+      margin: 20px 0 20px 0;
+      border-left: 2px solid white;
+      border-right: 2px solid white;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-left: 2px solid white;
+      border-right: 2px solid white;
+    }
+  }
 }
 .input {
   --border-color: var(--bg-main);

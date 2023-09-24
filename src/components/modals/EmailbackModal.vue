@@ -104,20 +104,20 @@ export default {
           let errorMessage = "";
           switch (e.rule.name) {
             case "null":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "empty":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "pattern":
               switch (e.target) {
                 case "email":
-                  errorMessage = "please, check email format";
+                  errorMessage = "Please, check email format";
                   break;
               }
               break;
             default:
-              errorMessage = "invalid value";
+              errorMessage = "Invalid value";
               break;
           }
           this.contactForm.errors[e.target] = errorMessage;

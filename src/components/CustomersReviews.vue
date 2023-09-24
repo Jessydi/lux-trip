@@ -126,7 +126,7 @@ export default {
 .customers-reviews {
   position: relative;
   .splide {
-    &__arrows {
+    :deep(.splide__arrows) {
       display: none;
     }
   }
@@ -167,11 +167,8 @@ export default {
     .splide {
       position: relative;
       margin-right: -290px;
-      &__arrows {
+      :deep(.splide__arrows) {
         display: block;
-        .splide__arrow--next {
-          right: 250px;
-        }
       }
       &::after {
         content: "";
@@ -187,6 +184,9 @@ export default {
           transparent
         );
         pointer-events: none;
+      }
+      :deep(.splide__arrow--next) {
+        right: 250px;
       }
     }
     &__title {

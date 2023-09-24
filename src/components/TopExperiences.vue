@@ -101,6 +101,8 @@ export default {
       } else {
         this.topTripsLoaded = false;
       }
+    } else {
+      this.topTripsLoaded = true;
     }
   },
 

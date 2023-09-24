@@ -53,7 +53,6 @@
           alt="mountains"
           loading="lazy" />
       </picture>
-
     </div>
   </div>
 </template>
@@ -87,7 +86,10 @@ export default {
       line-height: 26px;
       max-width: max(400px, 80%);
       margin: 0 auto;
+      font-family: var(--forum);
+
       &-enlarged {
+        font-family: var(--forum);
         margin-bottom: 40px;
         font-size: 40px;
         line-height: 40px;

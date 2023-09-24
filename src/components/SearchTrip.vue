@@ -118,12 +118,16 @@ export default {
     };
   },
   mounted() {
+    console.log(this.datePicker);
     this.datePicker = flatpickr("#search-trip__date", {
       minDate: new Date(),
       mode: "range",
       defaultDate: null,
       dateFormat: "j M Y ",
     });
+  },
+  beforeUnmount() {
+    this.datePicker.destroy();
   },
   methods: {
     async searchTrip() {
@@ -274,8 +278,7 @@ export default {
         transform-origin: center;
         translate: -50% -50%;
         background-color: var(--grey);
-      transition: 0.2s;
-
+        transition: 0.2s;
       }
       &::after {
         rotate: -45deg;

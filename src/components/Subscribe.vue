@@ -75,14 +75,13 @@ export default {
           .pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
           .test(this.email)
       ) {
-        this.errorMessage = "invalid email";
+        this.errorMessage = "Invalid email";
       }
     },
     subscribe() {
       this.validateEmail();
       if (!this.errorMessage) {
         this.subscribed = true;
-        console.log("subscribed");
       }
     },
   },

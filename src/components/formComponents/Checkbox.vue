@@ -28,6 +28,8 @@ export default {
   display: grid;
   grid-template-columns: 40px auto;
   gap: 12px;
+  max-width: fit-content;
+
   span {
     font-family: var(--manrope);
     font-size: 18px;
@@ -84,13 +86,7 @@ input[type="checkbox"] {
       background-color: var(--grey);
     }
   }
-  &:hover {
-    outline: 1px solid var(--bg-main);
-    background-color: #f5f0ef;
-    & + span {
-      font-weight: 500;
-    }
-  }
+
   &::before {
     content: "";
     width: 22px;
@@ -104,6 +100,18 @@ input[type="checkbox"] {
 
   &:checked::before {
     transform: scale(1);
+  }
+}
+
+@media (pointer: fine) {
+  input[type="checkbox"] {
+    &:hover {
+      outline: 1px solid var(--bg-main);
+      background-color: #f5f0ef;
+      & + span {
+        font-weight: 500;
+      }
+    }
   }
 }
 </style>

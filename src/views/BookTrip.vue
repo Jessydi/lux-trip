@@ -644,7 +644,7 @@
                     </div>
                   </div>
                   <h3
-                    v-if="!tripInfo.fullTripInfo.additionalServices.length"
+                    v-if="!additionalServicesAvaliable"
                     class="additional-services-empty">
                     There is no avaliable additional services
                   </h3>
@@ -702,6 +702,8 @@
 </template>
 <script>
 import v8n from "v8n";
+
+import { nextTick } from "vue";
 
 import Input from "@/components/formComponents/Input.vue";
 import decoratedTitle from "@/components/DecoratedTitle.vue";
@@ -882,26 +884,29 @@ export default {
           let errorMessage = "";
           switch (e.rule.name) {
             case "null":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "empty":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "minLength":
-              errorMessage = `min ${e.rule.args[0]} symbol`;
+              errorMessage = `Min ${e.rule.args[0]} symbol`;
               break;
             default:
-              errorMessage = "invalid value";
+              errorMessage = "Invalid value";
               break;
           }
           firstStage.errors[e.target] = errorMessage;
         });
-        console.log(error);
       }
+      await nextTick();
+      this.luxTripStore.scrollToError();
     },
-    verifySecondStage() {
+    async verifySecondStage() {
       const secondStage = this.bookForm.secondStage;
       const thirdStage = this.bookForm.thirdStage;
+
+      let validationPassed = true;
 
       const secondStepSchemaMainTraveler = v8n().schema({
         firstName: v8n().not.null().string().not.empty().minLength(1),
@@ -926,90 +931,90 @@ export default {
           return;
         }
       } catch (error) {
+        validationPassed = false;
         error.cause.forEach((e) => {
           let errorMessage = "";
           switch (e.rule.name) {
             case "null":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "empty":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "minLength":
-              errorMessage = `min ${e.rule.args[0]} symbol`;
+              errorMessage = `Min ${e.rule.args[0]} symbol`;
               break;
             case "pattern":
               switch (e.target) {
                 case "email":
-                  errorMessage = "please, check email format";
+                  errorMessage = "Please, check email format";
                   break;
                 case "countryCode":
-                  errorMessage = "invalid country code";
+                  errorMessage = "Invalid country code";
                   break;
                 case "phoneNumber":
-                  errorMessage = "invalid phone number";
+                  errorMessage = "Invalid phone number";
                   break;
                 default:
-                  errorMessage = "invalid format";
+                  errorMessage = "Invalid format";
                   break;
               }
               break;
             default:
-              errorMessage = "invalid value";
+              errorMessage = "Invalid value";
               break;
           }
           secondStage.errors.mainTraveler[e.target] = errorMessage;
         });
-        console.log(error);
       }
 
-      let additionValidate = true;
-      console.log(secondStage.values.additionTravellers);
       secondStage.values.additionTravellers.forEach((traveler, index) => {
         try {
           secondStepSchemaAdditionalTraveler.check(traveler);
         } catch (error) {
-          additionValidate = false;
+          validationPassed = false;
           error.cause.forEach((e) => {
             let errorMessage = "";
             switch (e.rule.name) {
               case "null":
-                errorMessage = "this field is required";
+                errorMessage = "This field is required";
                 break;
               case "minLength":
-                errorMessage = `min ${e.rule.args[0]} symbol`;
+                errorMessage = `Min ${e.rule.args[0]} symbol`;
                 break;
               case "empty":
-                errorMessage = "this field is required";
+                errorMessage = "This field is required";
                 break;
               case "pattern":
                 switch (e.target) {
                   case "countryCode":
-                    errorMessage = "invalid country code";
+                    errorMessage = "Invalid country code";
                     break;
                   case "phoneNumber":
-                    errorMessage = "invalid phone number";
+                    errorMessage = "Invalid phone number";
                     break;
                   default:
-                    errorMessage = "invalid format";
+                    errorMessage = "Invalid format";
                     break;
                 }
                 break;
               default:
-                errorMessage = "invalid value";
+                errorMessage = "Invalid value";
                 break;
             }
             secondStage.errors.additionTravellers[index][e.target] =
               errorMessage;
           });
         }
-        if (additionValidate) {
-          secondStage.confirmed = true;
-          thirdStage.confirmed = false;
-        }
       });
+      await nextTick();
+      this.luxTripStore.scrollToError();
+      if (validationPassed) {
+        secondStage.confirmed = true;
+        thirdStage.confirmed = false;
+      }
     },
-    verifyThirdStage() {
+    async verifyThirdStage() {
       // const secondStage = this.bookForm.secondStage;
       const thirdStage = this.bookForm.thirdStage;
       const carSchema = { carModel: v8n(), driver: v8n() };
@@ -1050,19 +1055,21 @@ export default {
           let errorMessage = "";
           switch (e.rule.name) {
             case "null":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             case "empty":
-              errorMessage = "this field is required";
+              errorMessage = "This field is required";
               break;
             default:
-              errorMessage = "invalid value";
+              errorMessage = "Invalid value";
               break;
           }
           thirdStage.errors[e.target] = errorMessage;
         });
         console.log(error);
       }
+      await nextTick();
+      this.luxTripStore.scrollToError();
     },
     sendForm() {
       this.formSent = Object.entries(this.bookForm).every(
@@ -1108,6 +1115,14 @@ export default {
   },
   computed: {
     ...mapStores(useLuxTripStore),
+    additionalServicesAvaliable() {
+      for (let services in this?.tripInfo?.fullTripInfo?.additionalServices) {
+        if (this?.tripInfo?.fullTripInfo?.additionalServices[services].length) {
+          return true;
+        }
+      }
+      return false;
+    },
   },
   async mounted() {
     try {
@@ -1230,6 +1245,7 @@ export default {
     }
   }
   .next-step-button {
+    margin-top: 26px;
     font-size: 24px;
     height: 55px;
     padding: 10px 50px;
