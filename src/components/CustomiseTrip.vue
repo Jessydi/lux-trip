@@ -40,10 +40,14 @@
           </div>
         </div>
       </div>
-      <ButtonBlack>
-        <CrownDecoration></CrownDecoration>
-        <span>Start a trip request</span>
-      </ButtonBlack>
+      <router-link
+        class="start-request"
+        :to="{ name: 'packages' }"
+        ><ButtonBlack>
+          <CrownDecoration></CrownDecoration>
+          <span>Start a trip request</span>
+        </ButtonBlack></router-link
+      >
       <div class="customise-trip__free">
         <span>It’s Free! - no credit card required</span>
       </div>
@@ -104,7 +108,7 @@ export default {
   h2 {
     margin-bottom: 45px;
   }
-  .btn-black {
+  .start-request {
     width: 100%;
     margin-bottom: 20px;
   }

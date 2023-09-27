@@ -98,6 +98,9 @@ textarea.input {
   padding: 20px 30px;
   border-radius: 20px;
   &.scrollable {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
     &::-webkit-scrollbar-track {
       margin: 20px 0 20px 0;
       border-left: 2px solid white;

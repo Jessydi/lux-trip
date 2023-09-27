@@ -101,7 +101,10 @@
                 <h3>
                   <span> 2. Your details</span>
                   <span
-                    v-if="bookForm.secondStage.confirmed === true"
+                    v-if="
+                      bookForm.secondStage.confirmed === true &&
+                      bookForm.firstStage.confirmed === true
+                    "
                     class="form-step__edit-button"
                     @click="editForm('secondStage')"
                     >Edit</span
@@ -404,15 +407,19 @@
                 </div>
               </div>
               <div class="form-step form-step__3">
-                <h3>
+                <!-- <h3>
                   <span>3. Additional services</span>
                   <span
-                    v-if="bookForm.thirdStage.confirmed === true"
+                    v-if="
+                      bookForm.thirdStage.confirmed === true &&
+                      bookForm.secondStage.confirmed === true &&
+                      bookForm.firstStage.confirmed === true
+                    "
                     class="form-step__edit-button"
                     @click="editForm('thirdStage')"
                     >Edit</span
                   >
-                </h3>
+                </h3> -->
                 <div
                   v-show="bookForm.thirdStage.confirmed === true"
                   class="form-step-confirmed">

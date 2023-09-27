@@ -38,7 +38,12 @@
             We craft and plan unique itineraries tailored to customers’
             interests and with strong attention to detail.
           </p>
-          <ButtonTransparent>help me plan a trip</ButtonTransparent>
+          <ButtonTransparent @click="openModal"
+            >help me plan a trip</ButtonTransparent
+          >
+          <CallbackModal
+            @close="closeModal"
+            :modal="modal"></CallbackModal>
           <IRhombusBlur class="rhombus-small rhombus-small-2"></IRhombusBlur>
         </div>
       </div>
@@ -60,12 +65,27 @@
 import IRhombusBlur from "@/components/icons/IRhombusBlur.vue";
 import ImageWithRhombus from "@/components/ImageWithRhombus.vue";
 import ButtonTransparent from "@/components/formComponents/ButtonTransparent.vue";
+import CallbackModal from "@/components/modals/CallbackModal.vue";
 
 export default {
+  data() {
+    return {
+      modal: false,
+    };
+  },
   components: {
     IRhombusBlur,
     ImageWithRhombus,
     ButtonTransparent,
+    CallbackModal,
+  },
+  methods: {
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+    },
   },
 };
 </script>

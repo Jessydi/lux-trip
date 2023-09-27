@@ -54,8 +54,12 @@ export default {
   line-height: 18px;
   letter-spacing: 1px;
   white-space: nowrap;
-  &:hover,
+  &:focus-visible,
   &:focus {
+    outline: none;
+  }
+  &:hover,
+  &:focus-visible {
     background-color: rgb(141 38 38 / 10%);
   }
   &:active {
@@ -107,7 +111,7 @@ export default {
       }
     }
     &:hover,
-    &:focus {
+    &:focus-visible {
       .crown-part {
         fill: #000;
       }

@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 // import { db } from "@/firebase/firebaseInit";
-import { db
+import {
+  db,
   // ,   storage
- } from "@/firebase/firebaseInit";
+} from "@/firebase/firebaseInit";
 // import { ref, getDownloadURL } from "firebase/storage";
 import {
   // setDoc,
@@ -4271,6 +4272,7 @@ export const useLuxTripStore = defineStore("luxTrip", {
               // замінити this.canBeLoadedWithFilter.data().count на іншу умову яка підходить для дати
               if (this.canBeLoadedWithFilter.data().count - tripsOnPage <= 0) {
                 this.canLoadMore = false;
+                this.tripsLoaded = false;
               }
 
               // if (this.trips.length >= tripsOnPage) {

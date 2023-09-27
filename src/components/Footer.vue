@@ -60,7 +60,7 @@
         >
       </div>
       <div class="footer__bottom">
-        <div class="footer__credits">© 2022 Made by Olexandr Zavrazhnyj</div>
+        <div class="footer__credits">© 2023 Made by Olexandr Zavrazhnyj</div>
         <div class="footer__privacy">
           <a
             class="link"
